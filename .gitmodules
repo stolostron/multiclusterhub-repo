@@ -1,0 +1,15 @@
+[submodule "search-chart"]
+	path = search-chart
+	url = https://github.ibm.com/IBMPrivateCloud/search-chart
+[submodule "mcm-kui-chart"]
+	path = mcm-kui-chart
+	url = https://github.ibm.com/IBMPrivateCloud/mcm-kui-chart
+[submodule "ibm-mcm-chart"]
+	path = ibm-mcm-chart
+	url = https://github.ibm.com/IBMPrivateCloud/ibm-mcm-chart
+[submodule "icp-cert-manager-chart"]
+	path = icp-cert-manager-chart
+	url = https://github.ibm.com/IBMPrivateCloud/icp-cert-manager-chart
+[submodule "icp-mongodb"]
+	path = icp-mongodb
+	url = https://github.ibm.com/IBMPrivateCloud/icp-mongodb
