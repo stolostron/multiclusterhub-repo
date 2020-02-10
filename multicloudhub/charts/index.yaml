@@ -1,0 +1,118 @@
+apiVersion: v1
+entries:
+  ibm-cert-manager:
+  - apiVersion: v1
+    appVersion: 0.10.1
+    created: 2020-02-10T12:02:30.210678-05:00
+    description: Service for issuing and managing certificates on IBM Cloud Private.
+    digest: bfc3d3fc52c1605dbbd4043742aae37859d04ff7b3bcdee98384752472d060a2
+    keywords:
+    - amd64
+    - ppc64le
+    - s390x
+    - OpenSource
+    - ICP
+    - IcpClusterResource
+    - Security
+    - cert-manager
+    - kube-lego
+    - letsencrypt
+    - tls
+    - Development
+    - IBM Cloud Private
+    - ICPRHOCP
+    - RHOCP
+    - ROKS
+    - ICPROKS
+    kubeVersion: '>=1.11.0'
+    name: ibm-cert-manager
+    tillerVersion: '>=2.7.0'
+    urls:
+    - ibm-cert-manager-3.5.0.tgz
+    version: 3.5.0
+  ibm-mcm-kui:
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: 2020-02-10T12:02:30.212122-05:00
+    description: A helm chart for deploying the IBM Visual Web Terminal
+    digest: d8832d8e7794b225cda918e7062fef81788c69adb4c0199e77c156d0b6f3c45d
+    keywords:
+    - IcpClusterResource
+    - Commercial
+    - ICP
+    - IKS
+    - ICPRHOCP
+    - Operations
+    - amd64
+    - ppc64le
+    - s390x
+    kubeVersion: '>=1.11.0'
+    name: ibm-mcm-kui
+    tillerVersion: '>=2.12.3'
+    urls:
+    - ibm-mcm-kui-3.5.0.tgz
+    version: 3.5.0
+  ibm-mcm-prod:
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: 2020-02-10T12:02:30.217409-05:00
+    description: IBM Multicloud Manager
+    digest: e496492828e01af735297cb3b98f6b463a5b2307e1278d5a9cf717d463612ead
+    keywords:
+    - ICP
+    - Analytics
+    - Commercial
+    - deploy
+    - amd64
+    kubeVersion: '>=1.14.0'
+    name: ibm-mcm-prod
+    tillerVersion: '>=2.9.1'
+    urls:
+    - ibm-mcm-prod-3.5.0.tgz
+    version: 3.5.0
+  ibm-search-prod:
+  - appVersion: 3.4.0
+    created: 2020-02-10T12:02:30.218474-05:00
+    description: Search Helm Chart for IBM Cloud Pak for Multicloud Management
+    digest: 4694ed0341d9f723d4e337974e304dc8ac769faf187492daeda22dd0f405fa1c
+    icon: https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.png
+    keywords:
+    - RHOCP
+    - ICPRHOCP
+    - multicluster
+    - search
+    - Commercial
+    - amd64
+    - ppc64le
+    - s390x
+    - runtime
+    kubeVersion: '>=1.10.0'
+    name: ibm-search-prod
+    tillerVersion: '>=2.9.0'
+    urls:
+    - ibm-search-prod-3.5.0.tgz
+    version: 3.5.0
+  icp-mongodb:
+  - appVersion: 4.0.12
+    created: 2020-02-10T12:02:30.220656-05:00
+    description: NoSQL document-oriented database.
+    digest: 88bfd00c104bac53830e80ea0f0ae248358bed554dae72ba909b3973166a4926
+    home: https://github.com/mongodb/mongo
+    icon: https://webassets.mongodb.com/_com_assets/cms/mongodb-logo-rgb-j6w271g1xn.jpg
+    keywords:
+    - Commercial
+    - Limited
+    - amd64
+    - ppc64le
+    - s390x
+    - database
+    - ICP
+    kubeVersion: '>=1.9.0-0'
+    name: icp-mongodb
+    sources:
+    - https://github.com/mongodb/mongo
+    tillerVersion: '>=2.9.0'
+    urls:
+    - icp-mongodb-3.4.2.tgz
+    version: 3.4.2
+generated: 2020-02-10T12:02:30.206519-05:00
