@@ -3,7 +3,7 @@ entries:
   ibm-cert-manager:
   - apiVersion: v1
     appVersion: 0.10.1
-    created: "2020-02-11T14:05:58.778321-05:00"
+    created: "2020-02-11T16:00:25.246054-05:00"
     dependencies:
     - alias: crd
       name: ibm-cert-manager-crd
@@ -37,12 +37,12 @@ entries:
     kubeVersion: '>=1.11.0'
     name: ibm-cert-manager
     urls:
-    - ibm-cert-manager-3.5.0.tgz
+    - https://raw.githubusercontent.com/open-cluster-management/multicloudhub-repo/master/multicloudhub/charts/ibm-cert-manager-3.5.0.tgz
     version: 3.5.0
   ibm-mcm-kui:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-02-11T14:05:58.779968-05:00"
+    created: "2020-02-11T16:00:25.253267-05:00"
     description: A helm chart for deploying the IBM Visual Web Terminal
     digest: d8832d8e7794b225cda918e7062fef81788c69adb4c0199e77c156d0b6f3c45d
     keywords:
@@ -58,12 +58,12 @@ entries:
     kubeVersion: '>=1.11.0'
     name: ibm-mcm-kui
     urls:
-    - ibm-mcm-kui-3.5.0.tgz
+    - https://raw.githubusercontent.com/open-cluster-management/multicloudhub-repo/master/multicloudhub/charts/ibm-mcm-kui-3.5.0.tgz
     version: 3.5.0
   ibm-mcm-prod:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-02-11T14:05:58.791176-05:00"
+    created: "2020-02-11T16:00:25.269537-05:00"
     dependencies:
     - condition: core.enabled
       name: core
@@ -112,12 +112,12 @@ entries:
     kubeVersion: '>=1.14.0'
     name: ibm-mcm-prod
     urls:
-    - ibm-mcm-prod-3.5.0.tgz
+    - https://raw.githubusercontent.com/open-cluster-management/multicloudhub-repo/master/multicloudhub/charts/ibm-mcm-prod-3.5.0.tgz
     version: 3.5.0
   ibm-search-prod:
   - apiVersion: v1
     appVersion: 3.4.0
-    created: "2020-02-11T14:05:58.793801-05:00"
+    created: "2020-02-11T16:00:25.278662-05:00"
     description: Search Helm Chart for IBM Cloud Pak for Multicloud Management
     digest: 4694ed0341d9f723d4e337974e304dc8ac769faf187492daeda22dd0f405fa1c
     icon: https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.png
@@ -134,12 +134,12 @@ entries:
     kubeVersion: '>=1.10.0'
     name: ibm-search-prod
     urls:
-    - ibm-search-prod-3.5.0.tgz
+    - https://raw.githubusercontent.com/open-cluster-management/multicloudhub-repo/master/multicloudhub/charts/ibm-search-prod-3.5.0.tgz
     version: 3.5.0
   icp-mongodb:
   - apiVersion: v1
     appVersion: 4.0.12
-    created: "2020-02-11T14:05:58.795986-05:00"
+    created: "2020-02-11T16:00:25.287866-05:00"
     description: NoSQL document-oriented database.
     digest: 88bfd00c104bac53830e80ea0f0ae248358bed554dae72ba909b3973166a4926
     home: https://github.com/mongodb/mongo
@@ -157,12 +157,12 @@ entries:
     sources:
     - https://github.com/mongodb/mongo
     urls:
-    - icp-mongodb-3.4.2.tgz
+    - https://raw.githubusercontent.com/open-cluster-management/multicloudhub-repo/master/multicloudhub/charts/icp-mongodb-3.4.2.tgz
     version: 3.4.2
   nginx:
   - apiVersion: v1
     appVersion: 1.16.1
-    created: "2020-02-11T14:05:58.798396-05:00"
+    created: "2020-02-11T16:00:25.289587-05:00"
     description: Chart for the nginx server
     digest: 4f714f3d19d34137334d293f85a761246fad985ce40401397bc2df79165626ca
     home: http://www.nginx.org
@@ -180,6 +180,6 @@ entries:
     sources:
     - https://github.com/bitnami/bitnami-docker-nginx
     urls:
-    - nginx-5.1.5.tgz
+    - https://raw.githubusercontent.com/open-cluster-management/multicloudhub-repo/master/multicloudhub/charts/nginx-5.1.5.tgz
     version: 5.1.5
-generated: "2020-02-11T14:05:58.76899-05:00"
+generated: "2020-02-11T16:00:25.237122-05:00"
