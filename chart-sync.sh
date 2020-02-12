@@ -64,17 +64,17 @@ package_chart()
   echo "after" $PWD
 }
 echo "Fetching charts from SOURCE-REPO"
-mkdir -p cp4mcm-install/charts
+mkdir -p multicloudhub/charts
 git submodule update --init --recursive
 SUB_LIST="$(grep path .gitmodules | sed 's/.*= //')"
 for submodule in ${SUB_LIST}; do
   echo ${submodule}
-  mv ${submodule}  cp4mcm-install/charts
-  cd "cp4mcm-install/charts/${submodule}"
+  mv ${submodule}  multicloudhub/charts
+  cd "multicloudhub/charts/${submodule}"
   package_chart 
-  rm -rf cp4mcm-install/charts/${submodule}
+  rm -rf multicloudhub/charts/${submodule}
 done
-helm repo index cp4mcm-install/charts
+helm repo index multicloudhub/charts
 
 # for chart in ${CHART_LIST}; do
 #   # chart=(${chartVer//:/ })
