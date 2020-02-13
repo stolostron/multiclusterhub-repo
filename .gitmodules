@@ -1,9 +1,9 @@
-[submodule "search-chart"]
-	path = search-chart
-	url = https://github.com/open-cluster-management/search-chart
 [submodule "kui-web-terminal-chart"]
 	path = kui-web-terminal-chart
 	url = https://github.com/open-cluster-management/kui-web-terminal-chart
+[submodule "search-chart"]
+	path = search-chart
+	url = https://github.com/open-cluster-management/search-chart
 [submodule "icp-cert-manager-chart"]
 	path = icp-cert-manager-chart
 	url = https://github.com/open-cluster-management/icp-cert-manager-chart
