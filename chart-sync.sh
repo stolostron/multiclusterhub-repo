@@ -3,7 +3,7 @@ package_chart()
 {
   cd stable/*/ 
   PACKAGE="$(helm package ./)"
-  find . -name '*tgz' | xargs -J% mv % ../../../multicloudhub/charts
+  find . -name '*tgz' -print0 | xargs -0 -I {} mv {} ../../../multicloudhub/charts
   cd ../../../
   echo "after" $PWD
 }
