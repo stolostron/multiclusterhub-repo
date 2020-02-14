@@ -1,3 +1,4 @@
+#!/bin/bash
 package_chart() 
 {
   cd stable/*/ 
