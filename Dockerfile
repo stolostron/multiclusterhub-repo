@@ -9,6 +9,6 @@ FROM registry.access.redhat.com/ubi8/ubi-minimal:latest
 
 WORKDIR /app
 COPY --from=builder /workspace/rhacm-repo .
-COPY charts/ charts/
+COPY multicloudhub/charts/ charts/
 EXPOSE 3000
 ENTRYPOINT /app/rhacm-repo
