@@ -25,6 +25,21 @@ ifndef DOCKER_PASS
 	exit -1
 endif
 
+image:
+	./cicd-scripts/build.sh "$(REGISTRY)/$(IMG):$(VERSION)"
+
+push:
+	./common/scripts/push.sh "$(REGISTRY)/$(IMG):$(VERSION)"
+
+unit-test:
+	./common/scripts/unit-test.sh "$(REGISTRY)/$(IMG):$(VERSION)"
+
+
+
+
+
+
+
 pull-secret:
 	kubectl create secret docker-registry scratch \
 	--docker-server=$(DOCKER_SCRATCH_REGISTRY) \
@@ -36,7 +51,7 @@ docker-login:
 	docker login hyc-cloud-private-scratch-docker-local.artifactory.swg-devops.com/rhacm-installer -u $(DOCKER_USER) -p $(DOCKER_PASS)
 
 docker-build:
-	docker build -t rhacm-repo:latest .
+	docker build -t multicloudhub-repo:latest .
 	
 docker-release:
 	docker tag rhacm-repo:latest hyc-cloud-private-scratch-docker-local.artifactory.swg-devops.com/rhacm-installer/rhacm-repo:0.1.0

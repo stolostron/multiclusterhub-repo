@@ -1,0 +1,1 @@
+multicloudhub-repo is intended to serve charts for the multicloudhub-operator installer
