@@ -33,3 +33,8 @@ push:
 
 unit-test:
 	./cicd-scripts/unit-test.sh
+
+# local builds a docker image and runs it locally
+local:
+	docker build -t "$(IMG):$(VERSION)" . && docker run -it --rm --expose 3000 -p 3000:3000  "$(IMG):$(VERSION)"
+	
