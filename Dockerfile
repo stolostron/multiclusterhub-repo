@@ -3,12 +3,12 @@ FROM golang:1.13 as builder
 
 WORKDIR /workspace
 COPY main.go main.go
-RUN GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o rhacm-repo main.go
+RUN GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o start-repo main.go
 
 FROM registry.access.redhat.com/ubi8/ubi-minimal:latest
 
 WORKDIR /app
-COPY --from=builder /workspace/rhacm-repo .
-COPY multicloudhub/charts/ charts/
+COPY --from=builder /workspace/start-repo .
+COPY multicloudhub/charts/ multicloudhub/charts/
 EXPOSE 3000
-ENTRYPOINT /app/rhacm-repo
+ENTRYPOINT /app/start-repo
