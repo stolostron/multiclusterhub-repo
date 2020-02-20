@@ -1,10 +1,21 @@
+# Bootstrap (pull) the build harness
+
+# GITHUB_USER containing '@' char must be escaped with '%40'
+GITHUB_USER := $(shell echo $(GITHUB_USER) | sed 's/@/%40/g')
+GITHUB_TOKEN ?=
+
+DOCKER_USER := $(shell echo $(DOCKER_USER))
+DOCKER_PASS := $(shell echo $(DOCKER_PASS))
+
+-include $(shell curl -H 'Authorization: token ${GITHUB_TOKEN}' -H 'Accept: application/vnd.github.v4.raw' -L https://api.github.com/repos/open-cluster-management/build-harness-extensions/contents/templates/Makefile.build-harness-bootstrap -o .build-harness-bootstrap; echo .build-harness-bootstrap)
+
 DOCKER_SCRATCH_REGISTRY := hyc-cloud-private-scratch-docker-local.artifactory.swg-devops.com
 
 .PHONY: default
 default:: init;
 
 .PHONY: init\:
-init:
+init::
 ifndef DOCKER_USER
 	$(info DOCKER_USER not defined)
 	exit -1
