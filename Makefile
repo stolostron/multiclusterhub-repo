@@ -15,7 +15,7 @@ DOCKER_SCRATCH_REGISTRY := hyc-cloud-private-scratch-docker-local.artifactory.sw
 default:: init;
 
 .PHONY: init\:
-init:
+init::
 ifndef DOCKER_USER
 	$(info DOCKER_USER not defined)
 	exit -1
