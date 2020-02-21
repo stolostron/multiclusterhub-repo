@@ -1,0 +1,238 @@
+apiVersion: v1
+entries:
+  cert-manager:
+  - apiVersion: v1
+    appVersion: 0.10.1
+    created: "2020-02-20T13:54:08.255423-05:00"
+    dependencies:
+    - alias: crd
+      name: cert-manager-crd
+      repository: file://cert-manager-crd
+      version: 3.4.0
+    description: Service for issuing and managing certificates.
+    digest: b776beda69b9dd60f170158d5db47e3b687dd3d21b985dea70328f1fe3cc5b66
+    keywords:
+    - amd64
+    - ppc64le
+    - s390x
+    - OpenSource
+    - Security
+    - cert-manager
+    - kube-lego
+    - letsencrypt
+    - tls
+    - Development
+    - RHOCP
+    - ROKS
+    kubeVersion: '>=1.11.0'
+    name: cert-manager
+    urls:
+    - http://multicloudhub-repo:3000/charts/cert-manager-3.5.0.tgz
+    version: 3.5.0
+  cert-manager-webhook:
+  - apiVersion: v1
+    appVersion: 0.10.1
+    created: "2020-02-20T13:54:08.257966-05:00"
+    description: A Helm chart for deploying the cert-manager webhook component
+    digest: 9001b50b5fe3b66698db3f5e3947f1fb6514c1ae763a2475c5a86dd225fbd73b
+    home: https://github.com/jetstack/cert-manager
+    keywords:
+    - cert-manager
+    - kube-lego
+    - letsencrypt
+    - tls
+    - Development
+    - amd64
+    - ppc64le
+    - s390x
+    - Commercial
+    - RHOCP
+    kubeVersion: '>=1.9.0-0'
+    name: cert-manager-webhook
+    sources:
+    - https://github.com/jetstack/cert-manager
+    urls:
+    - http://multicloudhub-repo:3000/charts/cert-manager-webhook-3.5.0.tgz
+    version: 3.5.0
+  configmap-watcher:
+  - apiVersion: v1
+    appVersion: 3.3.1
+    created: "2020-02-20T13:54:08.259468-05:00"
+    description: A helm chart for deploying the config map watcher component.
+    digest: ae4c3374cbb0b0cf3192355353f0267eecb28560dd505f9cb9803e685cb45748
+    keywords:
+    - configmap
+    - watcher
+    - kubernetes
+    - ICP
+    - amd64
+    - s390x
+    - ppc64le
+    - Tools
+    - Development
+    - Tech
+    kubeVersion: '>=1.11.0'
+    name: configmap-watcher
+    urls:
+    - http://multicloudhub-repo:3000/charts/configmap-watcher-3.4.1.tgz
+    version: 3.4.1
+  grc:
+  - apiVersion: v1
+    appVersion: 1.0.0
+    created: "2020-02-20T13:54:08.260932-05:00"
+    description: helm chart for multicloud grc
+    digest: 33c0b8be1f198fb152fe12affc866ad7e3ad0d3a69f4adeb60f0163784e044db
+    keywords:
+    - mcm
+    - grc
+    kubeVersion: '>=1.10.0'
+    name: grc
+    urls:
+    - http://multicloudhub-repo:3000/charts/grc-1.0.0.tgz
+    version: 1.0.0
+  ibm-search-prod:
+  - apiVersion: v1
+    appVersion: 3.4.0
+    created: "2020-02-20T13:54:08.263979-05:00"
+    description: Search Helm Chart for IBM Cloud Pak for Multicloud Management
+    digest: 3d281b5fe834458d78f956cef596d05ac4a32171892050f3d260abad9aac6ff0
+    icon: https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.png
+    keywords:
+    - RHOCP
+    - ICPRHOCP
+    - multicluster
+    - search
+    - Commercial
+    - amd64
+    - ppc64le
+    - s390x
+    - runtime
+    kubeVersion: '>=1.10.0'
+    name: ibm-search-prod
+    urls:
+    - http://multicloudhub-repo:3000/charts/ibm-search-prod-3.5.0.tgz
+    version: 3.5.0
+  icp-mongodb:
+  - apiVersion: v1
+    appVersion: 4.0.12
+    created: "2020-02-20T13:54:08.266686-05:00"
+    description: NoSQL document-oriented database.
+    digest: db0cb0bb9cdc0c509286b5e8db388e08d954f397be557f8166d6a1058038e059
+    home: https://github.com/mongodb/mongo
+    icon: https://webassets.mongodb.com/_com_assets/cms/mongodb-logo-rgb-j6w271g1xn.jpg
+    keywords:
+    - Commercial
+    - Limited
+    - amd64
+    - ppc64le
+    - s390x
+    - database
+    - ICP
+    kubeVersion: '>=1.9.0-0'
+    name: icp-mongodb
+    sources:
+    - https://github.com/mongodb/mongo
+    urls:
+    - http://multicloudhub-repo:3000/charts/icp-mongodb-3.5.0.tgz
+    version: 3.5.0
+  kui-web-terminal:
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: "2020-02-20T13:54:08.268056-05:00"
+    description: A helm chart for deploying the IBM Visual Web Terminal
+    digest: e497f4ba73bb4d0db332d833ba865b9ffbfa2e210685ef81936b878205a59ba4
+    keywords:
+    - IcpClusterResource
+    - Commercial
+    - ICP
+    - IKS
+    - ICPRHOCP
+    - Operations
+    - amd64
+    - ppc64le
+    - s390x
+    kubeVersion: '>=1.11.0'
+    name: kui-web-terminal
+    urls:
+    - http://multicloudhub-repo:3000/charts/kui-web-terminal-3.5.0.tgz
+    version: 3.5.0
+  management-ingress:
+  - apiVersion: v1
+    appVersion: 3.4.0
+    created: "2020-02-20T13:54:08.270274-05:00"
+    description: Multi Cloud control plane ingress controller
+    digest: 9bb2d873afc58f71000da6354bc7fa37615e5330a07b9bb5cc1cc3f425054170
+    keywords:
+    - ICP
+    - ingress
+    - nginx
+    - IcpClusterResource
+    - Network
+    - Commercial
+    - Limited
+    - amd64
+    - ppc64le
+    - s390x
+    kubeVersion: '>=1.11.0'
+    name: management-ingress
+    urls:
+    - http://multicloudhub-repo:3000/charts/management-ingress-3.4.0.tgz
+    version: 3.4.0
+  mcmapplicationui:
+  - apiVersion: v1
+    appVersion: 1.0.0
+    created: "2020-02-20T13:54:08.271111-05:00"
+    description: Helm chart for Open Cluster Management application UI
+    digest: 4595fa68643d2ce04a5af32f076a097ddaed4e1b7648c74f4b80409b203f4468
+    keywords:
+    - ui
+    kubeVersion: '>=1.10.0'
+    name: mcmapplicationui
+    urls:
+    - http://multicloudhub-repo:3000/charts/mcmapplicationui-1.0.0.tgz
+    version: 1.0.0
+  nginx:
+  - apiVersion: v1
+    appVersion: 1.16.1
+    created: "2020-02-20T13:54:08.272316-05:00"
+    description: Chart for the nginx server
+    digest: 4c2b0022fedce91c1354acb4a3eaebaee2a64a341694dd78d410f874ee600628
+    home: http://www.nginx.org
+    icon: https://bitnami.com/assets/stacks/nginx/img/nginx-stack-220x234.png
+    keywords:
+    - nginx
+    - http
+    - web
+    - www
+    - reverse proxy
+    maintainers:
+    - email: containers@bitnami.com
+      name: Bitnami
+    name: nginx
+    sources:
+    - https://github.com/bitnami/bitnami-docker-nginx
+    urls:
+    - http://multicloudhub-repo:3000/charts/nginx-5.1.6.tgz
+    version: 5.1.6
+  rcm:
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: "2020-02-20T13:54:08.274981-05:00"
+    description: A helm chart for deploying the cluster lifecycle
+    digest: 43246d52cb344f5145a33b0cd8e3dd030d4d3d9244dee3cdde414b64bcf997fc
+    keywords:
+    - IcpClusterResource
+    - Commercial
+    - ICP
+    - IKS
+    - ICPRHOCP
+    - Operations
+    - amd64
+    - ppc64le
+    - s390x
+    kubeVersion: '>=1.11.0'
+    name: rcm
+    urls:
+    - http://multicloudhub-repo:3000/charts/rcm-3.5.0.tgz
+    version: 3.5.0
+generated: "2020-02-20T13:54:08.246713-05:00"

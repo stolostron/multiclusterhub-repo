@@ -2,29 +2,27 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
+	sys "runtime"
 )
 
 const (
 	// chartsDir is the directory that holds all charts to serve
-	chartDir = "./charts"
+	chartDir = "./multicloudhub/charts/"
 	// gracePeriod is the duration for which the server will gracefully wait for existing connections to finish
 	gracePeriod = time.Second * 15
+	// envPort is the port to serve charts on
+	port = ":3000"
 )
 
 func main() {
-	envPort, exists := os.LookupEnv("RHACM_REPO_SERVICE_PORT")
-	if !exists {
-		log.Println("No port provided, defaulting to port :3000")
-		envPort = "3000"
-	}
-	port := fmt.Sprintf(":%s", envPort)
+	log.Printf("Go Version: %s", sys.Version())
+	log.Printf("Go OS/Arch: %s/%s", sys.GOOS, sys.GOARCH)
 
 	mux := http.NewServeMux()
 
@@ -32,7 +30,7 @@ func main() {
 	fileServer := http.FileServer(http.Dir(chartDir))
 	mux.Handle("/liveness", loggingMiddleware(http.HandlerFunc(livenessHandler)))
 	mux.Handle("/readiness", loggingMiddleware(http.HandlerFunc(readinessHandler)))
-	mux.Handle("/charts/", loggingMiddleware(http.StripPrefix("/charts", fileServer)))
+	mux.Handle("/charts/", loggingMiddleware(http.StripPrefix("/charts/", fileServer)))
 
 	srv := &http.Server{
 		Addr: port,
@@ -40,11 +38,12 @@ func main() {
 		WriteTimeout: time.Second * 30,
 		ReadTimeout:  time.Second * 30,
 		IdleTimeout:  time.Second * 30,
-		Handler:      mux, // Pass our instance of gorilla/mux in.
+		Handler:      mux,
 	}
 
 	// Run our server in a goroutine so that it doesn't block.
 	go func() {
+		log.Printf("Serving on port %s", srv.Addr)
 		if err := srv.ListenAndServe(); err != nil {
 			log.Println(err)
 		}
@@ -62,7 +61,7 @@ func main() {
 	// Doesn't block if no connections, but will otherwise wait
 	// until the timeout deadline.
 	srv.Shutdown(ctx)
-	log.Println("shutting down")
+	log.Println("Signal received, shutting down.")
 	os.Exit(0)
 }
 
