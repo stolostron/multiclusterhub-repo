@@ -4,6 +4,27 @@
 [submodule "search-chart"]
 	path = search-chart
 	url = https://github.com/open-cluster-management/search-chart
-[submodule "icp-cert-manager-chart"]
-	path = icp-cert-manager-chart
-	url = https://github.com/open-cluster-management/icp-cert-manager-chart
+[submodule "cert-manager-chart"]
+	path = cert-manager-chart
+	url = https://github.com/open-cluster-management/cert-manager-chart
+[submodule "application-chart"]
+	path = application-chart
+	url = https://github.com/open-cluster-management/application-chart
+[submodule "grc-chart"]
+	path = grc-chart
+	url = https://github.com/open-cluster-management/grc-chart
+[submodule "management-ingress-chart"]
+	path = management-ingress-chart
+	url = https://github.com/open-cluster-management/management-ingress-chart
+[submodule "rcm-chart"]
+	path = rcm-chart
+	url = https://github.com/open-cluster-management/rcm-chart
+[submodule "multicloud-mongodb-chart"]
+	path = multicloud-mongodb-chart
+	url = https://github.com/open-cluster-management/multicloud-mongodb-chart
+[submodule "cert-manager-webhook-chart"]
+	path = cert-manager-webhook-chart
+	url = https://github.com/open-cluster-management/cert-manager-webhook-chart
+[submodule "configmap-watcher-chart"]
+	path = configmap-watcher-chart
+	url = https://github.com/open-cluster-management/configmap-watcher-chart
