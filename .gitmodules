@@ -28,3 +28,6 @@
 [submodule "configmap-watcher-chart"]
 	path = configmap-watcher-chart
 	url = https://github.com/open-cluster-management/configmap-watcher-chart
+[submodule "console-chart"]
+	path = console-chart
+	url = https://github.com/open-cluster-management/console-chart
