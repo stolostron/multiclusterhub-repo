@@ -1,3 +1,4 @@
 # Ignore binary
 multicloudhub-repo
 .build-harness-bootstrap
+.DS_Store
