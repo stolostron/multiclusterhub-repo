@@ -23,6 +23,10 @@ git clone git@github.com:open-cluster-management/rcm-chart.git
 helm3 package rcm-chart/stable/rcm -d multicloudhub/charts
 rm -rf rcm-chart
 
+git clone git@github.com:open-cluster-management/console-chart.git
+helm3 package console-chart/stable/console-chart -d multicloudhub/charts
+rm -rf console-chart
+
 git clone git@github.com:open-cluster-management/multicloud-mongodb-chart.git
 helm3 package multicloud-mongodb-chart/stable/icp-mongodb -d multicloudhub/charts
 rm -rf multicloud-mongodb-chart
