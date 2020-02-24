@@ -4,7 +4,7 @@ helm3 package kui-web-terminal-chart/stable/kui-web-terminal -d multicloudhub/ch
 rm -rf kui-web-terminal-chart
 
 git clone git@github.com:open-cluster-management/search-chart.git
-helm3 package search-chart/stable/ibm-search-prod -d multicloudhub/charts
+helm3 package search-chart/stable/search-prod -d multicloudhub/charts
 rm -rf search-chart
 
 git clone git@github.com:open-cluster-management/application-chart.git
@@ -27,9 +27,9 @@ git clone git@github.com:open-cluster-management/console-chart.git
 helm3 package console-chart/stable/console-chart -d multicloudhub/charts
 rm -rf console-chart
 
-git clone git@github.com:open-cluster-management/multicloud-mongodb-chart.git
-helm3 package multicloud-mongodb-chart/stable/icp-mongodb -d multicloudhub/charts
-rm -rf multicloud-mongodb-chart
+# git clone git@github.com:open-cluster-management/multicloud-mongodb-chart.git
+# helm3 package multicloud-mongodb-chart/stable/multicloud-mongodb -d multicloudhub/charts
+# rm -rf multicloud-mongodb-chart
 
 git clone git@github.com:open-cluster-management/cert-manager-webhook-chart.git
 helm3 package cert-manager-webhook-chart/stable/cert-manager-webhook -d multicloudhub/charts
@@ -42,6 +42,10 @@ rm -rf cert-manager-chart
 git clone git@github.com:open-cluster-management/configmap-watcher-chart.git
 helm3 package configmap-watcher-chart/stable/configmap-watcher -d multicloudhub/charts
 rm -rf configmap-watcher-chart
+
+git clone git@github.com:open-cluster-management/topology-chart.git
+helm3 package topology-chart/stable/topology-chart -d multicloudhub/charts
+rm -rf topology-chart 
 
 curl -L https://charts.bitnami.com/bitnami/nginx-5.1.6.tgz > ./multicloudhub/charts/nginx-5.1.6.tgz
 
