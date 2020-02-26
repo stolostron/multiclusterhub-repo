@@ -1,22 +1,16 @@
-cd $(dirname $0)
-
-package_chart() 
-{
-  cd stable/*/ 
+echo "Fetching charts from csv"
+while IFS=, read -r f1 f2
+do
+  mkdir -p tmp
+  cd tmp
+  git clone $f1
+  cd */
+  git checkout $f2
+  cd stable/*/
   PACKAGE="$(helm package ./)"
-  find . -name '*tgz' | xargs -J% mv % ../../../
-  cd ../../../../../
-  echo "after" $PWD
-}
-echo "Fetching charts from SOURCE-REPO"
-mkdir -p multicloudhub/charts
-git submodule update --init --recursive
-SUB_LIST="$(grep path .gitmodules | sed 's/.*= //')"
-for submodule in ${SUB_LIST}; do
-  echo ${submodule}
-  mv ${submodule}  multicloudhub/charts
-  cd "multicloudhub/charts/${submodule}"
-  package_chart 
-  rm -rf multicloudhub/charts/${submodule}
-done
+  find . -name '*tgz' | xargs -J% mv % ../../../../multicloudhub/charts
+  cd ../../../../
+   rm -rf tmp
+done < chartSHA.csv
 helm repo index multicloudhub/charts
+curl -L https://charts.bitnami.com/bitnami/nginx-5.1.6.tgz > multicloudhub/charts/nginx-5.1.6.tgz
