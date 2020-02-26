@@ -6,9 +6,9 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"runtime"
 	"syscall"
 	"time"
-	sys "runtime"
 )
 
 const (
@@ -16,13 +16,13 @@ const (
 	chartDir = "./multicloudhub/charts/"
 	// gracePeriod is the duration for which the server will gracefully wait for existing connections to finish
 	gracePeriod = time.Second * 15
-	// envPort is the port to serve charts on
+	// port the server listens on
 	port = ":3000"
 )
 
 func main() {
-	log.Printf("Go Version: %s", sys.Version())
-	log.Printf("Go OS/Arch: %s/%s", sys.GOOS, sys.GOARCH)
+	log.Printf("Go Version: %s", runtime.Version())
+	log.Printf("Go OS/Arch: %s/%s", runtime.GOOS, runtime.GOARCH)
 
 	mux := http.NewServeMux()
 
@@ -50,10 +50,12 @@ func main() {
 	}()
 
 	sigs := make(chan os.Signal, 1)
+	// Kubernetes sends a SIGTERM, waits for a grace period, and then a SIGKILL
 	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
 
 	// Block until we receive our signal.
 	<-sigs
+	log.Println("Shutdown signal received")
 
 	// Create a deadline to wait for.
 	ctx, cancel := context.WithTimeout(context.Background(), gracePeriod)
@@ -61,17 +63,17 @@ func main() {
 	// Doesn't block if no connections, but will otherwise wait
 	// until the timeout deadline.
 	srv.Shutdown(ctx)
-	log.Println("Signal received, shutting down.")
+	log.Println("Goodbye")
 	os.Exit(0)
 }
 
 // loggingMiddleware logs each request sent to the server
 func loggingMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// Do stuff here
-		log.Println(r.RequestURI)
-		// Call the next handler
+		startTime := time.Now()
 		next.ServeHTTP(w, r)
+		duration := time.Since(startTime)
+		log.Printf("%5dms %s", duration.Milliseconds(), r.RequestURI)
 	})
 }
 
