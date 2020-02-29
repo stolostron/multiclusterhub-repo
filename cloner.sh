@@ -12,7 +12,7 @@ helm3 package application-chart/stable/application-chart -d multicloudhub/charts
 rm -rf application-chart
 
 git clone git@github.com:open-cluster-management/grc-chart.git
-helm3 package grc-chart/stable/grc-chart -d multicloudhub/charts
+helm3 package grc-chart/stable/grc -d multicloudhub/charts
 rm -rf grc-chart
 
 git clone git@github.com:open-cluster-management/management-ingress-chart.git
@@ -24,7 +24,8 @@ helm3 package rcm-chart/stable/rcm -d multicloudhub/charts
 rm -rf rcm-chart
 
 git clone git@github.com:open-cluster-management/console-chart.git
-helm3 package console-chart/stable/console-chart -d multicloudhub/charts
+mv console-chart/stable/console-chart/ console-chart/stable/console # hack until console chart updated
+helm3 package console-chart/stable/console -d multicloudhub/charts
 rm -rf console-chart
 
 # git clone git@github.com:open-cluster-management/multicloud-mongodb-chart.git
@@ -44,9 +45,7 @@ helm3 package configmap-watcher-chart/stable/configmap-watcher -d multicloudhub/
 rm -rf configmap-watcher-chart
 
 git clone git@github.com:open-cluster-management/topology-chart.git
-helm3 package topology-chart/stable/topology-chart -d multicloudhub/charts
+helm3 package topology-chart/stable/topology -d multicloudhub/charts
 rm -rf topology-chart 
-
-curl -L https://charts.bitnami.com/bitnami/nginx-5.1.6.tgz > ./multicloudhub/charts/nginx-5.1.6.tgz
 
 helm3 repo index --url http://multicloudhub-repo:3000/charts ./multicloudhub/charts
