@@ -7,11 +7,13 @@ do
   git clone $f1
   cd */
   git checkout $f2
-  cd stable/*/
+  var1=$(echo $f1 | cut -f5 -d/)  #get the repo name
+  var2=$(echo $var1 | cut -f1 -d-) #get the first word (ie kui in kui-web-terminal)
+  var3=$(find . -type d -name "$var2*") #look for folder in repo that starts with ^ rather than stable/*/
+  cd $var3
   PACKAGE="$(helm package ./)"
-  find . -name '*tgz' | xargs -J% mv % CHARTS_PATH
+  find . -name '*tgz' | xargs -J% mv % $CHARTS_PATH
   cd ../../../../
-   rm -rf tmp
+  rm -rf tmp
 done < chartSHA.csv
-helm repo index CHARTS_PATH
-curl -L https://charts.bitnami.com/bitnami/nginx-5.1.6.tgz > multicloudhub/charts/nginx-5.1.6.tgz
+helm repo index ../multicloudhub/charts
