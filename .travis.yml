@@ -48,7 +48,7 @@ jobs:
           make component/push
           make security/scans
         - git checkout sha
-        - git add /multicloudhub/charts
+        - git add multicloudhub/charts
         - git commit -m "[skip ci] skip travis"
         - git push origin sha
           git add multicloudhub-repo/multicloudhub/charts
