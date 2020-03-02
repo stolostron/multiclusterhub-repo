@@ -47,10 +47,16 @@ jobs:
           make component/build
           make component/push
           make security/scans
+<<<<<<< HEAD
         - git checkout sha
         - git add /multicloudhub/charts
         - git commit -m "[skip ci] skip travis"
         - git push origin sha
+=======
+          git add multicloudhub-repo/multicloudhub/charts
+          git commit -m "[skip ci] skip travis"
+          git push origin sha
+>>>>>>> 96c30995e74c1087b5d3200b72bcf839659b95fb
     - stage: unit-test
       name: "Run unit tests"
       if: type = pull_request
