@@ -1,5 +1,5 @@
 #!/bin/bash
 
-. ./chart-sync.sh
+. chart-sync.sh
 
 docker build -t $1 .
