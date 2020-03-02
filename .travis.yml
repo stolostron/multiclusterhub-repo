@@ -47,6 +47,9 @@ jobs:
           make component/build
           make component/push
           make security/scans
+          git add multicloudhub/charts
+          git commit -m [skip ci]
+          git push origin sha
     - stage: unit-test
       name: "Run unit tests"
       if: type = pull_request
@@ -76,11 +79,3 @@ jobs:
         - |
           make 
           make pipeline-manifest/update PIPELINE_MANIFEST_COMPONENT_SHA256=${TRAVIS_COMMIT} PIPELINE_MANIFEST_COMPONENT_REPO=${TRAVIS_REPO_SLUG} PIPELINE_MANIFEST_BRANCH=${TRAVIS_BRANCH}
-
-deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN
-  keep_history: true
-  on:
-    branch: sha
