@@ -47,7 +47,7 @@ jobs:
           make component/build
           make component/push
           make security/scans
-          git add multicloudhub/charts
+          git add multicloudhub-repo/multicloudhub/charts
           git commit -m "[skip ci] skip travis"
           git push origin sha
     - stage: unit-test
