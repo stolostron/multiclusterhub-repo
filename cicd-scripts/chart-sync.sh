@@ -13,8 +13,9 @@ do
   var3=$(find . -type d -name "$var2*") #look for folder in repo that starts with ^ rather than stable/*/
   cd $var3
   PACKAGE="$(helm package ./)"
-  find . -type f -name "*tgz" | xargs -I '{}' mv '{}' ../../../../../temp
+  find . -type f -name "*tgz" | xargs -I '{}' mv '{}' $CHARTS_PATH
   cd ../../../../
   rm -rf tmp
 done < chartSHA.csv
-helm repo index ../temp
+echo "$(git status)"
+helm repo index ../multicloudhub/charts
