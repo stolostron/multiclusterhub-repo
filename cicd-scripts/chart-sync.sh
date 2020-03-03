@@ -12,7 +12,7 @@ do
   var3=$(find . -type d -name "$var2*") #look for folder in repo that starts with ^ rather than stable/*/
   cd $var3
   PACKAGE="$(helm package ./)"
-  find . -type f -name "*tgz" | xargs -I '{}' mv '{}' $CHARTS_PATH
+  find . -type f -name "*tgz" | xargs -I '{}' mv '{}' ../../../../../temp
   cd ../../../../
   rm -rf tmp
 done < chartSHA.csv

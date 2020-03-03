@@ -47,7 +47,7 @@ jobs:
           make component/build
           make component/push
           make security/scans
-        - git add multicloudhub/charts
+        - git add temp
         - git commit -m "[skip ci] skip travis"
         - git push git@github.com:open-cluster-management/multicloudhub-repo.git HEAD:sha
     - stage: unit-test
