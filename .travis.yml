@@ -37,7 +37,7 @@ stages:
   - publish
 
 install:
-  - git clone https://github.com/open-cluster-management/multicloudhub-repo
+  - git clone https://github.com/open-cluster-management/multicloudhub-repo $TRAVIS_REPO_SLUG
   - cd $TRAVIS_REPO_SLUG
   - git checkout $TRAVIS_BRANCH
 
