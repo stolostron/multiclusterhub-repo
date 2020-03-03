@@ -43,14 +43,14 @@ jobs:
       script:
         - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then export COMPONENT_TAG_EXTENSION="-PR${TRAVIS_PULL_REQUEST}-${TRAVIS_COMMIT}"; fi;
         - make
-        - git clone https://github.com/open-cluster-management/multicloudhub-repo
+        - git clone $TRAVIS_BUILD_DIR
         - git checkout travisPush
         - make component/build
         - make component/push
         - git status
-        - git add multicloudhub/charts
+        - git add .
         - git commit -m "[skip ci] skip travis"
-        - git push origin travisPush
+        - git push origin $TRAVIS_PULL_REQUEST_BRANCH
         - make security/scans
     - stage: unit-test
       name: "Run unit tests"
