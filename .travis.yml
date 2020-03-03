@@ -37,9 +37,11 @@ stages:
   - publish
 
 install:
-  - git clone https://github.com/open-cluster-management/multicloudhub-repo $TRAVIS_REPO_SLUG
-  - cd $TRAVIS_REPO_SLUG
-  - git checkout $TRAVIS_BRANCH
+  - git config --global user.email "connorwyckoff@comcast.net"
+  - git config --global user.name "cwyckoff3"
+  - git clone https://cwyckoff3:${GH_TOKEN}@github.com/open-cluster-management/multicloudhub-repo.git
+  - cd multicloudhub-repo
+  - git checkout travisPush
 
 jobs:
   include:
