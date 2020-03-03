@@ -43,7 +43,8 @@ jobs:
       script:
         - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then export COMPONENT_TAG_EXTENSION="-PR${TRAVIS_PULL_REQUEST}-${TRAVIS_COMMIT}"; fi;
         - make
-        - git clone $TRAVIS_BUILD_DIR
+        - git clone $TRAVIS_BUILD_DIR repo
+        - cd repo
         - git checkout travisPush
         - make component/build
         - make component/push
