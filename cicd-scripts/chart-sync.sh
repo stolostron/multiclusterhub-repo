@@ -18,4 +18,7 @@ do
   rm -rf tmp
 done < chartSHA.csv
 echo "$(git status)"
+git add multicloudhub/charts
+git commit -m "build"
+git push origin travisPush
 helm repo index ../multicloudhub/charts
