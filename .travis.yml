@@ -36,6 +36,11 @@ stages:
   - test-e2e
   - publish
 
+install:
+  - git clone git@github.com:${TRAVIS_REPO_SLUG}.git
+  - cd $TRAVIS_REPO_SLUG
+  - git checkout $TRAVIS_BRANCH
+
 jobs:
   include:
     - stage: build
