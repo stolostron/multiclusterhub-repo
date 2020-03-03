@@ -36,27 +36,22 @@ stages:
   - test-e2e
   - publish
 
-install:
-  - git config --global user.email "connorwyckoff@comcast.net"
-  - git config --global user.name "cwyckoff3"
-  - git clone https://cwyckoff3:${GH_TOKEN}@github.com/open-cluster-management/multicloudhub-repo.git
-  - cd multicloudhub-repo
-  - git checkout travisPush
-
 jobs:
   include:
     - stage: build
       name: "Build the test image and push it"
       script:
         - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then export COMPONENT_TAG_EXTENSION="-PR${TRAVIS_PULL_REQUEST}-${TRAVIS_COMMIT}"; fi;
-        - |
-          make
-          make component/build
-          make component/push
-          make security/scans
+        - make
+        - git clone git@github.com:open-cluster-management/multicloudhub-repo.git
+        - git checkout travisPush
+        - make component/build
+        - make component/push
+        - git status
         - git add multicloudhub/charts
         - git commit -m "[skip ci] skip travis"
-        - git push git@github.com:open-cluster-management/multicloudhub-repo.git HEAD:sha
+        - git push origin travisPush
+        - make security/scans
     - stage: unit-test
       name: "Run unit tests"
       if: type = pull_request
