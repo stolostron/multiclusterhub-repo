@@ -6,9 +6,9 @@ do
   mkdir -p tmp
   cd tmp
   git clone $f1
-  cd */
   #git checkout $f2
-  var1=$(echo $f1 | cut -f5 -d/)  #get the repo name
+  var1=$(echo "$(ls)" | cut -f5 -d/)  #get the repo name
+  cd */ s
   var2=$(echo $var1 | cut -f1 -d-) #get the first word (ie kui in kui-web-terminal)
   var3=$(find . -type d -name "$var2*") #look for folder in repo that starts with ^ rather than stable/*/
   cd $var3
@@ -18,7 +18,4 @@ do
   rm -rf tmp
 done < chartSHA.csv
 echo "$(git status)"
-git add multicloudhub/charts
-git commit -m "build"
-git push origin travisPush
 helm repo index ../multicloudhub/charts
