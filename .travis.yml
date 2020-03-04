@@ -45,9 +45,8 @@ jobs:
         - make
         - make component/build
         - make component/push
-        - git add .
         - git commit -m "[skip ci] skip travis"
-        - git push origin HEAD:$TRAVIS_PULL_REQUEST_BRANCH
+        - git push origin $TRAVIS_PULL_REQUEST_BRANCH
         - make security/scans
     - stage: unit-test
       name: "Run unit tests"
