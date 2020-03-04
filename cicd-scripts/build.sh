@@ -6,7 +6,7 @@ curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bas
 
 git add ../multicloudhub/charts
 git commit -m "[skip ci] skip travis"
-git push origin HEAD:$TRAVIS_PULL_REQUEST_BRANCH
+git push origin "HEAD:${TRAVIS_PULL_REQUEST_BRANCH}"
 
 cd ..
 docker build -t $1 .
