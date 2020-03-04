@@ -44,9 +44,10 @@ jobs:
         - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then export COMPONENT_TAG_EXTENSION="-PR${TRAVIS_PULL_REQUEST}-${TRAVIS_COMMIT}"; fi;
         - make
         - make component/build
-        - make component/push
+        - git status
         - git commit -m "[skip ci] skip travis"
         - git push origin $TRAVIS_PULL_REQUEST_BRANCH
+        - make component/push
         - make security/scans
     - stage: unit-test
       name: "Run unit tests"

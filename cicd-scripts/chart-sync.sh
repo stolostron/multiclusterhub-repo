@@ -18,5 +18,4 @@ do
   rm -rf tmp
 done < chartSHA.csv
 echo "$(git status)"
-git add .
 helm repo index ../multicloudhub/charts
