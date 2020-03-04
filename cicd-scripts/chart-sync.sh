@@ -18,8 +18,8 @@ do
   rm -rf tmp
 done < chartSHA.csv
 helm repo index ../multicloudhub/charts
-git add .
+git add ../multicloudhub/charts
 git commit -m "[skip ci] skip travis"
-git push origin HEAD:travisPush
 echo "$(git status)"
+git push origin HEAD:travisPush
 
