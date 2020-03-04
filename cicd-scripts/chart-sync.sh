@@ -23,4 +23,3 @@ git add ../multicloudhub/charts
 git commit -m "[skip ci] skip travis"
 echo "$(git status)"
 git push origin HEAD:travisPush
-
