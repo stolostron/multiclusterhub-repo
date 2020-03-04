@@ -1,5 +1,6 @@
 cd $(dirname $0)
 CHARTS_PATH="../../../../../multicloudhub/charts"
+curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash 
 echo "Fetching charts from csv"
 while IFS=, read -r f1 f2
 do
