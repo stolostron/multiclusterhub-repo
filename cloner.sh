@@ -27,9 +27,9 @@ git clone git@github.com:open-cluster-management/console-chart.git
 helm package console-chart/stable/console-chart -d multicloudhub/charts
 rm -rf console-chart
 
-# git clone git@github.com:open-cluster-management/multicloud-mongodb-chart.git
-# helm package multicloud-mongodb-chart/stable/multicloud-mongodb -d multicloudhub/charts
-# rm -rf multicloud-mongodb-chart
+git clone git@github.com:open-cluster-management/multicloud-mongodb-chart.git
+helm package multicloud-mongodb-chart/stable/multicloud-mongodb -d multicloudhub/charts
+rm -rf multicloud-mongodb-chart
 
 git clone git@github.com:open-cluster-management/cert-manager-webhook-chart.git
 helm package cert-manager-webhook-chart/stable/cert-manager-webhook -d multicloudhub/charts
