@@ -1,5 +1,6 @@
 cd $(dirname $0)
 CHARTS_PATH="../../../../../multicloudhub/charts"
+CICD_FOLDER="../../../../"
 echo "Fetching charts from csv"
 while IFS=, read -r f1 f2
 do
@@ -17,7 +18,7 @@ do
   cd $var3
   PACKAGE="$(helm package ./)"
   find . -type f -name "*tgz" | xargs -I '{}' mv '{}' $CHARTS_PATH
-  cd ../../../../
+  cd $CICD_FOLDER
   rm -rf tmp
 done < chartSHA.csv
 helm repo index ../multicloudhub/charts
