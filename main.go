@@ -67,13 +67,29 @@ func main() {
 	os.Exit(0)
 }
 
+// CustomResponseWriter adds a field an http.ResponseWriter to track status
+type CustomResponseWriter struct {
+	http.ResponseWriter
+	status int
+}
+
+// WriteHeader populates the status field before calling WriteHeader
+func (w *CustomResponseWriter) WriteHeader(status int) {
+	w.status = status // Store the status for our own use
+	w.ResponseWriter.WriteHeader(status)
+}
+
 // loggingMiddleware logs each request sent to the server
 func loggingMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// Use custom ResponseWriter to track statuscode
+		crw := &CustomResponseWriter{ResponseWriter: w}
+
 		startTime := time.Now()
-		next.ServeHTTP(w, r)
+		next.ServeHTTP(crw, r)
 		duration := time.Since(startTime)
-		log.Printf("%5dms %s", duration.Milliseconds(), r.RequestURI)
+
+		log.Printf("%d %3dms %s", crw.status, duration.Milliseconds(), r.RequestURI)
 	})
 }
 
