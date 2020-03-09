@@ -5,7 +5,7 @@ cd $(dirname $0)
 
 git add ../multicloudhub/charts
 git commit -m "[skip ci] skip travis"
-git pull origin "HEAD:${TRAVIS_BRANCH}" -s recursive -X ours
+git pull origin "${TRAVIS_BRANCH}" -s recursive -X ours
 git push origin "HEAD:${TRAVIS_BRANCH}"
 
 cd ..
