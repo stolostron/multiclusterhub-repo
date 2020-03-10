@@ -3,9 +3,9 @@ entries:
   application-chart:
   - apiVersion: v1
     appVersion: 1.0.0
-    created: "2020-03-09T22:47:24.801477955Z"
+    created: "2020-03-10T14:15:30.469354009Z"
     description: Helm chart for Open Cluster Management application UI
-    digest: 5357c1ed89dbdb75dde168519f1068eebf2007660c6c0de0df41e90bdb5586fc
+    digest: bc4b9f34aeb2771c863008df15bf4b3bb7b9438bcd5a33298928c2b91dd8746a
     keywords:
     - ui
     kubeVersion: '>=1.10.0'
@@ -16,14 +16,14 @@ entries:
   cert-manager:
   - apiVersion: v1
     appVersion: 0.10.1
-    created: "2020-03-09T22:47:24.804700105Z"
+    created: "2020-03-10T14:15:30.472775399Z"
     dependencies:
     - alias: crd
       name: cert-manager-crd
       repository: file://cert-manager-crd
       version: 3.4.0
     description: Service for issuing and managing certificates.
-    digest: a547d7bcf988054e2bd2314a70c70ef95cfc02850768d40be6e0997afe54cd08
+    digest: e7108aa18dfeee0724556d3b7976bf360cdf2b2b9c539213488780a2d80141c5
     keywords:
     - amd64
     - ppc64le
@@ -45,9 +45,9 @@ entries:
   cert-manager-webhook:
   - apiVersion: v1
     appVersion: 0.10.1
-    created: "2020-03-09T22:47:24.806054776Z"
+    created: "2020-03-10T14:15:30.474202942Z"
     description: A Helm chart for deploying the cert-manager webhook component
-    digest: edb72a3636d1741aa60f795d644a4736f1faae00420f4ac7833365766b25b967
+    digest: 965dd6758ee81a2d4f321a00bdad56a3fbb56ec4c33fe2796a3a20158ad570d2
     home: https://github.com/jetstack/cert-manager
     keywords:
     - cert-manager
@@ -70,9 +70,9 @@ entries:
   configmap-watcher:
   - apiVersion: v1
     appVersion: 3.3.1
-    created: "2020-03-09T22:47:24.80762756Z"
+    created: "2020-03-10T14:15:30.475591264Z"
     description: A helm chart for deploying the config map watcher component.
-    digest: 6b5c867517b874d2cffe4814f25ee2e52386215fb360e5fe9497c2a0f9d7f7dd
+    digest: b5656536805423d67d9772ad169a58fd1e5bd646a3658fc433ad50c8aca9e1dc
     keywords:
     - configmap
     - watcher
@@ -92,14 +92,14 @@ entries:
   console-chart:
   - apiVersion: v1
     appVersion: 1.0.0
-    created: "2020-03-09T22:47:24.809441244Z"
+    created: "2020-03-10T14:15:30.477483018Z"
     dependencies:
     - alias: crd
       name: console-crd
       repository: file://console-crd
       version: 1.0.0
     description: Helm chart for Open Cluster Management console UI
-    digest: f5d1800dc2d5681c74d206ab2d38d926e6c60289db83da1a20b44c01b231a9d8
+    digest: 4c66a45586809a1529123298417ebfa9e8e0096347ae228731b7c3438b2dd0a1
     keywords:
     - ui
     kubeVersion: '>=1.10.0'
@@ -110,9 +110,9 @@ entries:
   grc:
   - apiVersion: v1
     appVersion: 1.0.0
-    created: "2020-03-09T22:47:24.81046076Z"
+    created: "2020-03-10T14:15:30.478670094Z"
     description: helm chart for multicloud grc
-    digest: 5ef6f7706eee7d5c206b30c4ba3e5ba66932e35d0d9f98cf128333511451ae0e
+    digest: 3b164c31928394344378098327f0e5dbcf7d5336123f0a77a36405d50f76ab6b
     keywords:
     - mcm
     - grc
@@ -124,9 +124,9 @@ entries:
   kui-web-terminal:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-03-09T22:47:24.811168669Z"
+    created: "2020-03-10T14:15:30.479364295Z"
     description: A helm chart for deploying the IBM Visual Web Terminal
-    digest: 240bee9b3c827e5c061dd47ca735cea86288929e1f2e99c0a2d10a2ba0fdf004
+    digest: 57e7d7d5c957874f25c9c7a02b000ed70c1230774c44e2e8cfe9971d7883f672
     keywords:
     - IcpClusterResource
     - Commercial
@@ -145,9 +145,9 @@ entries:
   management-ingress:
   - apiVersion: v1
     appVersion: 3.4.0
-    created: "2020-03-09T22:47:24.812002158Z"
+    created: "2020-03-10T14:15:30.480210604Z"
     description: Multi Cloud control plane ingress controller
-    digest: aa1098796fd895867d535734d622f4677864357eff4eacb8d6fd4fd1ce6702ce
+    digest: 3f851dd570675fc4cbb02e20060f74c5b2d2f8e1f4e0fabd48d838cc058ab855
     keywords:
     - ingress
     - nginx
@@ -162,12 +162,32 @@ entries:
     urls:
     - management-ingress-3.4.0.tgz
     version: 3.4.0
+  multicloud-mongodb:
+  - apiVersion: v1
+    appVersion: 4.0.12
+    created: "2020-03-10T14:15:30.482296981Z"
+    description: NoSQL document-oriented database.
+    digest: e0d2549e179081afffa33d2bc4ae1b0322fba65b8e74109c9c92847ebfd73abd
+    home: https://github.com/mongodb/mongo
+    icon: https://webassets.mongodb.com/_com_assets/cms/mongodb-logo-rgb-j6w271g1xn.jpg
+    keywords:
+    - Commercial
+    - Limited
+    - amd64
+    - database
+    kubeVersion: '>=1.9.0-0'
+    name: multicloud-mongodb
+    sources:
+    - https://github.com/mongodb/mongo
+    urls:
+    - multicloud-mongodb-3.5.0.tgz
+    version: 3.5.0
   rcm:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-03-09T22:47:24.812590963Z"
+    created: "2020-03-10T14:15:30.482893048Z"
     description: A helm chart for deploying the cluster lifecycle
-    digest: 37f291001ec1a2b632d0f6edbfb89b6ab1794c34205abf74d6df561a7eca372f
+    digest: ca559e83f770f0b969f2ff626e47ae2524b1ce5d6488dcf4b34bfe813dde6359
     keywords:
     - IcpClusterResource
     - Commercial
@@ -186,9 +206,9 @@ entries:
   search-prod:
   - apiVersion: v1
     appVersion: 3.4.0
-    created: "2020-03-09T22:47:24.813496268Z"
+    created: "2020-03-10T14:15:30.483833591Z"
     description: Helm chart to install the Multicloud Search service
-    digest: b80e555e60732179e26c950cd75f59f3b1f9afcba78be8385e2da7cd0c404516
+    digest: 20ba68fec5b2fd90e28079e9b62b3ff26be3e9951974e001088340d7a8e19e69
     icon: https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.png
     keywords:
     - RHOCP
@@ -206,9 +226,9 @@ entries:
   topology:
   - apiVersion: v1
     appVersion: 1.0.0
-    created: "2020-03-09T22:47:24.813950036Z"
+    created: "2020-03-10T14:15:30.484289473Z"
     description: helm chart for multicloud topology
-    digest: d31ca80da1f9da77c27f56ba080dc77ddf24571bdcef4dbd1ebed819d8c9463e
+    digest: c3225d875fb801da9f43aa4bc9810028d2bc3ff6a88b2b6c049135c72d842747
     keywords:
     - mcm
     - topology
@@ -217,4 +237,4 @@ entries:
     urls:
     - topology-1.0.0.tgz
     version: 1.0.0
-generated: "2020-03-09T22:47:24.800916577Z"
+generated: "2020-03-10T14:15:30.468738523Z"
