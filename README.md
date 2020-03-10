@@ -1,4 +1,4 @@
-multicloudhub-repo is intended to serve charts for the multicloudhub-operator installer
+multicloudhub-repo is intended to serve charts for the [multicloudhub-operator installer](https://github.com/open-cluster-management/multicloudhub-operator)
 
 ## Updating charts in the `multicloudhub/charts` folder (as of 3/10/20)
 
