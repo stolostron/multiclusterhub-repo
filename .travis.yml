@@ -4,11 +4,6 @@
 os:
   - linux
 
-branches:
-  only:
-    - master
-    - /^release-[0-9]+\..*$/
-
 language: go
 go:
   - "1.13.x"
