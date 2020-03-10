@@ -21,4 +21,4 @@ do
   cd $CICD_FOLDER
   rm -rf tmp
 done < chartSHA.csv
-helm repo index ../multicloudhub/charts
+helm repo index --url http://multicloudhub-repo:3000/charts ../multicloudhub/charts
