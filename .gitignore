@@ -2,5 +2,3 @@
 multicloudhub-repo
 .build-harness-bootstrap
 .DS_Store
-build-harness
-build-harness-extensions
