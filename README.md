@@ -8,3 +8,5 @@ Calling the cloner script will build all the charts from the master branch and g
 ```console
 bash cloner.sh
 ```
+
+Last updated via Travis: March 11 11:38AM EST
