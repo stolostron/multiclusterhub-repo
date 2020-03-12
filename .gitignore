@@ -1,4 +1,13 @@
 # Ignore binary
 multicloudhub-repo
-.build-harness-bootstrap
 .DS_Store
+
+build-harness
+build-harness-extensions
+.build-harness
+.build-harness-bootstrap
+
+# override build harness vendoring
+!vbh/.build-harness-vendorized
+!vbh/build-harness
+!vbh/build-harness-extensions 
