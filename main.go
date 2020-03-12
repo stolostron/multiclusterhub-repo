@@ -1,7 +1,10 @@
 package main
 
 import (
+	"bytes"
 	"context"
+	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -10,6 +13,8 @@ import (
 	"syscall"
 	"time"
 )
+
+var index []byte
 
 const (
 	// chartsDir is the directory that holds all charts to serve
@@ -24,12 +29,27 @@ func main() {
 	log.Printf("Go Version: %s", runtime.Version())
 	log.Printf("Go OS/Arch: %s/%s", runtime.GOOS, runtime.GOARCH)
 
+	// Hold index file in memory
+	index, err := readIndex()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Modify urls in index to reference namespace deployed in
+	ns := os.Getenv("POD_NAMESPACE")
+	if ns == "" {
+		log.Println("POD_NAMESPACE missing, index.yaml will not be updated")
+	} else {
+		index = modifyIndex(index, ns)
+	}
+
 	mux := http.NewServeMux()
 
 	// Add route handlers
 	fileServer := http.FileServer(http.Dir(chartDir))
 	mux.Handle("/liveness", loggingMiddleware(http.HandlerFunc(livenessHandler)))
 	mux.Handle("/readiness", loggingMiddleware(http.HandlerFunc(readinessHandler)))
+	mux.Handle("/charts/index.yaml", loggingMiddleware(http.HandlerFunc(indexHandler)))
 	mux.Handle("/charts/", loggingMiddleware(http.StripPrefix("/charts/", fileServer)))
 
 	srv := &http.Server{
@@ -91,6 +111,43 @@ func loggingMiddleware(next http.Handler) http.Handler {
 
 		log.Printf("%d %3dms %s", crw.status, duration.Milliseconds(), r.RequestURI)
 	})
+}
+
+func readIndex() ([]byte, error) {
+	f, err := ioutil.ReadFile(chartDir + "index.yaml")
+	if err != nil {
+		return nil, err
+	}
+	log.Println(len(f))
+	return f, nil
+}
+
+func modifyIndex(index []byte, ns string) []byte {
+	oldURL := []byte("multicloudhub-repo:3000")
+	newURL := []byte(fmt.Sprintf("multicloudhub-repo.%s.svc.cluster.local:3000", ns))
+
+	newIndex := bytes.ReplaceAll(index, oldURL, newURL)
+	return newIndex
+}
+
+// indexHandler serves the index.yaml file from in memory
+func indexHandler(w http.ResponseWriter, r *http.Request) {
+	// Hold index file in memory
+	index, err := readIndex()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Modify urls in index to reference namespace deployed in
+	ns := os.Getenv("POD_NAMESPACE")
+	if ns == "" {
+		log.Println("POD_NAMESPACE missing, index.yaml will not be updated")
+	} else {
+		index = modifyIndex(index, ns)
+	}
+
+	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+	w.Write(index)
 }
 
 // livenessHandler returns a 200 status as long as the server is running
