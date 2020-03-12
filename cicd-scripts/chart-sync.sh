@@ -1,5 +1,5 @@
 cd $(dirname $0)
-CHARTS_PATH="../../../../../multicloudhub/charts"
+CHARTS_PATH="../../../../../multiclusterhub/charts"
 CICD_FOLDER="../../../../"
 echo "Fetching charts from csv"
 while IFS=, read -r f1 f2
@@ -21,4 +21,4 @@ do
   cd $CICD_FOLDER
   rm -rf tmp
 done < chartSHA.csv
-helm repo index --url http://multicloudhub-repo:3000/charts ../multicloudhub/charts
+helm repo index --url http://multiclusterhub-repo:3000/charts ../multiclusterhub/charts
