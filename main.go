@@ -13,7 +13,7 @@ import (
 
 const (
 	// chartsDir is the directory that holds all charts to serve
-	chartDir = "./multicloudhub/charts/"
+	chartDir = "./multiclusterhub/charts/"
 	// gracePeriod is the duration for which the server will gracefully wait for existing connections to finish
 	gracePeriod = time.Second * 15
 	// port the server listens on

@@ -9,6 +9,6 @@ FROM registry.access.redhat.com/ubi8/ubi-minimal:latest
 
 WORKDIR /app
 COPY --from=builder /workspace/start-repo .
-COPY multicloudhub/charts/ multicloudhub/charts/
+COPY multiclusterhub/charts/ multiclusterhub/charts/
 EXPOSE 3000
 ENTRYPOINT /app/start-repo
