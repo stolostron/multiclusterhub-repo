@@ -1,6 +1,6 @@
 multicloudhub-repo is intended to serve charts for the [multicloudhub-operator installer](https://github.com/open-cluster-management/multicloudhub-operator)
 
-## Updating charts in the `multicloudhub/charts` folder (as of 3/10/20)
+## Updating charts in the `multiclusterhub/charts` folder (as of 3/10/20)
 
 *NOTE: This requires the Helm 3 CLI*
 
