@@ -11,5 +11,4 @@ if [ $TRAVIS_BRANCH != "master" ] && [ $TRAVIS_BRANCH != "release-1.0.0" ]; then
 fi
 
 cd ..
-
 docker build -t $1 .
