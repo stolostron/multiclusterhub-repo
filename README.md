@@ -9,4 +9,4 @@ Calling the cloner script will build all the charts from the master branch and g
 bash cloner.sh
 ```
 
-Last updated via Travis: March 12 7:24AM. 
+Last updated via Travis: March 13 8:45AM EST
