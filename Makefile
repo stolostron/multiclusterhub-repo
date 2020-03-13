@@ -32,13 +32,13 @@ IMG ?= multiclusterhub-repo
 VERSION ?= latest
 
 image:
-	./cicd-scripts/build.sh "$(REGISTRY)/$(IMG):$(VERSION)"
+	docker build -t "$(REGISTRY)/$(IMG):$(VERSION)" .
 
 push:
-	./scripts/push.sh "$(REGISTRY)/$(IMG):$(VERSION)"
+	docker push "$(REGISTRY)/$(IMG):$(VERSION)"
 
 unit-test:
-	./cicd-scripts/unit-test.sh
+	go test -v
 
 # local builds a docker image and runs it locally
 local:

@@ -1,7 +1,10 @@
 package main
 
 import (
+	"bytes"
 	"context"
+	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -18,11 +21,33 @@ const (
 	gracePeriod = time.Second * 15
 	// port the server listens on
 	port = ":3000"
+	// serviceName is the address of the service
+	serviceName = "multiclusterhub-repo"
 )
+
+// Server holds an index.yaml
+type Server struct {
+	Index []byte
+}
 
 func main() {
 	log.Printf("Go Version: %s", runtime.Version())
 	log.Printf("Go OS/Arch: %s/%s", runtime.GOOS, runtime.GOARCH)
+
+	// Hold index file in memory
+	index, err := readIndex()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Modify urls in index to reference namespace deployed in
+	ns := os.Getenv("POD_NAMESPACE")
+	if ns != "" {
+		log.Printf("Updating index with namespace '%s'", ns)
+		index = modifyIndex(index, ns)
+	}
+
+	s := &Server{Index: index}
 
 	mux := http.NewServeMux()
 
@@ -30,6 +55,7 @@ func main() {
 	fileServer := http.FileServer(http.Dir(chartDir))
 	mux.Handle("/liveness", loggingMiddleware(http.HandlerFunc(livenessHandler)))
 	mux.Handle("/readiness", loggingMiddleware(http.HandlerFunc(readinessHandler)))
+	mux.Handle("/charts/index.yaml", loggingMiddleware(http.HandlerFunc(s.indexHandler)))
 	mux.Handle("/charts/", loggingMiddleware(http.StripPrefix("/charts/", fileServer)))
 
 	srv := &http.Server{
@@ -91,6 +117,29 @@ func loggingMiddleware(next http.Handler) http.Handler {
 
 		log.Printf("%d %3dms %s", crw.status, duration.Milliseconds(), r.RequestURI)
 	})
+}
+
+func readIndex() ([]byte, error) {
+	f, err := ioutil.ReadFile(chartDir + "index.yaml")
+	if err != nil {
+		return nil, err
+	}
+	return f, nil
+}
+
+// modifyIndex makes urls namespace-specific
+func modifyIndex(index []byte, ns string) []byte {
+	oldURL := []byte(serviceName + port)
+	newURL := []byte(fmt.Sprintf("%s.%s.svc.cluster.local%s", serviceName, ns, port))
+
+	newIndex := bytes.ReplaceAll(index, oldURL, newURL)
+	return newIndex
+}
+
+// indexHandler serves the index.yaml file from in memory
+func (s *Server) indexHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+	w.Write(s.Index)
 }
 
 // livenessHandler returns a 200 status as long as the server is running
