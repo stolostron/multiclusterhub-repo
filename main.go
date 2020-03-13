@@ -133,7 +133,9 @@ func modifyIndex(index []byte, ns string) []byte {
 
 // indexHandler serves the index.yaml file from in memory
 func (s *Server) indexHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write(s.Index)
+	if _, err := w.Write(s.Index); err != nil {
+		log.Println(err)
+	}
 }
 
 // livenessHandler returns a 200 status as long as the server is running
