@@ -10,18 +10,8 @@ if [ "${TRAVIS_BRANCH}" == "chartTest" ]; then
     . chart-sync.sh
     git add ../multiclusterhub/charts
     git commit -m "[skip ci] update charts"
-    git push origin +${TRAVIS_BRANCH}:${TRAVIS_BRANCH}
-
-    #now merge the new master branch into release-1.0.0
-    git fetch
-    git checkout chartAutomation
-    git merge chartTest 
+    git push origin ${TRAVIS_BRANCH}
 fi
-# . chart-sync.sh
-# git add ../multiclusterhub/charts
-# git commit -m "[skip ci] skip travis"
-# git pull origin master -s recursive -X ours --allow-unrelated-histories
-# git push origin "HEAD:${TRAVIS_BRANCH}"
 
 cd ..
 docker build -t $1 .
