@@ -12,6 +12,7 @@ if [ "${TRAVIS_BRANCH}" != "master" ] && [ "${TRAVIS_BRANCH}" != "release-1.0.0"
     git checkout "${TRAVIS_BRANCH}"
     cicd-scripts/chart-sync.sh
     git add .
+    git commit -m "[skip ci] add charts"
     git merge master -m "[skip ci] resolve conflicts" -s recursive -X ours
     git push origin "HEAD:${TRAVIS_BRANCH}"
 fi
