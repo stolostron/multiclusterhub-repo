@@ -9,7 +9,7 @@ docker build -t $1 .
 
 if [ "${TRAVIS_BRANCH}" != "master" ] && [ "${TRAVIS_BRANCH}" != "release-1.0.0" ]; then
     git add .
-    git merge master -m "[skip ci] resolve conflicts" -s recursive -X theirs
+    git merge master -m "[skip ci] resolve conflicts" -s recursive -X ours
     git push origin "HEAD:${TRAVIS_BRANCH}"
 fi
 
