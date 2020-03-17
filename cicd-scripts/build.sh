@@ -1,4 +1,5 @@
 #!/bin/bash
+git clone git@github.com:open-cluster-management/multicloudhub-repo.git
 git checkout master
 git checkout "${TRAVIS_BRANCH}"
 
