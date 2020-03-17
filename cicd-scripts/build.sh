@@ -1,5 +1,5 @@
 #!/bin/bash
-
+git checkout master
 git checkout "${TRAVIS_BRANCH}"
 
 cd $(dirname $0)
