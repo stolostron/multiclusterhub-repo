@@ -9,7 +9,7 @@ if [ "${TRAVIS_BRANCH}" == "chartTest" ]; then
     git checkout "${TRAVIS_BRANCH}"
     . chart-sync.sh
     git add ../multiclusterhub/charts
-    git commit --amend --no-edit
+    git commit --amend -m "[skip ci] update charts"
     git push origin +${TRAVIS_BRANCH}:${TRAVIS_BRANCH}
 
     #now merge the new master branch into release-1.0.0
