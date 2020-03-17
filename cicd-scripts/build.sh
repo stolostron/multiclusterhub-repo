@@ -1,17 +1,20 @@
 #!/bin/bash
 
-cd $(dirname $0)
-echo "TRAVIS_BRANCH: ${TRAVIS_BRANCH}"
+git checkout "${TRAVIS_BRANCH}"
 
-# if we are merging into master, update the charts and 
-# amend the charts to the previous commit
-if [ "${TRAVIS_BRANCH}" == "chartTest" ]; then
-    git checkout "${TRAVIS_BRANCH}"
-    . chart-sync.sh
-    git add ../multiclusterhub/charts
-    git commit -m "[skip ci] update charts"
-    git push origin ${TRAVIS_BRANCH}
-fi
+cd $(dirname $0)
+. chart-sync.sh
 
 cd ..
 docker build -t $1 .
+
+# if we are merging into master, update the charts and 
+# amend the charts to the previous commit
+if [ "${TRAVIS_BRANCH}" != "master" ] && [ "${TRAVIS_BRANCH}" != "release-1.0.0" ]; then
+    git add .
+    git commit -m "[skip ci] update charts"
+    git rebase master -s recursive -X theirs
+    git rebase --continue
+    git pull
+    git push origin "${TRAVIS_BRANCH}"
+fi
