@@ -1,24 +1,20 @@
 #!/bin/bash
 cd $(dirname $0)
+release='release-[0-9][.][0-9][.][0-9]$'
 
-. chart-sync.sh
-
-cd ..
-docker build -t $1 .
-
-if [ "${TRAVIS_BRANCH}" != "master" ] && [ "${TRAVIS_BRANCH}" != "release-1.0.0" ]; then
+#if on PR not master or release, update PR with latest charts. Otherwise just build image
+if [ "${TRAVIS_BRANCH}" != "master" ] && ! [[ "${TRAVIS_BRANCH}" =~ $release ]]; then
     git clone git@github.com:open-cluster-management/multicloudhub-repo.git
     cd multicloudhub-repo
     git checkout "${TRAVIS_BRANCH}"
     cicd-scripts/chart-sync.sh
+    docker build -t $1 .
     git add .
     git commit -m "[skip ci] add charts"
     git merge master -m "[skip ci] resolve conflicts" -s recursive -X ours
     git push origin "HEAD:${TRAVIS_BRANCH}"
+else 
+    cd ..
+    docker build -t $1 .
 fi
-
-
-# git add ../multiclusterhub/charts
-# git commit -m "[skip ci] skip travis"
-# git pull origin master -s recursive -X ours --allow-unrelated-histories
-# git push origin "HEAD:${TRAVIS_BRANCH}"
+    
