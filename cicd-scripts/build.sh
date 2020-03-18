@@ -3,7 +3,7 @@ cd $(dirname $0)
 release='release-[0-9][.][0-9][.][0-9]$'
 
 #if on PR not master or release, update PR with latest charts. Otherwise just build image
-if [ "${TRAVIS_BRANCH}" != "master" ] && ! [[ "${TRAVIS_BRANCH}" =~ $release ]]; then
+if [ "${TRAVIS_BRANCH}" != "master" ] && ! [[ "${TRAVIS_BRANCH}" =~ "$release" ]]; then
     git clone git@github.com:open-cluster-management/multicloudhub-repo.git
     cd multicloudhub-repo
     git checkout "${TRAVIS_BRANCH}"
