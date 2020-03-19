@@ -1,7 +1,7 @@
 #!/bin/bash
 cd $(dirname $0)
 
-#if on PR not master or release, update PR with latest charts. Otherwise just build image
+#if on PR not master or release, update PR with latest charts.Otherwise just build image
 if [ "${TRAVIS_BRANCH}" != "master" ] && [[ "${TRAVIS_BRANCH}" != "release-"* ]]; then
     git clone git@github.com:open-cluster-management/multicloudhub-repo.git
     cd multicloudhub-repo
