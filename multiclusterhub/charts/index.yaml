@@ -43,6 +43,30 @@ entries:
     urls:
     - http://multiclusterhub-repo:3000/charts/cert-manager-3.5.0.tgz
     version: 3.5.0
+  cert-manager-no-crds:
+  - apiVersion: v1
+    appVersion: 3.5.0
+    created: "2020-03-19T13:36:43.340117-04:00"
+    description: Service for issuing and managing certificates.
+    digest: f7ea3419194eb053d2e498a6b63c63d16e92de6e31cf0890c41457ec4ed74ee5
+    keywords:
+    - amd64
+    - ppc64le
+    - s390x
+    - OpenSource
+    - Security
+    - cert-manager
+    - kube-lego
+    - letsencrypt
+    - tls
+    - Development
+    - RHOCP
+    - ROKS
+    kubeVersion: '>=1.11.0'
+    name: cert-manager-no-crds
+    urls:
+    - http://multiclusterhub-repo:3000/charts/cert-manager-no-crds-3.5.0.tgz
+    version: 3.5.0
   cert-manager-webhook:
   - apiVersion: v1
     appVersion: 0.10.1
