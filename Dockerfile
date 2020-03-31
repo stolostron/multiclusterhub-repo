@@ -6,6 +6,7 @@ COPY main.go main.go
 RUN GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o start-repo main.go
 
 FROM registry.access.redhat.com/ubi8/ubi-minimal:latest
+RUN microdnf install tar
 
 WORKDIR /app
 COPY --from=builder /workspace/start-repo .
