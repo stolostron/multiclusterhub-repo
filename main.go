@@ -26,10 +26,8 @@ type Server struct {
 	Index []byte
 }
 
-func main() {
-	log.Printf("Go Version: %s", runtime.Version())
-	log.Printf("Go OS/Arch: %s/%s", runtime.GOOS, runtime.GOARCH)
-
+// Create request router with modified index
+func setupRouter() *http.ServeMux {
 	// Hold index file in memory
 	index, err := readIndex()
 	if err != nil {
@@ -43,7 +41,6 @@ func main() {
 	}
 
 	s := &Server{Index: index}
-
 	mux := http.NewServeMux()
 
 	// Add route handlers
@@ -53,6 +50,14 @@ func main() {
 	mux.Handle("/charts/index.yaml", http.HandlerFunc(s.indexHandler))
 	mux.Handle("/charts/", loggingMiddleware(http.StripPrefix("/charts/", fileServer)))
 
+	return mux
+}
+
+func main() {
+	log.Printf("Go Version: %s", runtime.Version())
+	log.Printf("Go OS/Arch: %s/%s", runtime.GOOS, runtime.GOARCH)
+
+	mux := setupRouter()
 	srv := &http.Server{
 		Addr: ":" + port,
 		// Good practice to set timeouts to avoid Slowloris attacks.
