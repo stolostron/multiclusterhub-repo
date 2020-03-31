@@ -9,6 +9,6 @@ echo ${NAMESPACE}
 echo ${REPOPOD}
 echo $PWD
 
-kubectl exec ${REPOPOD} -- sh -c 'rm -rf multiclusterhub/charts' 
-kubectl cp $PWD/multiclusterhub/charts ${NAMESPACE}/${REPOPOD}:multiclusterhub/charts 
-
+#create a temp dir of charts, move only tgz, rm tmp folder
+kubectl cp $PWD/multiclusterhub/charts ${NAMESPACE}/${REPOPOD}:tmp/
+kubectl exec ${REPOPOD} -- sh -c 'rm -rf multiclusterhub/charts/*.tgz && mv tmp/*.tgz multiclusterhub/charts && rm -rf tmp'
