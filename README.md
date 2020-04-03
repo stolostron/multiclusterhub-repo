@@ -10,7 +10,7 @@ If you make changes to any charts we consume and want them built into the next s
 
 - After approval, when you go to Squash and Merge, in the Merge Message, remove any line with `[skip ci]` in it
 
-Open new PR pulling these changes into release-1.0.0 (might need to contact Installer Squad)
+Contact Installer Squad to pull these into release branch
 
 ## Updating chart in cluster
 Running `make update-charts` will update the charts in the `multiclusterhub-repo` pod with charts in the local `multiclusterhub/charts` folder
