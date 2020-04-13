@@ -25,6 +25,6 @@ Calling the cloner script will build all the charts from the master branch and g
 bash cloner.sh
 ```
 
-Last updated manually: April 13, 9:10 EST
+Last updated manually: April 13, 10:00 EST
 
 
