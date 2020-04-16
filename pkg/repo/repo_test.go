@@ -1,10 +1,12 @@
-package main
+package repo
 
 import (
 	"net/http"
 	"net/http/httptest"
 	"reflect"
 	"testing"
+
+	"github.com/open-cluster-management/multicloudhub-repo/pkg/config"
 )
 
 func TestLiveness(t *testing.T) {
@@ -41,25 +43,29 @@ func TestReadiness(t *testing.T) {
 }
 
 func Test_modifyIndex(t *testing.T) {
-	ns := "default"
-
 	type args struct {
-		index []byte
-		ns    string
+		index   []byte
+		ns      string
+		service string
 	}
 	tests := []struct {
 		name string
 		args args
 		want []byte
 	}{
-		{"Update index",
-			args{index: []byte("http://" + serviceName + "/index.yaml"), ns: ns},
-			[]byte("http://" + serviceName + "." + ns + "/index.yaml"),
+		{
+			"Update index",
+			args{
+				index:   []byte("http://multiclusterhub-repo:3000/charts/application-chart-1.0.0.tgz"),
+				ns:      "default",
+				service: "multiclusterhub-repo",
+			},
+			[]byte("http://multiclusterhub-repo.default:3000/charts/application-chart-1.0.0.tgz"),
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := modifyIndex(tt.args.index, tt.args.ns); !reflect.DeepEqual(got, tt.want) {
+			if got := modifyIndex(tt.args.index, tt.args.ns, tt.args.service); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("modifyIndex() = %s, want %s", string(got), string(tt.want))
 			}
 		})
@@ -67,7 +73,13 @@ func Test_modifyIndex(t *testing.T) {
 }
 
 func TestFileServer(t *testing.T) {
-	ts := httptest.NewServer(setupRouter())
+	c := &config.Config{
+		ChartDir:  "../../multiclusterhub/charts/",
+		Namespace: "test",
+		Port:      "8000",
+		Service:   "test-service",
+	}
+	ts := httptest.NewServer(SetupRouter(c))
 	defer ts.Close()
 
 	tests := []struct {
