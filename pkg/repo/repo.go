@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"path/filepath"
 	"time"
 
 	"github.com/open-cluster-management/multicloudhub-repo/pkg/config"
@@ -70,7 +71,8 @@ func loggingMiddleware(next http.Handler) http.Handler {
 }
 
 func readIndex(dir string) ([]byte, error) {
-	f, err := ioutil.ReadFile(dir + "index.yaml")
+	filepath := filepath.Clean(dir + "index.yaml")
+	f, err := ioutil.ReadFile(filepath)
 	if err != nil {
 		return nil, err
 	}
