@@ -71,8 +71,8 @@ func loggingMiddleware(next http.Handler) http.Handler {
 }
 
 func readIndex(dir string) ([]byte, error) {
-	filepath := filepath.Clean(dir + "index.yaml")
-	f, err := ioutil.ReadFile(filepath)
+	filePath := filepath.Join(filepath.Clean(dir), "index.yaml")
+	f, err := ioutil.ReadFile(filePath)
 	if err != nil {
 		return nil, err
 	}
