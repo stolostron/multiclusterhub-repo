@@ -1,0 +1,58 @@
+package main
+
+import (
+	"context"
+	"log"
+	"net/http"
+	"os"
+	"os/signal"
+	"runtime"
+	"syscall"
+	"time"
+
+	"github.com/open-cluster-management/multicloudhub-repo/pkg/config"
+	"github.com/open-cluster-management/multicloudhub-repo/pkg/repo"
+)
+
+func main() {
+	c := config.New()
+	log.Printf("Go Version: %s", runtime.Version())
+	log.Printf("Go OS/Arch: %s/%s", runtime.GOOS, runtime.GOARCH)
+
+	mux := repo.SetupRouter(c)
+	srv := &http.Server{
+		Addr: ":" + c.Port,
+		// Good practice to set timeouts to avoid Slowloris attacks.
+		WriteTimeout: time.Second * 30,
+		ReadTimeout:  time.Second * 30,
+		IdleTimeout:  time.Second * 30,
+		Handler:      mux,
+	}
+
+	// Run our server in a goroutine so that it doesn't block.
+	go func() {
+		log.Printf("Serving on port %s", srv.Addr)
+		if err := srv.ListenAndServe(); err != nil {
+			log.Println(err)
+		}
+	}()
+
+	sigs := make(chan os.Signal, 1)
+	// Kubernetes sends a SIGTERM, waits for a grace period, and then a SIGKILL
+	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
+
+	// Block until we receive our signal.
+	sig := <-sigs
+	log.Printf("Received signal: %s", sig.String())
+
+	// Create a deadline to wait for.
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
+	defer cancel()
+
+	if err := srv.Shutdown(ctx); err != nil {
+		log.Fatalf("Server Shutdown Failed:%+v", err)
+	}
+
+	log.Println("Goodbye")
+	os.Exit(0)
+}
