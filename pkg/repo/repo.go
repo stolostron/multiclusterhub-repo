@@ -24,6 +24,7 @@ func SetupRouter(c *config.Config) *http.ServeMux {
 	// Hold index file in memory
 	index, err := readIndex(c.ChartDir)
 	if err != nil {
+		log.Printf("Could not read index.yaml file at path '%s'", c.ChartDir)
 		log.Fatal(err)
 	}
 
@@ -74,7 +75,7 @@ func loggingMiddleware(next http.Handler) http.Handler {
 
 func readIndex(dir string) ([]byte, error) {
 	filePath := filepath.Join(filepath.Clean(dir), "index.yaml")
-	f, err := ioutil.ReadFile(filePath) // #nosec G304 (index path not configurable by user)
+	f, err := ioutil.ReadFile(filePath) // #nosec G304 (index path variable cleaned before use)
 	if err != nil {
 		return nil, err
 	}
