@@ -27,6 +27,8 @@ var skip = map[string]bool{
 func TestLicense(t *testing.T) {
 	// Run from base dir instead of package dir
 	os.Chdir("..")
+	defer os.Chdir("license")
+
 	err := filepath.Walk(".", func(path string, info os.FileInfo, err error) error {
 		if skip[path] {
 			if info.IsDir() {
