@@ -8,6 +8,11 @@ RUN GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o start-repo ./cmd/repo
 FROM registry.access.redhat.com/ubi8/ubi-minimal:latest
 RUN microdnf install tar
 
+LABEL org.label-schema.vendor="Red Hat" \
+      org.label-schema.name="multiclusterhub-repo" \
+      org.label-schema.description="Helm repo that serves charts for the Red Hat Advanced Cluster Management installer" \
+      org.label-schema.license="Red Hat Advanced Cluster Management for Kubernetes EULA"
+
 WORKDIR /app
 COPY --from=builder /workspace/start-repo .
 COPY multiclusterhub/charts/ multiclusterhub/charts/
