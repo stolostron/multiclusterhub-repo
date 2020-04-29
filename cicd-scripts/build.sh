@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright (c) 2020 Red Hat, Inc.
+
 cd $(dirname $0)
 
 #if on PR not master or release, update PR with latest charts.Otherwise just build image

@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright (c) 2020 Red Hat, Inc.
+
 # build image with charts and replace image in cluster
 # Use current namespace
 REPOPOD=$(kubectl get pods -o=name | grep multiclusterhub-repo | sed "s/^.\{4\}//")

@@ -1,3 +1,4 @@
+# Copyright (c) 2020 Red Hat, Inc.
 
 git clone git@github.com:open-cluster-management/kui-web-terminal-chart.git
 helm package kui-web-terminal-chart/stable/kui-web-terminal -d multiclusterhub/charts

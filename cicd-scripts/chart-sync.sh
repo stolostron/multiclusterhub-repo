@@ -1,3 +1,5 @@
+# Copyright (c) 2020 Red Hat, Inc.
+
 cd $(dirname $0)
 CHARTS_PATH="../../../../../multiclusterhub/charts"
 CICD_FOLDER="../../../../"
