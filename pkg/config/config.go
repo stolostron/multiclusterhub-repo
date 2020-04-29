@@ -27,7 +27,7 @@ type Config struct {
 // New returns a new Config struct
 func New() *Config {
 	return &Config{
-		ChartDir:  getEnv("MCH_CHART_DIR", defaultChartDir),
+		ChartDir:  defaultChartDir,
 		Namespace: getEnv("POD_NAMESPACE", ""),
 		Port:      getEnv("MCH_REPO_PORT", defaultPort),
 		Service:   getEnv("MCH_REPO_SERVICE", defaultServiceName),
