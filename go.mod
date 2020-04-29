@@ -1,3 +1,3 @@
 module github.com/open-cluster-management/multicloudhub-repo
 
-go 1.14
+go 1.13
