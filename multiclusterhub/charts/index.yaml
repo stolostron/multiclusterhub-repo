@@ -3,9 +3,9 @@ entries:
   application-chart:
   - apiVersion: v1
     appVersion: 1.0.0
-    created: "2020-05-20T13:21:51.069109181Z"
+    created: "2020-05-20T17:30:16.647204241Z"
     description: Helm chart for Open Cluster Management application UI
-    digest: feb4131ab2018f9e52b41e6ae3b9adb734cfd2e291fa533903e2d2edf5c95627
+    digest: 61077e8497679d2e87502522986bf56557b1fe49d615a91a38b5e9d89369703c
     keywords:
     - ui
     kubeVersion: '>=1.10.0'
@@ -16,7 +16,7 @@ entries:
   cert-manager:
   - apiVersion: v1
     appVersion: 0.10.2
-    created: "2020-05-20T13:21:51.077228043Z"
+    created: "2020-05-20T17:30:16.650502562Z"
     dependencies:
     - alias: crd
       condition: cert-manager-crd.enabled
@@ -24,7 +24,7 @@ entries:
       repository: file://cert-manager-crd
       version: 3.4.0
     description: Service for issuing and managing certificates.
-    digest: 6348421407ca8bb13ede5fb68309899f6ab34b8c37baa3f40458a2bdbe9b9bf1
+    digest: 3913d859f6d831e38450e40e1fbe90569cd240a1e4e07b4dab903e56f7063c6e
     keywords:
     - amd64
     - ppc64le
@@ -43,41 +43,12 @@ entries:
     urls:
     - http://multiclusterhub-repo:3000/charts/cert-manager-3.6.0.tgz
     version: 3.6.0
-  - apiVersion: v1
-    appVersion: 0.10.1
-    created: "2020-05-20T13:21:51.074187638Z"
-    dependencies:
-    - alias: crd
-      condition: cert-manager-crd.enabled
-      name: cert-manager-crd
-      repository: file://cert-manager-crd
-      version: 3.4.0
-    description: Service for issuing and managing certificates.
-    digest: edc1ba28aa5d88debac58fd5d82f585b18a4675cd57a895203fedb75ae25cb20
-    keywords:
-    - amd64
-    - ppc64le
-    - s390x
-    - OpenSource
-    - Security
-    - cert-manager
-    - kube-lego
-    - letsencrypt
-    - tls
-    - Development
-    - RHOCP
-    - ROKS
-    kubeVersion: '>=1.11.0'
-    name: cert-manager
-    urls:
-    - http://multiclusterhub-repo:3000/charts/cert-manager-3.5.0.tgz
-    version: 3.5.0
   cert-manager-webhook:
   - apiVersion: v1
     appVersion: 0.10.2
-    created: "2020-05-20T13:21:51.07848941Z"
+    created: "2020-05-20T17:30:16.65182905Z"
     description: A Helm chart for deploying the cert-manager webhook component
-    digest: 1fd7abeba59beb9d39f6a69807d403e2a1eb54d4934e274973bab930514e4e1c
+    digest: b8292a4e832c810c17cf3278bf4d1a9cbb77f6c64a709987f7ea46324aa47735
     home: https://github.com/jetstack/cert-manager
     keywords:
     - cert-manager
@@ -100,9 +71,9 @@ entries:
   configmap-watcher:
   - apiVersion: v1
     appVersion: 3.6.0
-    created: "2020-05-20T13:21:51.079846505Z"
+    created: "2020-05-20T17:30:16.652531098Z"
     description: A helm chart for deploying the config map watcher component.
-    digest: 46d0ec3eb63e52674cb83fd5c50e16f663ad21fc5780cbc6f2191cabd24713e7
+    digest: ed66c161d7ca6a1d8ff1bb7bd271cfe7f623c9f559b1eb1e91d92760db1c00b6
     keywords:
     - configmap
     - watcher
@@ -119,38 +90,17 @@ entries:
     urls:
     - http://multiclusterhub-repo:3000/charts/configmap-watcher-3.6.0.tgz
     version: 3.6.0
-  - apiVersion: v1
-    appVersion: 3.3.1
-    created: "2020-05-20T13:21:51.079160379Z"
-    description: A helm chart for deploying the config map watcher component.
-    digest: a50c7c61e6c52f3d5129c0b749a28ceaf83e2f47c8812e58fd4be171e0d9f7bc
-    keywords:
-    - configmap
-    - watcher
-    - kubernetes
-    - ICP
-    - amd64
-    - s390x
-    - ppc64le
-    - Tools
-    - Development
-    - Tech
-    kubeVersion: '>=1.11.0'
-    name: configmap-watcher
-    urls:
-    - http://multiclusterhub-repo:3000/charts/configmap-watcher-3.4.1.tgz
-    version: 3.4.1
   console-chart:
   - apiVersion: v1
     appVersion: 2.0.0
-    created: "2020-05-20T13:21:51.080738428Z"
+    created: "2020-05-20T17:30:16.654166236Z"
     dependencies:
     - alias: crd
       name: console-crd
       repository: file://console-crd
       version: 2.0.0
     description: Helm chart for Open Cluster Management console UI
-    digest: 111f297982f12438853e9e27f3099b4c6fbe2da87fac5f063a18b80a42c6c3be
+    digest: 0cce57f95792a2eb695ce9f71c731f30d7c24e4452e572ef9631426d79d36f0c
     keywords:
     - ui
     kubeVersion: '>=1.10.0'
@@ -161,9 +111,9 @@ entries:
   grc:
   - apiVersion: v1
     appVersion: 1.0.0
-    created: "2020-05-20T13:21:51.081712442Z"
+    created: "2020-05-20T17:30:16.655305288Z"
     description: helm chart for multicloud grc
-    digest: 5cdd694647e38592b0733ce0cdaebb1397d009b8168ee78f024474d25db80490
+    digest: a8f74c4e64c5f13c2d2bade722ded5f281bae7370b6ed4cecdfeb61ba7b4929c
     keywords:
     - mcm
     - grc
@@ -172,25 +122,12 @@ entries:
     urls:
     - http://multiclusterhub-repo:3000/charts/grc-2.0.0.tgz
     version: 2.0.0
-  - apiVersion: v1
-    appVersion: 1.0.0
-    created: "2020-05-20T13:21:51.081188104Z"
-    description: helm chart for multicloud grc
-    digest: 5572f374cbe11204e7c1c6341a787dc4330ce8bc728db275c341f8f787fe36e8
-    keywords:
-    - mcm
-    - grc
-    kubeVersion: '>=1.10.0'
-    name: grc
-    urls:
-    - http://multiclusterhub-repo:3000/charts/grc-1.0.0.tgz
-    version: 1.0.0
   kui-web-terminal:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-05-20T13:21:51.08242118Z"
+    created: "2020-05-20T17:30:16.656945469Z"
     description: A helm chart for deploying the Red Hat Visual Web Terminal
-    digest: 78f32901c481a206b258fa8c97b1b9e87e687f320458ef6e9688e66802a6bee5
+    digest: 06681abe422facd0ee6fc5a85f3a8d0cca2824cef8c64c1b227be06f94630d6b
     keywords:
     - IcpClusterResource
     - Commercial
@@ -209,9 +146,9 @@ entries:
   management-ingress:
   - apiVersion: v1
     appVersion: 3.4.0
-    created: "2020-05-20T13:21:51.084628334Z"
+    created: "2020-05-20T17:30:16.657833073Z"
     description: Multi Cloud control plane ingress controller
-    digest: c6ebfb039abecb0ba50864516d75451ed921ca7f6ae81170cd3954c9c02150ed
+    digest: 0ed365f2159b0f2888ea0998bc11488b557c0219427c0a779e545cab2e16052c
     keywords:
     - ingress
     - nginx
@@ -229,9 +166,9 @@ entries:
   multicluster-mongodb:
   - apiVersion: v1
     appVersion: 3.6.3
-    created: "2020-05-20T13:21:51.087441731Z"
+    created: "2020-05-20T17:30:16.659870281Z"
     description: NoSQL document-oriented database.
-    digest: 2eec9a8a0f27cd11565259d4420c87ba5d2cd0eb69f991c363fa26fec3318a7d
+    digest: f629e1e10feaa96b5e09cddd7a989fb22590046c69090ef8a620985abf69208f
     home: https://github.com/mongodb/mongo
     icon: https://webassets.mongodb.com/_com_assets/cms/mongodb-logo-rgb-j6w271g1xn.jpg
     keywords:
@@ -249,9 +186,9 @@ entries:
   rcm:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-05-20T13:21:51.087876144Z"
+    created: "2020-05-20T17:30:16.660326347Z"
     description: A helm chart for deploying the cluster lifecycle
-    digest: fe1c7b4bf225dde8a007dc82343be04d7b8a26445133dfe6d2b53be983552a1c
+    digest: 9487073db41f339d35057a739584e207cec4107c1f2b02cc0708535630392df9
     keywords:
     - IcpClusterResource
     - Commercial
@@ -270,9 +207,9 @@ entries:
   search-prod:
   - apiVersion: v1
     appVersion: 3.4.0
-    created: "2020-05-20T13:21:51.088726002Z"
+    created: "2020-05-20T17:30:16.661221595Z"
     description: Helm chart to install the Multicloud Search service
-    digest: 81e1c34c0a54b67baf227de0058faba121b1f2c89f0f23811c6888071d736fec
+    digest: 98c778e257e8cadd275a7274a428ddb918acaa5a668fa3fbb24857ef35c64ff3
     icon: https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.png
     keywords:
     - RHOCP
@@ -290,9 +227,9 @@ entries:
   topology:
   - apiVersion: v1
     appVersion: 1.0.0
-    created: "2020-05-20T13:21:51.089092519Z"
+    created: "2020-05-20T17:30:16.66166297Z"
     description: helm chart for multicloud topology
-    digest: 98a17af4876113c24d69fa9f8cfe18853fa55ba014d94862183c843ccfbb2842
+    digest: 4529d825c6283be9c33d671075693043e6265c1a05cad0d07757db64e51704af
     keywords:
     - mcm
     - topology
@@ -301,4 +238,4 @@ entries:
     urls:
     - http://multiclusterhub-repo:3000/charts/topology-1.0.0.tgz
     version: 1.0.0
-generated: "2020-05-20T13:21:51.068672959Z"
+generated: "2020-05-20T17:30:16.645919584Z"
