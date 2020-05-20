@@ -90,7 +90,7 @@ func TestFileServer(t *testing.T) {
 		want int
 	}{
 		{"Get index", "index.yaml", http.StatusOK},
-		{"Get cert-manager chart", "cert-manager-3.5.0.tgz", http.StatusOK},
+		{"Get cert-manager chart", "cert-manager-3.6.0.tgz", http.StatusOK},
 		{"Get non-existant chart", "not-found.tgz", http.StatusNotFound},
 	}
 
