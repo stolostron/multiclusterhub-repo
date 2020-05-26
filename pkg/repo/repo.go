@@ -3,43 +3,44 @@
 package repo
 
 import (
-	"bytes"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"path/filepath"
+	"sync"
 	"time"
 
 	"github.com/open-cluster-management/multicloudhub-repo/pkg/config"
+	"helm.sh/helm/v3/pkg/repo"
+	"sigs.k8s.io/yaml"
 )
 
 // Server holds an index.yaml
 type Server struct {
-	Index []byte
+	sync.Mutex
+	Index  []byte
+	Config *config.Config
 }
 
 // Create request router with modified index
 func SetupRouter(c *config.Config) *http.ServeMux {
 	// Hold index file in memory
-	index, err := readIndex(c.ChartDir)
+	index, err := createIndex(c)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// Modify urls in index to reference namespace deployed in
-	if ns := c.Namespace; ns != "" {
-		log.Printf("Updating index with namespace '%s'", ns)
-		index = modifyIndex(index, ns, c.Service)
+	s := &Server{
+		Index:  index,
+		Config: c,
 	}
-
-	s := &Server{Index: index}
 	mux := http.NewServeMux()
 
 	// Add route handlers
 	fileServer := http.FileServer(http.Dir(c.ChartDir))
 	mux.Handle("/liveness", http.HandlerFunc(livenessHandler))
 	mux.Handle("/readiness", http.HandlerFunc(readinessHandler))
+	mux.Handle("/reindex", loggingMiddleware(http.HandlerFunc(s.reindexHandler)))
 	mux.Handle("/charts/index.yaml", loggingMiddleware(http.HandlerFunc(s.indexHandler)))
 	mux.Handle("/charts/", loggingMiddleware(http.StripPrefix("/charts/", fileServer)))
 
@@ -72,29 +73,51 @@ func loggingMiddleware(next http.Handler) http.Handler {
 	})
 }
 
-func readIndex(dir string) ([]byte, error) {
-	filePath := filepath.Join(filepath.Clean(dir), "index.yaml")
-	f, err := ioutil.ReadFile(filePath) // #nosec G304 (index path not configurable by user)
+// readIndex builds an index from a flat directory
+func createIndex(c *config.Config) ([]byte, error) {
+	url := indexURL(c)
+	index, err := repo.IndexDirectory(filepath.Clean(c.ChartDir), url)
 	if err != nil {
 		return nil, err
 	}
-	return f, nil
+
+	b, err := yaml.Marshal(index)
+	if err != nil {
+		return nil, err
+	}
+
+	return b, nil
 }
 
-// modifyIndex makes urls namespace-specific
-func modifyIndex(index []byte, ns string, service string) []byte {
-	oldURL := []byte(service)
-	newURL := []byte(fmt.Sprintf("%s.%s", service, ns))
-
-	newIndex := bytes.ReplaceAll(index, oldURL, newURL)
-	return newIndex
+// indexURL returns a formatted URL based on Config parameters
+func indexURL(c *config.Config) string {
+	if c.Namespace == "" {
+		return fmt.Sprintf("http://%s:%s", c.Service, c.Port)
+	}
+	return fmt.Sprintf("http://%s.%s:%s", c.Service, c.Namespace, c.Port)
 }
 
 // indexHandler serves the index.yaml file from in memory
 func (s *Server) indexHandler(w http.ResponseWriter, r *http.Request) {
+	s.Lock()
+	defer s.Unlock()
 	if _, err := w.Write(s.Index); err != nil {
 		log.Println(err)
 	}
+}
+
+// reindexHandler reindexes the chart repo
+func (s *Server) reindexHandler(w http.ResponseWriter, r *http.Request) {
+	index, err := createIndex(s.Config)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+	s.Lock()
+	defer s.Unlock()
+
+	s.Index = index
+	w.WriteHeader(http.StatusOK)
 }
 
 // livenessHandler returns a 200 status as long as the server is running
