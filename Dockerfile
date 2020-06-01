@@ -7,6 +7,7 @@ RUN GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o start-repo ./cmd/repo
 
 FROM registry.access.redhat.com/ubi8/ubi-minimal:latest
 RUN microdnf install tar
+RUN microdnf update
 
 LABEL org.label-schema.vendor="Red Hat" \
       org.label-schema.name="multiclusterhub-repo" \
