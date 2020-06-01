@@ -35,8 +35,10 @@ func (s *Server) Watch() {
 				return
 			}
 
-			fmt.Println("File change detected: ", event.String())
-			s.Reindex()
+			log.Println("File change detected: ", event.String())
+			if err := s.Reindex(); err != nil {
+				log.Println(err)
+			}
 
 		case err, ok := <-s.watcher.Errors:
 			// Channel is closed.

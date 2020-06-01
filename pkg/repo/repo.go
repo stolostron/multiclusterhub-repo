@@ -72,7 +72,7 @@ func createIndex(c *config.Config) ([]byte, error) {
 
 // readIndex builds an index from a flat directory
 func (s *Server) Reindex() error {
-	fmt.Println("Reindexing")
+	log.Println("Reindexing")
 	s.Lock()
 	defer s.Unlock()
 
