@@ -58,7 +58,8 @@ func TestFileServer(t *testing.T) {
 		Port:      "8000",
 		Service:   "test-service",
 	}
-	ts := httptest.NewServer(SetupRouter(c))
+	s, _ := New(c)
+	ts := httptest.NewServer(s.Router)
 	defer ts.Close()
 
 	tests := []struct {
@@ -152,6 +153,7 @@ func Test_createIndex(t *testing.T) {
 }
 
 func TestReindex(t *testing.T) {
+	// Serve charts in tempDir
 	tmpDir, err := ioutil.TempDir("testdata", "charts_tmp_")
 	if err != nil {
 		t.Fatalf("Could not create chart dir")
@@ -165,7 +167,12 @@ func TestReindex(t *testing.T) {
 		Port:      "8000",
 		Service:   "test-service",
 	}
-	ts := httptest.NewServer(SetupRouter(c))
+
+	s, _ := New(c)
+	s.Start()
+	defer s.Stop()
+
+	ts := httptest.NewServer(s.Router)
 	defer ts.Close()
 
 	// Empty chart directory
@@ -175,28 +182,19 @@ func TestReindex(t *testing.T) {
 	}
 
 	// Check that index has no entries
-	b, err := ioutil.ReadAll(res.Body)
+	i, err := getIndex(res.Body)
 	if err != nil {
-		log.Fatal(err)
-	}
-	i := &repo.IndexFile{}
-	if err := yaml.Unmarshal(b, i); err != nil {
-		t.Errorf("createIndex() index failed to unmarshal: %s", err)
+		t.Errorf("createIndex() index failed to get index: %s", err)
 	}
 	numEntries := len(i.Entries)
 	if numEntries != 0 {
 		t.Errorf("Expected 0 entry in index file but got %d", numEntries)
 	}
 
-	// Add chart and reindex
+	// Add chart (should trigger reindexing)
 	err = copyFile("testdata/charts/nginx-5.6.0.tgz", path.Join(tmpDir, "nginx-5.6.0.tgz"))
 	if err != nil {
 		t.Errorf("Error adding chart: %v", err)
-	}
-	res, err = http.Get(ts.URL + "/reindex")
-	if status := res.StatusCode; status != http.StatusOK {
-		t.Errorf("handler returned wrong status code: got %v want %v",
-			status, http.StatusOK)
 	}
 
 	// Populated chart directory
@@ -206,20 +204,31 @@ func TestReindex(t *testing.T) {
 	}
 
 	// Check that index now includes nginx
-	b, err = ioutil.ReadAll(res.Body)
+	i, err = getIndex(res.Body)
 	if err != nil {
-		log.Fatal(err)
+		t.Errorf("createIndex() index failed to get index: %s", err)
 	}
-	i = &repo.IndexFile{}
-	if err = yaml.Unmarshal(b, i); err != nil {
-		t.Errorf("createIndex() index failed to unmarshal: %s", err)
-	}
+
 	nginx, ok := i.Entries["nginx"]
 	if !ok || len(nginx) != 1 {
 		t.Errorf("Expected 1 nginx entry")
 	}
 }
 
+// helper for getting an index from an http response
+func getIndex(res io.Reader) (*repo.IndexFile, error) {
+	b, err := ioutil.ReadAll(res)
+	if err != nil {
+		log.Fatal(err)
+	}
+	i := &repo.IndexFile{}
+	if err := yaml.Unmarshal(b, i); err != nil {
+		return i, err
+	}
+	return i, nil
+}
+
+// helper for copying charts
 func copyFile(sourcePath, destPath string) error {
 	inputFile, err := os.Open(sourcePath)
 	if err != nil {

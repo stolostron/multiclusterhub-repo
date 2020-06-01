@@ -7,7 +7,6 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
-	"sync"
 	"time"
 
 	"github.com/open-cluster-management/multicloudhub-repo/pkg/config"
@@ -15,36 +14,18 @@ import (
 	"sigs.k8s.io/yaml"
 )
 
-// Server holds an index.yaml
-type Server struct {
-	sync.Mutex
-	Index  []byte
-	Config *config.Config
-}
-
 // Create request router with modified index
-func SetupRouter(c *config.Config) *http.ServeMux {
-	// Hold index file in memory
-	index, err := createIndex(c)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	s := &Server{
-		Index:  index,
-		Config: c,
-	}
+func (s *Server) SetupRouter() {
 	mux := http.NewServeMux()
 
 	// Add route handlers
-	fileServer := http.FileServer(http.Dir(c.ChartDir))
+	fileServer := http.FileServer(http.Dir(s.Config.ChartDir))
 	mux.Handle("/liveness", http.HandlerFunc(livenessHandler))
 	mux.Handle("/readiness", http.HandlerFunc(readinessHandler))
-	mux.Handle("/reindex", loggingMiddleware(http.HandlerFunc(s.reindexHandler)))
 	mux.Handle("/charts/index.yaml", loggingMiddleware(http.HandlerFunc(s.indexHandler)))
 	mux.Handle("/charts/", loggingMiddleware(http.StripPrefix("/charts/", fileServer)))
 
-	return mux
+	s.Router = mux
 }
 
 // StatusWriter adds a field an http.ResponseWriter to track status
@@ -89,6 +70,21 @@ func createIndex(c *config.Config) ([]byte, error) {
 	return b, nil
 }
 
+// readIndex builds an index from a flat directory
+func (s *Server) Reindex() error {
+	fmt.Println("Reindexing")
+	s.Lock()
+	defer s.Unlock()
+
+	index, err := createIndex(s.Config)
+	if err != nil {
+		return err
+	}
+
+	s.Index = index
+	return nil
+}
+
 // indexURL returns a formatted URL based on Config parameters
 func indexURL(c *config.Config) string {
 	if c.Namespace == "" {
@@ -104,20 +100,6 @@ func (s *Server) indexHandler(w http.ResponseWriter, r *http.Request) {
 	if _, err := w.Write(s.Index); err != nil {
 		log.Println(err)
 	}
-}
-
-// reindexHandler reindexes the chart repo
-func (s *Server) reindexHandler(w http.ResponseWriter, r *http.Request) {
-	index, err := createIndex(s.Config)
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		return
-	}
-	s.Lock()
-	defer s.Unlock()
-
-	s.Index = index
-	w.WriteHeader(http.StatusOK)
 }
 
 // livenessHandler returns a 200 status as long as the server is running
