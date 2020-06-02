@@ -3,8 +3,8 @@ git@github.com:open-cluster-management/search-chart.git,3ecc7a5
 git@github.com:open-cluster-management/application-chart.git,cfaecec
 git@github.com:open-cluster-management/grc-chart.git,bb325e3
 git@github.com:open-cluster-management/management-ingress-chart.git,7934a8b
-git@github.com:open-cluster-management/rcm-chart.git,83335d9
-git@github.com:open-cluster-management/console-chart.git,7d84562
+git@github.com:open-cluster-management/rcm-chart.git,c4515bfe17d60671f55a0d7b3c855e58a2f00945
+git@github.com:open-cluster-management/console-chart.git,7b76c4f9b3225a7c1d5dafe27bde9c5769cd8dbb
 git@github.com:open-cluster-management/multicluster-mongodb-chart.git,59e6d2b
 git@github.com:open-cluster-management/cert-manager-webhook-chart.git,cce15de
 git@github.com:open-cluster-management/cert-manager-chart.git,4063b86
