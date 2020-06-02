@@ -3,12 +3,19 @@
 package repo
 
 import (
+	"fmt"
+	"io"
+	"io/ioutil"
+	"log"
 	"net/http"
 	"net/http/httptest"
-	"reflect"
+	"os"
+	"path"
 	"testing"
 
 	"github.com/open-cluster-management/multicloudhub-repo/pkg/config"
+	"helm.sh/helm/v3/pkg/repo"
+	"sigs.k8s.io/yaml"
 )
 
 func TestLiveness(t *testing.T) {
@@ -44,44 +51,15 @@ func TestReadiness(t *testing.T) {
 	}
 }
 
-func Test_modifyIndex(t *testing.T) {
-	type args struct {
-		index   []byte
-		ns      string
-		service string
-	}
-	tests := []struct {
-		name string
-		args args
-		want []byte
-	}{
-		{
-			"Update index",
-			args{
-				index:   []byte("http://multiclusterhub-repo:3000/charts/application-chart-1.0.0.tgz"),
-				ns:      "default",
-				service: "multiclusterhub-repo",
-			},
-			[]byte("http://multiclusterhub-repo.default:3000/charts/application-chart-1.0.0.tgz"),
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := modifyIndex(tt.args.index, tt.args.ns, tt.args.service); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("modifyIndex() = %s, want %s", string(got), string(tt.want))
-			}
-		})
-	}
-}
-
 func TestFileServer(t *testing.T) {
 	c := &config.Config{
-		ChartDir:  "../../multiclusterhub/charts/",
+		ChartDir:  "testdata/charts/",
 		Namespace: "test",
 		Port:      "8000",
 		Service:   "test-service",
 	}
-	ts := httptest.NewServer(SetupRouter(c))
+	s, _ := New(c)
+	ts := httptest.NewServer(s.Router)
 	defer ts.Close()
 
 	tests := []struct {
@@ -90,7 +68,7 @@ func TestFileServer(t *testing.T) {
 		want int
 	}{
 		{"Get index", "index.yaml", http.StatusOK},
-		{"Get cert-manager chart", "cert-manager-3.6.0.tgz", http.StatusOK},
+		{"Get nginx chart", "nginx-5.6.0.tgz", http.StatusOK},
 		{"Get non-existant chart", "not-found.tgz", http.StatusNotFound},
 	}
 
@@ -106,4 +84,166 @@ func TestFileServer(t *testing.T) {
 			}
 		})
 	}
+}
+
+func Test_indexURL(t *testing.T) {
+	type args struct {
+		c *config.Config
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			name: "No namespace",
+			args: args{
+				c: &config.Config{
+					Port:    "3000",
+					Service: "multiclusterhub-repo",
+				}},
+			want: "http://multiclusterhub-repo:3000",
+		},
+		{
+			name: "Namespaced",
+			args: args{
+				c: &config.Config{
+					Namespace: "test",
+					Port:      "8000",
+					Service:   "multicloudhub-repo",
+				}},
+			want: "http://multicloudhub-repo.test:8000",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := indexURL(tt.args.c); got != tt.want {
+				t.Errorf("indexURL() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_createIndex(t *testing.T) {
+	c := &config.Config{
+		ChartDir:  "testdata/charts/",
+		Namespace: "test",
+		Port:      "3000",
+		Service:   "multiclusterhub-repo",
+	}
+	b, err := createIndex(c)
+	if err != nil {
+		t.Errorf("createIndex() error = %v, wantErr %v", err, nil)
+	}
+
+	i := &repo.IndexFile{}
+	if err := yaml.Unmarshal(b, i); err != nil {
+		t.Errorf("createIndex() index failed to unmarshal: %s", err)
+	}
+
+	numEntries := len(i.Entries)
+	if numEntries != 1 {
+		t.Errorf("Expected 1 entry in index file but got %d", numEntries)
+	}
+	nginx, ok := i.Entries["nginx"]
+	if !ok || len(nginx) != 1 {
+		t.Errorf("Expected 1 nginx entry")
+	}
+
+}
+
+func TestReindex(t *testing.T) {
+	// Serve charts in tempDir
+	tmpDir, err := ioutil.TempDir("testdata", "charts_tmp_")
+	if err != nil {
+		t.Fatalf("Could not create chart dir")
+	}
+	defer os.RemoveAll(tmpDir)
+
+	c := &config.Config{
+		// ChartDir:  "testdata/" + tmpDir + "/",
+		ChartDir:  path.Join(tmpDir),
+		Namespace: "test",
+		Port:      "8000",
+		Service:   "test-service",
+	}
+
+	s, _ := New(c)
+	s.Start()
+	defer s.Stop()
+
+	ts := httptest.NewServer(s.Router)
+	defer ts.Close()
+
+	// Empty chart directory
+	res, err := http.Get(ts.URL + "/charts/" + "index.yaml")
+	if err != nil {
+		t.Errorf("request error: %v", err)
+	}
+
+	// Check that index has no entries
+	i, err := getIndex(res.Body)
+	if err != nil {
+		t.Errorf("createIndex() index failed to get index: %s", err)
+	}
+	numEntries := len(i.Entries)
+	if numEntries != 0 {
+		t.Errorf("Expected 0 entry in index file but got %d", numEntries)
+	}
+
+	// Add chart (should trigger reindexing)
+	err = copyFile("testdata/charts/nginx-5.6.0.tgz", path.Join(tmpDir, "nginx-5.6.0.tgz"))
+	if err != nil {
+		t.Errorf("Error adding chart: %v", err)
+	}
+
+	// Populated chart directory
+	res, err = http.Get(ts.URL + "/charts/" + "index.yaml")
+	if err != nil {
+		t.Errorf("request error: %v", err)
+	}
+
+	// Check that index now includes nginx
+	i, err = getIndex(res.Body)
+	if err != nil {
+		t.Errorf("createIndex() index failed to get index: %s", err)
+	}
+
+	nginx, ok := i.Entries["nginx"]
+	if !ok || len(nginx) != 1 {
+		t.Errorf("Expected 1 nginx entry")
+	}
+}
+
+// helper for getting an index from an http response
+func getIndex(res io.Reader) (*repo.IndexFile, error) {
+	b, err := ioutil.ReadAll(res)
+	if err != nil {
+		log.Fatal(err)
+	}
+	i := &repo.IndexFile{}
+	if err := yaml.Unmarshal(b, i); err != nil {
+		return i, err
+	}
+	return i, nil
+}
+
+// helper for copying charts
+func copyFile(sourcePath, destPath string) error {
+	inputFile, err := os.Open(sourcePath)
+	if err != nil {
+		return fmt.Errorf("Couldn't open source file: %s", err)
+	}
+	outputFile, err := os.Create(destPath)
+	if err != nil {
+		inputFile.Close()
+		return fmt.Errorf("Couldn't open dest file: %s", err)
+	}
+	defer outputFile.Close()
+	_, err = io.Copy(outputFile, inputFile)
+	inputFile.Close()
+	if err != nil {
+		return fmt.Errorf("Writing to output file failed: %s", err)
+	}
+	return nil
 }

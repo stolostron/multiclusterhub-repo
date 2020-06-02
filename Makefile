@@ -38,7 +38,7 @@ push:
 	docker push "$(REGISTRY)/$(IMG):$(VERSION)"
 
 unit-test:
-	go test -v
+	go test -v ./...
 
 update-charts: 
 	./cicd-scripts/patchCharts.sh

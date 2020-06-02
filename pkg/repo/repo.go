@@ -3,47 +3,29 @@
 package repo
 
 import (
-	"bytes"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"path/filepath"
 	"time"
 
 	"github.com/open-cluster-management/multicloudhub-repo/pkg/config"
+	"helm.sh/helm/v3/pkg/repo"
+	"sigs.k8s.io/yaml"
 )
 
-// Server holds an index.yaml
-type Server struct {
-	Index []byte
-}
-
 // Create request router with modified index
-func SetupRouter(c *config.Config) *http.ServeMux {
-	// Hold index file in memory
-	index, err := readIndex(c.ChartDir)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// Modify urls in index to reference namespace deployed in
-	if ns := c.Namespace; ns != "" {
-		log.Printf("Updating index with namespace '%s'", ns)
-		index = modifyIndex(index, ns, c.Service)
-	}
-
-	s := &Server{Index: index}
+func (s *Server) SetupRouter() {
 	mux := http.NewServeMux()
 
 	// Add route handlers
-	fileServer := http.FileServer(http.Dir(c.ChartDir))
+	fileServer := http.FileServer(http.Dir(s.Config.ChartDir))
 	mux.Handle("/liveness", http.HandlerFunc(livenessHandler))
 	mux.Handle("/readiness", http.HandlerFunc(readinessHandler))
 	mux.Handle("/charts/index.yaml", loggingMiddleware(http.HandlerFunc(s.indexHandler)))
 	mux.Handle("/charts/", loggingMiddleware(http.StripPrefix("/charts/", fileServer)))
 
-	return mux
+	s.Router = mux
 }
 
 // StatusWriter adds a field an http.ResponseWriter to track status
@@ -72,26 +54,49 @@ func loggingMiddleware(next http.Handler) http.Handler {
 	})
 }
 
-func readIndex(dir string) ([]byte, error) {
-	filePath := filepath.Join(filepath.Clean(dir), "index.yaml")
-	f, err := ioutil.ReadFile(filePath) // #nosec G304 (index path not configurable by user)
+// readIndex builds an index from a flat directory
+func createIndex(c *config.Config) ([]byte, error) {
+	url := indexURL(c)
+	index, err := repo.IndexDirectory(filepath.Clean(c.ChartDir), url)
 	if err != nil {
 		return nil, err
 	}
-	return f, nil
+
+	b, err := yaml.Marshal(index)
+	if err != nil {
+		return nil, err
+	}
+
+	return b, nil
 }
 
-// modifyIndex makes urls namespace-specific
-func modifyIndex(index []byte, ns string, service string) []byte {
-	oldURL := []byte(service)
-	newURL := []byte(fmt.Sprintf("%s.%s", service, ns))
+// readIndex builds an index from a flat directory
+func (s *Server) Reindex() error {
+	log.Println("Reindexing")
+	s.Lock()
+	defer s.Unlock()
 
-	newIndex := bytes.ReplaceAll(index, oldURL, newURL)
-	return newIndex
+	index, err := createIndex(s.Config)
+	if err != nil {
+		return err
+	}
+
+	s.Index = index
+	return nil
+}
+
+// indexURL returns a formatted URL based on Config parameters
+func indexURL(c *config.Config) string {
+	if c.Namespace == "" {
+		return fmt.Sprintf("http://%s:%s", c.Service, c.Port)
+	}
+	return fmt.Sprintf("http://%s.%s:%s", c.Service, c.Namespace, c.Port)
 }
 
 // indexHandler serves the index.yaml file from in memory
 func (s *Server) indexHandler(w http.ResponseWriter, r *http.Request) {
+	s.Lock()
+	defer s.Unlock()
 	if _, err := w.Write(s.Index); err != nil {
 		log.Println(err)
 	}

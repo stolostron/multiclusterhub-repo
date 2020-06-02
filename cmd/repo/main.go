@@ -21,14 +21,22 @@ func main() {
 	log.Printf("Go Version: %s", runtime.Version())
 	log.Printf("Go OS/Arch: %s/%s", runtime.GOOS, runtime.GOARCH)
 
-	mux := repo.SetupRouter(c)
+	server, err := repo.New(c)
+	if err != nil {
+		panic(err)
+	}
+	err = server.Start()
+	if err != nil {
+		panic(err)
+	}
+
 	srv := &http.Server{
 		Addr: ":" + c.Port,
 		// Good practice to set timeouts to avoid Slowloris attacks.
 		WriteTimeout: time.Second * 30,
 		ReadTimeout:  time.Second * 30,
 		IdleTimeout:  time.Second * 30,
-		Handler:      mux,
+		Handler:      server.Router,
 	}
 
 	// Run our server in a goroutine so that it doesn't block.
@@ -46,6 +54,12 @@ func main() {
 	// Block until we receive our signal.
 	sig := <-sigs
 	log.Printf("Received signal: %s", sig.String())
+
+	// Stop file watcher
+	err = server.Stop()
+	if err != nil {
+		panic(err)
+	}
 
 	// Create a deadline to wait for.
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
