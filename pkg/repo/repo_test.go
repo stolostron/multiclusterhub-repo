@@ -12,6 +12,7 @@ import (
 	"os"
 	"path"
 	"testing"
+	"time"
 
 	"github.com/open-cluster-management/multicloudhub-repo/pkg/config"
 	"helm.sh/helm/v3/pkg/repo"
@@ -196,6 +197,9 @@ func TestReindex(t *testing.T) {
 	if err != nil {
 		t.Errorf("Error adding chart: %v", err)
 	}
+
+	// Give time to reindex
+	time.Sleep(4 * time.Second)
 
 	// Populated chart directory
 	res, err = http.Get(ts.URL + "/charts/" + "index.yaml")
