@@ -12,6 +12,7 @@ import (
 	"os"
 	"path"
 	"testing"
+	"time"
 
 	"github.com/open-cluster-management/multicloudhub-repo/pkg/config"
 	"helm.sh/helm/v3/pkg/repo"
@@ -197,6 +198,9 @@ func TestReindex(t *testing.T) {
 		t.Errorf("Error adding chart: %v", err)
 	}
 
+	// Give time to reindex
+	time.Sleep(4 * time.Second)
+
 	// Populated chart directory
 	res, err = http.Get(ts.URL + "/charts/" + "index.yaml")
 	if err != nil {
@@ -206,6 +210,7 @@ func TestReindex(t *testing.T) {
 	// Check that index now includes nginx
 	i, err = getIndex(res.Body)
 	if err != nil {
+		log.Println(i)
 		t.Errorf("createIndex() index failed to get index: %s", err)
 	}
 
@@ -218,10 +223,10 @@ func TestReindex(t *testing.T) {
 // helper for getting an index from an http response
 func getIndex(res io.Reader) (*repo.IndexFile, error) {
 	b, err := ioutil.ReadAll(res)
-	if err != nil {
-		log.Fatal(err)
-	}
 	i := &repo.IndexFile{}
+	if err != nil {
+		return i, err
+	}
 	if err := yaml.Unmarshal(b, i); err != nil {
 		return i, err
 	}
