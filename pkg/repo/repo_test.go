@@ -102,7 +102,7 @@ func Test_indexURL(t *testing.T) {
 					Port:    "3000",
 					Service: "multiclusterhub-repo",
 				}},
-			want: "http://multiclusterhub-repo:3000",
+			want: "http://multiclusterhub-repo:3000/charts",
 		},
 		{
 			name: "Namespaced",
@@ -112,7 +112,7 @@ func Test_indexURL(t *testing.T) {
 					Port:      "8000",
 					Service:   "multicloudhub-repo",
 				}},
-			want: "http://multicloudhub-repo.test:8000",
+			want: "http://multicloudhub-repo.test:8000/charts",
 		},
 	}
 	for _, tt := range tests {
