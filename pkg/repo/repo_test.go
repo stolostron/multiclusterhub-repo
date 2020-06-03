@@ -206,6 +206,7 @@ func TestReindex(t *testing.T) {
 	// Check that index now includes nginx
 	i, err = getIndex(res.Body)
 	if err != nil {
+		log.Println(i)
 		t.Errorf("createIndex() index failed to get index: %s", err)
 	}
 
@@ -218,10 +219,10 @@ func TestReindex(t *testing.T) {
 // helper for getting an index from an http response
 func getIndex(res io.Reader) (*repo.IndexFile, error) {
 	b, err := ioutil.ReadAll(res)
-	if err != nil {
-		log.Fatal(err)
-	}
 	i := &repo.IndexFile{}
+	if err != nil {
+		return i, err
+	}
 	if err := yaml.Unmarshal(b, i); err != nil {
 		return i, err
 	}
