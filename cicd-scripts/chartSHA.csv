@@ -5,7 +5,6 @@ git@github.com:open-cluster-management/grc-chart.git,release-2.0
 git@github.com:open-cluster-management/management-ingress-chart.git,release-2.0
 git@github.com:open-cluster-management/rcm-chart.git,release-2.0
 git@github.com:open-cluster-management/console-chart.git,release-2.0
-git@github.com:open-cluster-management/multicluster-mongodb-chart.git,release-2.0
 git@github.com:open-cluster-management/cert-manager-webhook-chart.git,release-2.0
 git@github.com:open-cluster-management/cert-manager-chart.git,release-2.0
 git@github.com:open-cluster-management/configmap-watcher-chart.git,release-2.0
