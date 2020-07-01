@@ -28,10 +28,6 @@ git clone git@github.com:open-cluster-management/console-chart.git
 helm package console-chart/stable/console-chart -d multiclusterhub/charts
 rm -rf console-chart
 
-git clone git@github.com:open-cluster-management/multicluster-mongodb-chart.git
-helm package multicluster-mongodb-chart/stable/multicluster-mongodb -d multiclusterhub/charts
-rm -rf multicluster-mongodb-chart
-
 git clone git@github.com:open-cluster-management/cert-manager-webhook-chart.git
 helm package cert-manager-webhook-chart/stable/cert-manager-webhook -d multiclusterhub/charts
 rm -rf cert-manager-webhook-chart
