@@ -2,10 +2,10 @@ git@github.com:open-cluster-management/application-chart.git,41eb792e446c0075157
 git@github.com:open-cluster-management/cert-manager-chart.git,800c7b954121dbb88ef00fc8b7bcf9cff0d147d5
 git@github.com:open-cluster-management/cert-manager-webhook-chart.git,542521f9992633df9fd3ac7d070744887236f330
 git@github.com:open-cluster-management/configmap-watcher-chart.git,b1077b1ddfa570a4e0245df532cb0b929ae2d0e4
-git@github.com:open-cluster-management/console-chart.git,311f774aad33ba7341ffa395ca90c35fdefacbb0
+git@github.com:open-cluster-management/console-chart.git,fca53b7266482190c839970e7aec9f9241e39bbe
 git@github.com:open-cluster-management/grc-chart.git,06c6b41b665a26e59ef24c90e1cd05814c22454d
 git@github.com:open-cluster-management/kui-web-terminal-chart.git,3fbc387fe16d6674ec4c4c726aec0839c8abfc1e
 git@github.com:open-cluster-management/management-ingress-chart.git,f0c945062266281bbf76509338a5a3f0c0aa347e
 git@github.com:open-cluster-management/rcm-chart.git,72ab9c74839692a340190cfa59e2dab2dbbaeeee
-git@github.com:open-cluster-management/search-chart.git,d9a3333c62d5740c2de0d9e37dfe3bcb281302fd
+git@github.com:open-cluster-management/search-chart.git,b4e3bcf7cc3428cac60bdf72e2b7965e3f3a310c
 git@github.com:open-cluster-management/topology-chart.git,acf5c71fa3f1fe83c2d26c546b8d663d76c388fa
