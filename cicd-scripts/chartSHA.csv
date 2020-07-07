@@ -7,5 +7,5 @@ git@github.com:open-cluster-management/grc-chart.git,06c6b41b665a26e59ef24c90e1c
 git@github.com:open-cluster-management/kui-web-terminal-chart.git,3fbc387fe16d6674ec4c4c726aec0839c8abfc1e
 git@github.com:open-cluster-management/management-ingress-chart.git,f0c945062266281bbf76509338a5a3f0c0aa347e
 git@github.com:open-cluster-management/rcm-chart.git,72ab9c74839692a340190cfa59e2dab2dbbaeeee
-git@github.com:open-cluster-management/search-chart.git,b4e3bcf7cc3428cac60bdf72e2b7965e3f3a310c
+git@github.com:open-cluster-management/search-chart.git,85dadb32446299c2f8da3eb5e3a139d52336ac5e
 git@github.com:open-cluster-management/topology-chart.git,acf5c71fa3f1fe83c2d26c546b8d663d76c388fa
