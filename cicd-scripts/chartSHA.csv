@@ -4,7 +4,7 @@ git@github.com:open-cluster-management/cert-manager-webhook-chart.git,65076e2006
 git@github.com:open-cluster-management/configmap-watcher-chart.git,193343868bf98710b9718578c891c8aef1df78c8
 git@github.com:open-cluster-management/console-chart.git,0bbe417c07f18c1a413d3a2b9ef5abb78e167d0b
 git@github.com:open-cluster-management/grc-chart.git,d110896b0e4c2b87b86144038cb1fc4f027715bd
-git@github.com:open-cluster-management/kui-web-terminal-chart.git,3fbc387fe16d6674ec4c4c726aec0839c8abfc1e
+git@github.com:open-cluster-management/kui-web-terminal-chart.git,f22c379abdd097f015656e34d6b267499a5ac47a
 git@github.com:open-cluster-management/management-ingress-chart.git,4318ac6a7be954746311bed5bee42a69bbcc5b39
 git@github.com:open-cluster-management/rcm-chart.git,a0a84eacdf5538cafb60f9223ebd2fa1be4d2a3d
 git@github.com:open-cluster-management/search-chart.git,280d1ae5335cd935014cf65aa01e75cb816edc29
