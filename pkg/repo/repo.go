@@ -90,7 +90,7 @@ func indexURL(c *config.Config) string {
 	if c.Namespace == "" {
 		return fmt.Sprintf("http://%s:%s/charts", c.Service, c.Port)
 	}
-	return fmt.Sprintf("http://%s.%s:%s/charts", c.Service, c.Namespace, c.Port)
+	return fmt.Sprintf("http://%s.%s.svc.cluster.local:%s/charts", c.Service, c.Namespace, c.Port)
 }
 
 // indexHandler serves the index.yaml file from in memory
