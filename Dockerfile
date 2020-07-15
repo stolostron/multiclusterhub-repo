@@ -18,4 +18,5 @@ WORKDIR /app
 COPY --from=builder /workspace/start-repo .
 COPY multiclusterhub/charts/ multiclusterhub/charts/
 EXPOSE 3000
+RUN chmod -R 777 /app/multiclusterhub/charts
 ENTRYPOINT /app/start-repo
