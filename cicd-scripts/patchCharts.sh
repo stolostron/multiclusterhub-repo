@@ -16,3 +16,4 @@ for chart in $PWD/multiclusterhub/charts/*.tgz; do
     echo "full: $fullName"
     kubectl cp $chart ${NAMESPACE}/${REPOPOD}:multiclusterhub/charts/
 done
+kubectl delete pod $(kubectl get pods -o=name | grep standalone-subscription | sed "s/^.\{4\}//")
