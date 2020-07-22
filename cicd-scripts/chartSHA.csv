@@ -5,7 +5,7 @@ git@github.com:open-cluster-management/configmap-watcher-chart.git,193343868bf98
 git@github.com:open-cluster-management/console-chart.git,6bba56678017aac98b3ce46a39717ad4ba004948
 git@github.com:open-cluster-management/grc-chart.git,d110896b0e4c2b87b86144038cb1fc4f027715bd
 git@github.com:open-cluster-management/kui-web-terminal-chart.git,f22c379abdd097f015656e34d6b267499a5ac47a
-git@github.com:open-cluster-management/management-ingress-chart.git,c4a33d93c05564ea64d81536627296a7ed71cad9
+git@github.com:open-cluster-management/management-ingress-chart.git,386b5945cc1e2a7c5b97b59a04c3ac9d415d1d2e
 git@github.com:open-cluster-management/rcm-chart.git,c2fa7e6566ad8f2644dd4f28f7ffe1e4b50d25cd
 git@github.com:open-cluster-management/search-chart.git,280d1ae5335cd935014cf65aa01e75cb816edc29
 git@github.com:open-cluster-management/topology-chart.git,0db40c79c9564e4ed7b2bb2a478608a24608ae13
