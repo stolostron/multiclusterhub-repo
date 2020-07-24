@@ -7,13 +7,8 @@ echo "REPO: $REPOPOD"
 NAMESPACE=$(echo $(oc project) | cut -d " " -f 3)
 NAMESPACE=${NAMESPACE//\"}
 
-echo ${NAMESPACE}
-echo ${REPOPOD}
-echo $PWD
-
 for chart in $PWD/multiclusterhub/charts/*.tgz; do
-    fullName="$(basename $chart)"
-    echo "full: $fullName"
+    echo "chart: $(basename $chart)"
     kubectl cp $chart ${NAMESPACE}/${REPOPOD}:multiclusterhub/charts/
 done
 kubectl delete pod $(kubectl get pods -o=name | grep standalone-subscription | sed "s/^.\{4\}//")
