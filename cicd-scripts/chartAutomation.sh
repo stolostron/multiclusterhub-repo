@@ -9,5 +9,5 @@ cd multicloudhub-repo
 git checkout chartAutomation
 cicd-scripts/chart-sync.sh
 git add .
-git commit -m "[skip ci] greetings from fakeMaster"
+git commit -m "[skip ci] greetings from fakeMaster "
 git push  https://github.com/open-cluster-management/multicloudhub-repo.git "chartAutomation"
