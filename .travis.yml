@@ -36,6 +36,7 @@ stages:
   - test-e2e
   - release-ff
   - publish
+  - auto
 
 jobs:
   include:
@@ -82,3 +83,7 @@ jobs:
         - |
           make 
           make pipeline-manifest/update PIPELINE_MANIFEST_COMPONENT_SHA256=${TRAVIS_COMMIT} PIPELINE_MANIFEST_COMPONENT_REPO=${TRAVIS_REPO_SLUG} PIPELINE_MANIFEST_BRANCH=${TRAVIS_BRANCH}
+    - stage: auto
+      name: "Auto trigger mch-repo"
+      if: type = pull_request 
+      script: ./cicd-scripts/chartAutomation.sh
