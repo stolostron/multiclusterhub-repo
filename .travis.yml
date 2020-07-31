@@ -86,4 +86,6 @@ jobs:
     - stage: auto
       name: "Auto trigger mch-repo"
       if: type = pull_request 
-      script: ./cicd-scripts/chartAutomation.sh
+      script: 
+        - ./cicd-scripts/install-dependencies.sh
+        - ./cicd-scripts/chartAutomation.sh
