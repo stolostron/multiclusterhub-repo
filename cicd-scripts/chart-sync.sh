@@ -12,7 +12,7 @@ do
   if [ -z "${TRAVIS_BUILD_DIR}" ]; then 
     git clone $f1
   else 
-    git clone "https://${MCH_REPO_BOT_TOKEN}@github.com/open-cluster-management/$(echo $f1 | cut -f2 -d/).git"
+    git clone "https://${MCH_REPO_BOT_TOKEN}@github.com/open-cluster-management/$(echo $f1 | cut -f2 -d/)"
   fi
   var1=$(echo "$(ls)" | cut -f5 -d/)  #get the repo name
   cd */ 
