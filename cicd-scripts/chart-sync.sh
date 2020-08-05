@@ -4,6 +4,7 @@ cd $(dirname $0)
 CHARTS_PATH="../../../../../multiclusterhub/charts"
 CICD_FOLDER="../../../../"
 echo "Fetching charts from csv"
+echo "build dir: ${TRAVIS_BUILD_DIR}"
 while IFS=, read -r f1 f2
 do
   mkdir -p tmp
