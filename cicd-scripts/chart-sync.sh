@@ -10,9 +10,11 @@ do
   mkdir -p tmp
   cd tmp
   #if this is being run by travis, use token in travis job to clone
-  if [ -z "$1" ]; then git clone $f1; 
+  if [ -z "$1" ]; then 
+    git clone $f1
   else 
     chart=$(echo ${TRAVIS_BUILD_DIR} | CUT -f5-6 -d/)
+    echo "ECHO https://${MCH_REPO_BOT_TOKEN}@github.com/$chart.git"
     git clone "https://${MCH_REPO_BOT_TOKEN}@github.com/$chart.git"
   fi
   var1=$(echo "$(ls)" | cut -f5 -d/)  #get the repo name
