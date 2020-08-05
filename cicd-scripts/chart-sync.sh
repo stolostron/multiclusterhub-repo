@@ -14,6 +14,7 @@ do
   else 
     chart=$(echo ${TRAVIS_BUILD_DIR} | CUT -f5-6 -d/)
     git clone "https://${MCH_REPO_BOT_TOKEN}@github.com/$chart.git"
+  fi
   var1=$(echo "$(ls)" | cut -f5 -d/)  #get the repo name
   cd */ 
   git checkout $f2
