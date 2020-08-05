@@ -4,18 +4,19 @@ cd $(dirname $0)
 CHARTS_PATH="../../../../../multiclusterhub/charts"
 CICD_FOLDER="../../../../"
 echo "Fetching charts from csv"
-echo "build dir: ${TRAVIS_BUILD_DIR}"
+$(echo $prac | cut -f5-6 -d/)
 while IFS=, read -r f1 f2
 do
   mkdir -p tmp
   cd tmp
-  git clone $f1
+  #if this is being run by travis, use token in travis job to clone
+  if [ -z "$1" ]; then git clone $f1; 
+  else 
+    chart=$(echo ${TRAVIS_BUILD_DIR} | CUT -f5-6 -d/)
+    git clone "https://${MCH_REPO_BOT_TOKEN}@github.com/$chart.git"
   var1=$(echo "$(ls)" | cut -f5 -d/)  #get the repo name
   cd */ 
-  if [ $f2 != "latest" ]
-  then
-    git checkout $f2
-  fi
+  git checkout $f2
   var2=$(echo $var1 | cut -f1 -d-) #get the first word (ie kui in kui-web-terminal)
   var3=$(find . -type d -name "$var2*") #look for folder in repo that starts with ^ rather than stable/*/
   cd $var3
