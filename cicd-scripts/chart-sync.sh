@@ -4,7 +4,6 @@ cd $(dirname $0)
 CHARTS_PATH="../../../../../multiclusterhub/charts"
 CICD_FOLDER="../../../../"
 echo "Fetching charts from csv"
-$(echo $prac | cut -f5-6 -d/)
 while IFS=, read -r f1 f2
 do
   mkdir -p tmp
@@ -13,8 +12,7 @@ do
   if [ -z "${TRAVIS_BUILD_DIR}" ]; then 
     git clone $f1
   else 
-    chart=$(echo ${TRAVIS_BUILD_DIR} | cut -f5-6 -d/)
-    git clone https://${MCH_REPO_BOT_TOKEN}@github.com/$chart.git
+    git clone "https://${MCH_REPO_BOT_TOKEN}@github.com/open-cluster-management/$(echo $f1 | cut -f2 -d/).git"
   fi
   var1=$(echo "$(ls)" | cut -f5 -d/)  #get the repo name
   cd */ 
