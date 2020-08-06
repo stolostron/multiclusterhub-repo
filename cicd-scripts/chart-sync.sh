@@ -7,6 +7,7 @@ echo "Fetching charts from csv"
 rm ../multiclusterhub/charts/* #rm all charts first, in case chart versions are changed
 while IFS=, read -r f1 f2
 do
+  echo "TRAVIS: ${TRAVIS_BUILD_DIR}"
   mkdir -p tmp
   cd tmp
   #if this is being run by travis, use token in travis job to clone
