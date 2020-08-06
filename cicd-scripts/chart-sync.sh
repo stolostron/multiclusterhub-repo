@@ -4,6 +4,7 @@ cd $(dirname $0)
 CHARTS_PATH="../../../../../multiclusterhub/charts"
 CICD_FOLDER="../../../../"
 echo "Fetching charts from csv"
+rm ../multiclusterhub/charts/* #rm all charts first, in case chart versions are changed
 while IFS=, read -r f1 f2
 do
   mkdir -p tmp
