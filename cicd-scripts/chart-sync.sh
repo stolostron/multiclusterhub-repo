@@ -9,8 +9,8 @@ while IFS=, read -r f1 f2
 do
   mkdir -p tmp
   cd tmp
-  #if this is being run by travis, use token in travis job to clone
-  if [ -z "${TRAVIS_BUILD_DIR}" ]; then 
+  #if this is being run by chart travis, use that token in travis job to clone
+  if [ -z "${TRAVIS_BUILD_DIR}" ] || [[ "$(echo $TRAVIS_BUILD_DIR | cut -f8 -d/)" == "multicloudhub-repo" ]]; then 
     git clone $f1
   else 
     git clone "https://${MCH_REPO_BOT_TOKEN}@github.com/open-cluster-management/$(echo $f1 | cut -f2 -d/)"
