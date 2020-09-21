@@ -3,6 +3,7 @@
 cd $(dirname $0)
 CHARTS_PATH="../../../../../multiclusterhub/charts"
 CICD_FOLDER="../../../../"
+CHART_VERSION="$(cat ../CHART_VERSION)"
 echo "Fetching charts from csv"
 rm ../multiclusterhub/charts/* #rm all charts first, in case chart versions are changed
 while IFS=, read -r f1 f2
@@ -21,7 +22,7 @@ do
   var2=$(echo $var1 | cut -f1 -d-) #get the first word (ie kui in kui-web-terminal)
   var3=$(find . -type d -name "$var2*") #look for folder in repo that starts with ^ rather than stable/*/
   cd $var3
-  PACKAGE="$(helm package ./)"
+  PACKAGE="$(helm package ./ --version $CHART_VERSION)"
   find . -type f -name "*tgz" | xargs -I '{}' mv '{}' $CHARTS_PATH
   cd $CICD_FOLDER
   rm -rf tmp
