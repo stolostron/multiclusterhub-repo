@@ -14,4 +14,4 @@ NOTE:
 ## Updating chart in cluster
 Running `make update-charts` will update the charts in the `multiclusterhub-repo` pod with charts in the local `multiclusterhub/charts` folder
 
-Last updated manually: Sept 30, 2020 11:40 AM EDT
+Last updated manually: Oct 21, 2020 10:40 PM EDT
