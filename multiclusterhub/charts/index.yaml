@@ -3,9 +3,9 @@ entries:
   application-chart:
   - apiVersion: v1
     appVersion: 2.1.0
-    created: "2020-12-03T19:24:53.80655078Z"
+    created: "2021-01-06T19:59:17.517208593Z"
     description: Helm chart for Open Cluster Management application UI
-    digest: f349c5e758b751c822bc5523d625c5ee1594991b131a9be9eddd36061aad195b
+    digest: 5fe09a99af8db00579afb2e049c6eed608d628382dd57b48bd6be03b98560bbf
     keywords:
     - ui
     name: application-chart
@@ -15,15 +15,9 @@ entries:
   cert-manager:
   - apiVersion: v1
     appVersion: 0.10.3
-    created: "2020-12-03T19:24:53.812279371Z"
-    dependencies:
-    - alias: crd
-      condition: cert-manager-crd.enabled
-      name: cert-manager-crd
-      repository: file://cert-manager-crd
-      version: 3.4.0
+    created: "2021-01-06T19:59:17.519898549Z"
     description: Service for issuing and managing certificates.
-    digest: 47d4d61a422412005925c70e08c64de04466ec5f12334cc3757a9dbbcd6aeac0
+    digest: 6909a2703f07aee6b7b1efe0ca2dcf2ef76075af0deb7c39459184e276c502b9
     keywords:
     - amd64
     - ppc64le
@@ -44,9 +38,9 @@ entries:
   cert-manager-webhook:
   - apiVersion: v1
     appVersion: 0.10.3
-    created: "2020-12-03T19:24:53.813741212Z"
+    created: "2021-01-06T19:59:17.522057653Z"
     description: A Helm chart for deploying the cert-manager webhook component
-    digest: 1099a298dcc1a30c374e39392e36759b67e4e1214a353f4b5f64f871e320164d
+    digest: 66fe4685b83a08e5fb2cc3ed3983be710763d61f2168fcca71c4b777d07576bf
     home: https://github.com/jetstack/cert-manager
     keywords:
     - cert-manager
@@ -68,9 +62,9 @@ entries:
   configmap-watcher:
   - apiVersion: v1
     appVersion: 3.7.0
-    created: "2020-12-03T19:24:53.814572469Z"
+    created: "2021-01-06T19:59:17.523766828Z"
     description: A helm chart for deploying the config map watcher component.
-    digest: fa7d46c29fba91ee66c8771abfa0ec9257150f0e9ca10e987dc3309b6d9fe66f
+    digest: 3a142ba664ce1b11fa59fba8fbdf31dd2174bfdc7c1338db83ff46066ec9e20a
     keywords:
     - configmap
     - watcher
@@ -89,14 +83,9 @@ entries:
   console-chart:
   - apiVersion: v1
     appVersion: 2.0.0
-    created: "2020-12-03T19:24:53.815391647Z"
-    dependencies:
-    - alias: crd
-      name: console-crd
-      repository: file://console-crd
-      version: 2.0.0
+    created: "2021-01-06T19:59:17.52521918Z"
     description: Helm chart for Open Cluster Management console UI
-    digest: 43ae56039538e684dd11f398b8a5dacecbe63f0f41347ec2cd38c86c966b0540
+    digest: d2c518777a34dd7e50f2d188ef784527897fb75e3fa5ef24fa00360b686197d1
     keywords:
     - ui
     kubeVersion: '>=1.10.0-0'
@@ -107,9 +96,9 @@ entries:
   grc:
   - apiVersion: v1
     appVersion: 1.0.0
-    created: "2020-12-03T19:24:53.815860358Z"
+    created: "2021-01-06T19:59:17.525718568Z"
     description: helm chart for multicloud grc
-    digest: 45f9c63ca3cccd2167fccbeef23bd4ae4ce5b5ebbd1a428fa585953704c2c011
+    digest: ed8b670bd9e66da854fbbfaac251ac63415118f9dc7cc910afc813bbc819fe29
     keywords:
     - acm
     - grc
@@ -120,9 +109,9 @@ entries:
   kui-web-terminal:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-12-03T19:24:53.816694428Z"
+    created: "2021-01-06T19:59:17.526518674Z"
     description: A helm chart for deploying the Red Hat Visual Web Terminal
-    digest: 2d5fa9be8cc94f207848f9ab5c0dc934c0435115a919cea9f72cdfb4344be074
+    digest: 69089f573fa83cdddfa132f58c1dfbe020c8607673e3d95d67c220d2c0c3da5d
     keywords:
     - IcpClusterResource
     - Commercial
@@ -141,9 +130,9 @@ entries:
   management-ingress:
   - apiVersion: v1
     appVersion: 3.4.0
-    created: "2020-12-03T19:24:53.817754225Z"
+    created: "2021-01-06T19:59:17.52745962Z"
     description: Multi Cloud control plane ingress controller
-    digest: 85abf46e8683344afef7dc1e470e3fc936e12f70c97efe05588f56842cfe1ab2
+    digest: ee138b5e596998e3994991e5db65ab2e50d1bbce37869d58a235870f4338f027
     keywords:
     - ingress
     - nginx
@@ -161,9 +150,9 @@ entries:
   rcm:
   - apiVersion: v1
     appVersion: "2.1"
-    created: "2020-12-03T19:24:53.818739212Z"
+    created: "2021-01-06T19:59:17.528283928Z"
     description: A helm chart for deploying the cluster lifecycle
-    digest: 8ccff56bc46f0c123c829d9613233491a7f5fd0fcfc8e048c5baca637e562b35
+    digest: c04ed7153c5976a8fb15a5c023d34850a95c9dcb1d27e3432c4b36f473ea72d7
     keywords:
     - IcpClusterResource
     - Commercial
@@ -182,9 +171,9 @@ entries:
   search-prod:
   - apiVersion: v1
     appVersion: 2.1.0
-    created: "2020-12-03T19:24:53.819857402Z"
+    created: "2021-01-06T19:59:17.529245787Z"
     description: Helm chart to install the Open Cluster Management Search service
-    digest: cc8f537e78ffa862ccb47103281ded9f8b3f41161d8eca6c092e48cc04f4752c
+    digest: 8ae1e13a6adae8547c1f358f7b8804d98f476cd90b8bdd1ab8f3dcdb961b65a4
     icon: https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.png
     keywords:
     - RHOCP
@@ -201,9 +190,9 @@ entries:
   topology:
   - apiVersion: v1
     appVersion: 1.0.0
-    created: "2020-12-03T19:24:53.820301201Z"
+    created: "2021-01-06T19:59:17.529610996Z"
     description: helm chart for multicloud topology
-    digest: 1cf52f63561b665b484a7d4e073834587c6b19cf73fbe22ec694abec3ce8647b
+    digest: f9330b7bd3eb08ec5743a2514808a3614fb903528c8ffb10b93f340eab934377
     keywords:
     - acm
     - topology
@@ -211,4 +200,4 @@ entries:
     urls:
     - http://multiclusterhub-repo:3000/charts/topology-2.1.2.tgz
     version: 2.1.2
-generated: "2020-12-03T19:24:53.80589108Z"
+generated: "2021-01-06T19:59:17.516605058Z"
