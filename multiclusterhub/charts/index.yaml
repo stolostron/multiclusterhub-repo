@@ -176,6 +176,7 @@ entries:
     digest: 8ae1e13a6adae8547c1f358f7b8804d98f476cd90b8bdd1ab8f3dcdb961b65a4
     icon: https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.png
     keywords:
+    - RHACM
     - RHOCP
     - ICPRHOCP
     - multicloud
