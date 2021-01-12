@@ -1,0 +1,1 @@
+Keep this here to ensure multiclusterhub/chart directories stay in case our automation fails again.
