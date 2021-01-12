@@ -1,0 +1,191 @@
+apiVersion: v1
+entries:
+  application-chart:
+  - apiVersion: v1
+    appVersion: 2.1.0
+    created: "2021-01-12T13:34:56.780216-05:00"
+    description: Helm chart for Open Cluster Management application UI
+    digest: d7241b057b15b29d0b826fa9b216a269e047a35a44319e7f9ce685d2c43ac7aa
+    keywords:
+    - ui
+    name: application-chart
+    urls:
+    - http://multiclusterhub-repo:3000/charts/application-chart-2.2.0.tgz
+    version: 2.2.0
+  cert-manager:
+  - apiVersion: v1
+    appVersion: 0.10.3
+    created: "2021-01-12T13:34:56.781438-05:00"
+    description: Service for issuing and managing certificates.
+    digest: a6da8c4585ab450375f67b1832590223e0108ef0a8e5597cabe80d8de7f2dd25
+    keywords:
+    - amd64
+    - ppc64le
+    - s390x
+    - OpenSource
+    - Security
+    - cert-manager
+    - kube-lego
+    - letsencrypt
+    - tls
+    - Development
+    - RHOCP
+    - ROKS
+    name: cert-manager
+    urls:
+    - http://multiclusterhub-repo:3000/charts/cert-manager-2.2.0.tgz
+    version: 2.2.0
+  cert-manager-webhook:
+  - apiVersion: v1
+    appVersion: 0.10.3
+    created: "2021-01-12T13:34:56.783153-05:00"
+    description: A Helm chart for deploying the cert-manager webhook component
+    digest: d03aad6f42b24f12730b2e7b29d050e351fc0bb9b1340c47da901f21dccb22ae
+    home: https://github.com/jetstack/cert-manager
+    keywords:
+    - cert-manager
+    - kube-lego
+    - letsencrypt
+    - tls
+    - Development
+    - amd64
+    - ppc64le
+    - s390x
+    - Commercial
+    - RHOCP
+    name: cert-manager-webhook
+    sources:
+    - https://github.com/jetstack/cert-manager
+    urls:
+    - http://multiclusterhub-repo:3000/charts/cert-manager-webhook-2.2.0.tgz
+    version: 2.2.0
+  configmap-watcher:
+  - apiVersion: v1
+    appVersion: 3.7.0
+    created: "2021-01-12T13:34:56.784151-05:00"
+    description: A helm chart for deploying the config map watcher component.
+    digest: 3981d0ee4bd10e6d137c82c12227a33a82c25620c3b14b674f27e702e1eed69f
+    keywords:
+    - configmap
+    - watcher
+    - kubernetes
+    - ICP
+    - amd64
+    - s390x
+    - ppc64le
+    - Tools
+    - Development
+    - Tech
+    name: configmap-watcher
+    urls:
+    - http://multiclusterhub-repo:3000/charts/configmap-watcher-2.2.0.tgz
+    version: 2.2.0
+  grc:
+  - apiVersion: v1
+    appVersion: 1.0.0
+    created: "2021-01-12T13:34:56.784685-05:00"
+    description: helm chart for multicloud grc
+    digest: acbc42a05c502c2534ccab66fcfc5d17dc4850ae217290ea5944da6a60cde638
+    keywords:
+    - acm
+    - grc
+    name: grc
+    urls:
+    - http://multiclusterhub-repo:3000/charts/grc-2.2.0.tgz
+    version: 2.2.0
+  kui-web-terminal:
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: "2021-01-12T13:34:56.785791-05:00"
+    description: A helm chart for deploying the Red Hat Visual Web Terminal
+    digest: 157a249ee852059dceb7d51d6aa22f9ac0af1e49129e9a5971e18db313fdd4ee
+    keywords:
+    - IcpClusterResource
+    - Commercial
+    - ICP
+    - IKS
+    - ICPRHOCP
+    - Operations
+    - amd64
+    - ppc64le
+    - s390x
+    kubeVersion: '>=1.11.0-0'
+    name: kui-web-terminal
+    urls:
+    - http://multiclusterhub-repo:3000/charts/kui-web-terminal-2.2.0.tgz
+    version: 2.2.0
+  management-ingress:
+  - apiVersion: v1
+    appVersion: 3.4.0
+    created: "2021-01-12T13:34:56.787034-05:00"
+    description: Multi Cloud control plane ingress controller
+    digest: 2dad31dc01662708101a3c4a261104ab2c8892fd99284306a846242eb9a2ed08
+    keywords:
+    - ingress
+    - nginx
+    - Network
+    - Commercial
+    - Limited
+    - amd64
+    - ppc64le
+    - s390x
+    kubeVersion: '>=1.11.0-0'
+    name: management-ingress
+    urls:
+    - http://multiclusterhub-repo:3000/charts/management-ingress-2.2.0.tgz
+    version: 2.2.0
+  rcm:
+  - apiVersion: v1
+    appVersion: "2.2"
+    created: "2021-01-12T13:34:56.788579-05:00"
+    description: A helm chart for deploying the cluster lifecycle
+    digest: ed7bd7126a5111a032c3ea1919bd0ec4c70cedbbafc1a6b796e7cb9c9c9449f8
+    keywords:
+    - IcpClusterResource
+    - Commercial
+    - ICP
+    - IKS
+    - ICPRHOCP
+    - Operations
+    - amd64
+    - ppc64le
+    - s390x
+    kubeVersion: '>=1.11.0-0'
+    name: rcm
+    urls:
+    - http://multiclusterhub-repo:3000/charts/rcm-2.2.0.tgz
+    version: 2.2.0
+  search-prod:
+  - apiVersion: v1
+    appVersion: 2.2.0
+    created: "2021-01-12T13:34:56.789808-05:00"
+    description: Helm chart to install the Open Cluster Management Search service
+    digest: 4031603b4d4268d5d98ec864b9c44f2df9cfd00c88242213ee1d6292c1570f42
+    icon: https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.png
+    keywords:
+    - RHACM
+    - RHOCP
+    - ICPRHOCP
+    - multicloud
+    - multicluster
+    - search
+    - amd64
+    - runtime
+    name: search-prod
+    urls:
+    - http://multiclusterhub-repo:3000/charts/search-prod-2.2.0.tgz
+    version: 2.2.0
+  topology:
+  - apiVersion: v1
+    appVersion: 1.0.0
+    created: "2021-01-12T13:34:56.790505-05:00"
+    description: helm chart for multicloud topology
+    digest: b84100289bb4007603b35fe0c71b9fc216041f308a2d3e02c5daacebe60b78ca
+    keywords:
+    - acm
+    - topology
+    name: topology
+    urls:
+    - http://multiclusterhub-repo:3000/charts/topology-2.2.0.tgz
+    version: 2.2.0
+generated: "2021-01-12T13:34:56.779352-05:00"
