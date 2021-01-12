@@ -1,4 +1,15 @@
+#!/bin/bash
 # Copyright (c) 2020 Red Hat, Inc.
+
+
+if ! command -v helm &> /dev/null
+then
+    echo "helm could not be found"
+    curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+    chmod 700 get_helm.sh
+    ./get_helm.sh
+    rm get_helm.sh
+fi
 
 cd $(dirname $0)
 CHARTS_PATH="../../../../../multiclusterhub/charts"
