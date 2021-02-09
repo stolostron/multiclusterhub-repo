@@ -40,8 +40,4 @@ git clone git@github.com:open-cluster-management/configmap-watcher-chart.git
 helm package configmap-watcher-chart/stable/configmap-watcher -d multiclusterhub/charts
 rm -rf configmap-watcher-chart
 
-git clone git@github.com:open-cluster-management/topology-chart.git
-helm package topology-chart/stable/topology -d multiclusterhub/charts
-rm -rf topology-chart 
-
 helm repo index --url http://multiclusterhub-repo:3000/charts ./multiclusterhub/charts
