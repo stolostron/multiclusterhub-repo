@@ -1,7 +1,7 @@
 // Copyright (c) 2020 Red Hat, Inc.
 
 // Package license scans the repo for missing license or copyright headers
-package license
+package licensetest
 
 import (
 	"io/ioutil"
