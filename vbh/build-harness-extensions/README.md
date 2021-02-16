@@ -1,3 +1,6 @@
+# WORK IN PROGRESS
+
+We are in the process of enabling this repo for community contribution. See wiki [here](https://open-cluster-management.io/concepts/architecture/).
 ## Extensions to `build-harness`
 
 This repo is structured just like `build-harness`, and is pulled in via:
