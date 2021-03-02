@@ -7,3 +7,6 @@ require (
 	helm.sh/helm/v3 v3.2.1
 	sigs.k8s.io/yaml v1.2.0
 )
+
+// Resolves CVE-2020-14040
+replace golang.org/x/text => golang.org/x/text v0.3.5
