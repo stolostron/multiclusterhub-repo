@@ -1,4 +1,6 @@
 # Copyright (c) 2020 Red Hat, Inc.
+# Copyright Contributors to the Open Cluster Management project
+
 
 #Script to be run in travis when charts are updated in master
 

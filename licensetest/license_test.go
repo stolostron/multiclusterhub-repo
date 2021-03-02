@@ -1,7 +1,9 @@
 // Copyright (c) 2020 Red Hat, Inc.
+// Copyright Contributors to the Open Cluster Management project
+
 
 // Package license scans the repo for missing license or copyright headers
-package license
+package licensetest
 
 import (
 	"io/ioutil"
