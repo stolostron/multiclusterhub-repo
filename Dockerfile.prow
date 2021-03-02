@@ -1,0 +1,23 @@
+# Copyright Contributors to the Open Cluster Management project
+
+# Build the manager binary
+FROM registry.ci.openshift.org/open-cluster-management/builder:go1.13-linux-amd64 AS builder
+
+WORKDIR /workspace
+COPY . .
+RUN GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o start-repo ./cmd/repo
+
+FROM registry.access.redhat.com/ubi8/ubi-minimal:latest
+RUN microdnf install tar
+RUN microdnf update
+
+LABEL org.label-schema.vendor="Red Hat" \
+      org.label-schema.name="multiclusterhub-repo" \
+      org.label-schema.description="Helm repo that serves charts for the Red Hat Advanced Cluster Management installer" \
+      org.label-schema.license="Red Hat Advanced Cluster Management for Kubernetes EULA"
+
+WORKDIR /app
+COPY --from=builder /workspace/start-repo .
+COPY multiclusterhub/charts/ multiclusterhub/charts/
+EXPOSE 3000
+ENTRYPOINT /app/start-repo
