@@ -5,7 +5,7 @@ cd $(dirname $0)
 
 #if on PR not master or release, update PR with latest charts.Otherwise just build image
 if [ "${TRAVIS_BRANCH}" != "master" ] && [[ "${TRAVIS_BRANCH}" != "release-"* ]] && [[ "${TRAVIS_BRANCH}" != "dev-"* ]]; then
-    git clone git@github.com:open-cluster-management/multicloudhub-repo.git
+    git clone https://github.com/open-cluster-management/multicloudhub-repo.git
     cd multicloudhub-repo
     git checkout "${TRAVIS_BRANCH}"
     cicd-scripts/chart-sync.sh
