@@ -3,8 +3,8 @@
 
 cd $(dirname $0)
 
-#if on PR not master or release, update PR with latest charts.Otherwise just build image
-if [ "${TRAVIS_BRANCH}" != "master" ] && [[ "${TRAVIS_BRANCH}" != "release-"* ]] && [[ "${TRAVIS_BRANCH}" != "dev-"* ]]; then
+#if on PR not main or release, update PR with latest charts.Otherwise just build image
+if [ "${TRAVIS_BRANCH}" != "main" ] && [[ "${TRAVIS_BRANCH}" != "release-"* ]] && [[ "${TRAVIS_BRANCH}" != "dev-"* ]]; then
     git clone git@github.com:open-cluster-management/multicloudhub-repo.git
     cd multicloudhub-repo
     git checkout "${TRAVIS_BRANCH}"
@@ -12,7 +12,7 @@ if [ "${TRAVIS_BRANCH}" != "master" ] && [[ "${TRAVIS_BRANCH}" != "release-"* ]]
     docker build -t $1 .
     git add .
     git commit -m "[skip ci] add charts"
-    git merge master -m "[skip ci] resolve conflicts" -s recursive -X ours
+    git merge main -m "[skip ci] resolve conflicts" -s recursive -X ours
     git push origin "HEAD:${TRAVIS_BRANCH}"
 else 
     cd ..
