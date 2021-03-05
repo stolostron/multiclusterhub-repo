@@ -1,7 +1,6 @@
 // Copyright (c) 2020 Red Hat, Inc.
 // Copyright Contributors to the Open Cluster Management project
 
-
 package repo
 
 import (
@@ -52,6 +51,7 @@ func TestReadiness(t *testing.T) {
 		t.Errorf("handler returned wrong status code: got %v want %v",
 			status, http.StatusOK)
 	}
+	t.Errorf("Regression introduced")
 }
 
 func TestFileServer(t *testing.T) {
