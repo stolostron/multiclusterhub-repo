@@ -20,8 +20,8 @@ echo "Fetching charts from csv"
 rm ../multiclusterhub/charts/* #rm all charts first, in case chart versions are changed
 while IFS=, read -r f1 f2
 do
-  mkdir -p tmp
-  cd tmp
+  mkdir -p temp
+  cd temp
   #if this is being run by chart travis, use that token in travis job to clone
   if [ -z "${TRAVIS_BUILD_DIR}" ] || [[ "$(echo $TRAVIS_BUILD_DIR | cut -f8 -d/)" == "multicloudhub-repo" ]]; then 
     git clone $f1
@@ -37,6 +37,6 @@ do
   PACKAGE="$(helm package ./ --version $CHART_VERSION)"
   find . -type f -name "*tgz" | xargs -I '{}' mv '{}' $CHARTS_PATH
   cd $CICD_FOLDER
-  rm -rf tmp
+  rm -rf temp
 done < chartSHA.csv
 helm repo index --url http://multiclusterhub-repo:3000/charts ../multiclusterhub/charts
