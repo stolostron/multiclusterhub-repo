@@ -52,7 +52,7 @@ We request that all PRs which contribute new code into the repo also contain the
 After your PR is ready to commit, please run following commands to check your code.
 
 ```shell
-unit-test
+make unit-test
 ```
 
 ## Build images
