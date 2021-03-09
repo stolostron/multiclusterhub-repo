@@ -52,3 +52,5 @@ local:
 set-copyright:
 	./cicd-scripts/set-copyright.sh
 	
+chart-sync-local:
+	./cicd-scripts/chart-sync-local.sh
