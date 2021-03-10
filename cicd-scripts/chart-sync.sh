@@ -14,7 +14,7 @@ then
 fi
 
 cd $(dirname $0)
-CHARTS_PATH=$(echo $(PWD)/../multiclusterhub/charts)
+CHARTS_PATH=$(echo $(pwd)/../multiclusterhub/charts)
 CHART_VERSION="$(cat ../CHART_VERSION)"
 
 echo "Fetching charts from csv"
@@ -24,7 +24,7 @@ rm ../multiclusterhub/charts/* #rm all charts first, in case chart versions are 
 rm -rf tmp-chart-build
 mkdir -p tmp-chart-build
 
-workingDirectory=$(PWD)
+workingDirectory=$(pwd)
 
 while IFS=, read -r chartLink folderName chartBranch
 do
