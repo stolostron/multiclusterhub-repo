@@ -47,3 +47,5 @@ update-charts:
 local:
 	docker build -t "$(IMG):$(VERSION)" . && docker run -it --rm --expose 3000 -p 3000:3000  "$(IMG):$(VERSION)"
 	
+chart-sync-local:
+	./cicd-scripts/chart-sync-local.sh
