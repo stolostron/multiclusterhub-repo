@@ -1,26 +1,47 @@
+#!/bin/bash
 # Copyright (c) 2020 Red Hat, Inc.
+# Copyright Contributors to the Open Cluster Management project
+
+set -e
+
+if ! command -v helm &> /dev/null
+then
+    echo "helm could not be found"
+    curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+    chmod 700 get_helm.sh
+    ./get_helm.sh
+    rm get_helm.sh
+fi
 
 cd $(dirname $0)
-CHARTS_PATH="../../../../../multiclusterhub/charts"
-CICD_FOLDER="../../../../"
+CHARTS_PATH=$(echo $(pwd)/../multiclusterhub/charts)
+
 echo "Fetching charts from csv"
-while IFS=, read -r f1 f2
+touch ../multiclusterhub/charts/text.txt
+rm ../multiclusterhub/charts/* #rm all charts first, in case chart versions are changed
+
+rm -rf tmp-chart-build
+mkdir -p tmp-chart-build
+
+workingDirectory=$(pwd)
+
+while IFS=, read -r chartLink folderName chartBranch
 do
-  mkdir -p tmp
-  cd tmp
-  git clone $f1
-  var1=$(echo "$(ls)" | cut -f5 -d/)  #get the repo name
-  cd */ 
-  if [ $f2 != "latest" ]
-  then
-    git checkout $f2
+
+  chartLink=https://${GITHUB_USER}:${GITHUB_TOKEN}@${chartLink}
+
+  git clone ${chartLink} tmp-chart-build/$folderName && cd tmp-chart-build/$folderName
+  git checkout $chartBranch
+
+  chartPath="stable/$folderName"
+  if [ ! -d "$chartPath" ]; then
+    echo "Unable to determine path to chart for $chartPath"
+    exit 1
   fi
-  var2=$(echo $var1 | cut -f1 -d-) #get the first word (ie kui in kui-web-terminal)
-  var3=$(find . -type d -name "$var2*") #look for folder in repo that starts with ^ rather than stable/*/
-  cd $var3
-  PACKAGE="$(helm package ./)"
-  find . -type f -name "*tgz" | xargs -I '{}' mv '{}' $CHARTS_PATH
-  cd $CICD_FOLDER
-  rm -rf tmp
+
+  helm package $chartPath -d $CHARTS_PATH
+
+  cd $workingDirectory
+  echo ""
 done < chartSHA.csv
-helm repo index --url http://multiclusterhub-repo:3000/charts ../multiclusterhub/charts
+helm repo index --url http://multiclusterhub-repo:3000/charts $CHARTS_PATH
