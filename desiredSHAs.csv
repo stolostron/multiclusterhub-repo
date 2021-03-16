@@ -1,0 +1,10 @@
+https://github.com/open-cluster-management/application-chart,stable/application-chart,release-2.3
+https://github.com/open-cluster-management/cert-manager-chart,stable/cert-manager,release-2.3
+https://github.com/open-cluster-management/cert-manager-webhook-chart,stable/cert-manager-webhook,release-2.3
+https://github.com/open-cluster-management/configmap-watcher-chart,stable/configmap-watcher,release-2.3
+https://github.com/open-cluster-management/console-chart,stable/console-chart,release-2.3
+https://github.com/open-cluster-management/grc-chart,stable/grc,release-2.3
+https://github.com/open-cluster-management/kui-web-terminal-chart,stable/kui-web-terminal,release-2.3
+https://github.com/open-cluster-management/management-ingress-chart,stable/management-ingress,release-2.3
+https://github.com/open-cluster-management/cluster-lifecycle-chart,stable/cluster-lifecycle,release-2.3
+https://github.com/open-cluster-management/search-chart,stable/search-prod,release-2.3
