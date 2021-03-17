@@ -6,6 +6,5 @@ git@github.com:open-cluster-management/console-chart.git,release-2.3
 git@github.com:open-cluster-management/grc-chart.git,release-2.3
 git@github.com:open-cluster-management/kui-web-terminal-chart.git,release-2.3
 git@github.com:open-cluster-management/management-ingress-chart.git,release-2.3
-git@github.com:open-cluster-management/rcm-chart.git,release-2.3
 git@github.com:open-cluster-management/cluster-lifecycle-chart.git,release-2.3
 git@github.com:open-cluster-management/search-chart.git,release-2.3
