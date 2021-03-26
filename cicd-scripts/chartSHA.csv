@@ -6,6 +6,6 @@ github.com/open-cluster-management/console-chart.git,console-chart,9c61ee0058dd0
 github.com/open-cluster-management/grc-chart.git,grc,a51d476c7073d252fa3c6278b3085252ae64c5ba
 github.com/open-cluster-management/kui-web-terminal-chart.git,kui-web-terminal,aa98074b36c8e3a5b2352366e3dec66d667c8c9d
 github.com/open-cluster-management/management-ingress-chart.git,management-ingress,a4b8d42632ab31d9341f8ccccfd530ec3fb13608
-github.com/open-cluster-management/rcm-chart.git,rcm,5deb6e4f9171abf628837e8d446e75d9825aa713
+github.com/open-cluster-management/rcm-chart.git,rcm,916855e491dfbeeaadaea974d8c74e23403856c2
 github.com/open-cluster-management/search-chart.git,search-prod,ede270a27fa43af122606e3b2e0be0845f9f63b4
 github.com/open-cluster-management/topology-chart.git,topology,44674df448feeab339b2ad5de1e05a6c7343bf05
