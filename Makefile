@@ -1,6 +1,6 @@
 # Copyright Contributors to the Open Cluster Management project
 
-REGISTRY ?= quay.io/rhibmcollab
+REGISTRY ?= quay.io/open-cluster-management
 IMG ?= multiclusterhub-repo
 VERSION ?= latest
 
