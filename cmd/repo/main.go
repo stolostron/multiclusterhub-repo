@@ -1,7 +1,6 @@
 // Copyright (c) 2020 Red Hat, Inc.
 // Copyright Contributors to the Open Cluster Management project
 
-
 package main
 
 import (
@@ -19,10 +18,10 @@ import (
 )
 
 func main() {
-	c := config.New()
 	log.Printf("Go Version: %s", runtime.Version())
 	log.Printf("Go OS/Arch: %s/%s", runtime.GOOS, runtime.GOARCH)
 
+	c := config.New()
 	server, err := repo.New(c)
 	if err != nil {
 		panic(err)

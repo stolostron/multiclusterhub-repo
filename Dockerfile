@@ -1,11 +1,23 @@
 # Copyright Contributors to the Open Cluster Management project
 
 # Build the manager binary
-FROM golang:1.13 as builder
+FROM golang:1.16 as builder
 
 WORKDIR /workspace
+
+# Copy the Go Modules manifests
+COPY go.mod go.mod
+COPY go.sum go.sum
+
+# cache deps before building and copying source so that we don't need to re-download as much
+# and so that source changes don't invalidate our downloaded layer
+RUN go mod download
+
+# Copy the go source
 COPY . .
-RUN GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o start-repo ./cmd/repo
+
+# Build
+RUN go build -o start-repo ./cmd/repo
 
 FROM registry.access.redhat.com/ubi8/ubi-minimal:latest
 RUN microdnf install tar
