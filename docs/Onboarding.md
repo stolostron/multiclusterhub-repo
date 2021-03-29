@@ -10,7 +10,7 @@ This document is intended to be a guide to enable developers who would like to a
   - [Onboarding Images](#onboarding-images)
   - [Onboarding CRDs](#onboarding-crds)
 - [Onboarding a Chart](#onboarding-a-chart)
-  - [Contributing.md](#contributingmd)
+  - [Contributing a Chart](#contributing-a-chart)
   - [Service Account](#service-account)
   - [Referencing an image in a chart](#referencing-an-image-in-a-chart)
   - [Replica Count](#replica-count)
@@ -45,9 +45,9 @@ The chart repository must be public and must be in github.com/open-cluster-manag
 
 The chart must be valid and helm linted.
 
-### Contributing.md
+### Contributing a Chart
 
-Before beginning to onboard your chart, please see our [contributind.md](https://github.com/open-cluster-management/multicloudhub-repo/blob/main/CONTRIBUTING.md). Follow the steps here for to ensure that the repo owners are aware of the desired change and can handle the desired change in a standard fashion.
+Before beginning to onboard your chart, please see our [contributing.md](https://github.com/open-cluster-management/multicloudhub-repo/blob/main/CONTRIBUTING.md). Follow the steps here for to ensure that the repo owners are aware of the desired change and can handle the desired change in a standard fashion.
 
 ### Service Account
 
@@ -78,7 +78,7 @@ containers:
 
 ### Replica Count
 
-Unless a replicaCount of 1 is always desirable. It is necessary to add `hubconfig.replicaCount` to the values.yaml file. This will allow the MCH CR to toggle between basic and high availability installation modes.
+Unless a replicaCount of 1 is always desirable, it is necessary to add `hubconfig.replicaCount` to the values.yaml file. This will allow the MCH CR to toggle between basic and high availability installation modes.
 
 ```yaml
 # Source: nginx/values.yaml
@@ -154,7 +154,7 @@ spec:
 
 ### Tolerations
 
-Tolerations  must be set in a charts deployment(s) like so - 
+Tolerations must be set in a charts deployment(s). These values do not need changed or altered.
 
 ```yaml
 # Source: nginx/templates/deployment.yaml
