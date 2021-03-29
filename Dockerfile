@@ -17,7 +17,7 @@ RUN go mod download
 COPY . .
 
 # Build
-RUN go build -o start-repo main.go
+RUN go build -o start-repo ./cmd/repo
 
 FROM registry.access.redhat.com/ubi8/ubi-minimal:latest
 RUN microdnf install tar
