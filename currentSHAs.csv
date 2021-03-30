@@ -6,5 +6,5 @@ https://github.com/open-cluster-management/configmap-watcher-chart,stable/config
 https://github.com/open-cluster-management/console-chart,stable/console-chart,9991239c778269cb9c54922624957cb4daf8a027
 https://github.com/open-cluster-management/grc-chart,stable/grc,7cc0844b9276966af31a599ca03bcd8580d54b33
 https://github.com/open-cluster-management/kui-web-terminal-chart,stable/kui-web-terminal,7fa41f76d6eb59d3a9c5843b4e5f7ce8fa3c32ac
-https://github.com/open-cluster-management/management-ingress-chart,stable/management-ingress,a55a44d91c3baecc544416fcae2477fa343eb267
+https://github.com/open-cluster-management/management-ingress-chart,stable/management-ingress,1c3c443777bd9fa6bae5a34d6f8fab3dca0e206c
 https://github.com/open-cluster-management/search-chart,stable/search-prod,c39ba694e614c8f491f13d623c34aecd49a1ae52
