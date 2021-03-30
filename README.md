@@ -6,6 +6,10 @@ We are in the process of enabling this repo for community contribution. See wiki
 
 This repo is intended to serve charts for the [multiclusterhub-operator installer](https://github.com/open-cluster-management/multicloudhub-operator)
 
+## Onboarding a Component
+
+For help onboarding your component, see the following [doc](docs/Onboarding.md). This guide will help ensure that your chart, images, CRDs, and GitHub repository fit our required specifications.
+
 ## Updating Charts
 
 To manually update charts in this repo:
