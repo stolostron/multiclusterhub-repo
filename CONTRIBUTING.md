@@ -28,9 +28,16 @@ contribution. See the [DCO](DCO) file for details.
 ## Contributing A Patch
 
 1. Submit an issue describing your proposed change to the repo in question.
-1. The [repo owners](OWNERS) will respond to your issue promptly.
-1. Fork the desired repo, develop and test your code changes.
-1. Submit a pull request.
+2. The [repo owners](OWNERS) will respond to your issue promptly.
+3. Fork the desired repo, develop and test your code changes.
+4. Submit a pull request.
+
+## Adding a New Component
+
+1. Submit an issue describing the proposed component and a brief description of its architecture and subcomponents.
+2. The [repo owners](OWNERS) will respond the issue promptly.
+3. Ensure your component meets the following standards as outlined in this [doc](docs/Onboarding.md).
+4. To ensure the component is installed as part of the MCH, further code changes to the MCH Operator are required to allow for an AppSub to be created and managed. 
 
 ## Issue and Pull Request Management
 

@@ -10,6 +10,7 @@ This document is intended to be a guide to enable developers who would like to a
   - [Onboarding Images](#onboarding-images)
   - [Onboarding CRDs](#onboarding-crds)
 - [Onboarding a Chart](#onboarding-a-chart)
+  - [Fast Forwarding and Release branches](#fast-forwarding-and-release-branches)
   - [Contributing a Chart](#contributing-a-chart)
   - [Service Account](#service-account)
   - [Referencing an image in a chart](#referencing-an-image-in-a-chart)
@@ -27,7 +28,7 @@ This document is intended to be a guide to enable developers who would like to a
 
 ### Onboarding Images
 
-For help onboarding images into the pipeline, please see the following [doc](https://github.com/open-cluster-management/cicd-docs/blob/main/prow/ONBOARDING.md).
+For help onboarding images into the pipeline, please see the following [doc](https://github.com/open-cluster-management/cicd-docs/blob/main/prow/Onboarding.md).
 
 ### Onboarding CRDs
 
@@ -41,21 +42,25 @@ See [Contributing.md](https://github.com/open-cluster-management/hub-crds/blob/m
 
 In order for a chart to be onboarded properly, ensure your chart meets the specifications below. 
 
-The chart repository must be public and must be in github.com/open-cluster-management organization.
+The chart repository must be public and must be inside the github.com/open-cluster-management organization. If creating a new repo from scratch, this repository must be approved by the organization.
 
 The chart must be valid and helm linted.
 
+### Fast Forwarding and Release branches
+
+A charts GitHub repository must be enabled with fast forwarding to release branches to ensure that our automation is able to pick up new updates to the chart across multiple versioned branches. See the following [doc](https://github.com/open-cluster-management/cicd-docs/blob/main/prow/Onboarding.md#onboarding-a-repo-to-openshift-ci) to ensure your charts GitHub repository is onboarded properly.
+
 ### Contributing a Chart
 
-Before beginning to onboard your chart, please see our [contributing.md](https://github.com/open-cluster-management/multicloudhub-repo/blob/main/CONTRIBUTING.md). Follow the steps here for to ensure that the repo owners are aware of the desired change and can handle the desired change in a standard fashion.
+Before beginning to onboard your chart, please see our [contributing.md](https://github.com/open-cluster-management/multicloudhub-repo/blob/main/CONTRIBUTING.md). Follow the steps here for to ensure that the repo owners are aware of the desired change and can handle the desired change in a standard fashion. An issue must be created to ensure this can be tracked, as changes are also required in the MultiClusterHub Operator, to create an Application Subscription when installing the MCH.
 
 ### Service Account
 
-A chart must not use the default service account. Instead if must be sure to create its own service account.
+A chart must not use the default service account. Instead it must be sure to create its own service account. This is done to ensure that each chart is properly managing its permissions and privileges.
 
 ### Referencing an image in a chart
 
-Images must be added under `global.imageOverrides` in the values.yaml file of a chart. Each image referenced in the chart, must have an accompanying image key. A chart must also accept `global.imageOverrides.pullPolicy` value. This should default to a preset of `Always`.
+Images must be added under `global.imageOverrides` in the values.yaml file of a chart. Each image referenced in the chart, must have an accompanying image key. A chart must also accept `global.imageOverrides.pullPolicy` value. This should default to a preset of `Always`. The Image key will be available after the image has been successfully [onboarded](#onboarding-images). We do not allow for static image pinning in charts, images must be overrideable.
 
 ```yaml
 # Source: nginx/values.yaml
@@ -102,7 +107,7 @@ spec:
 
 ### Affinity
 
-Affinity must be set in a charts deployment(s) like so, Ensure the `ocm-antiaffinity-selector` labels is set.  -
+Affinity must be set in a charts deployment(s) like shown below. Ensure the `ocm-antiaffinity-selector` labels is set and that the value of this label is unique to your chart. We require affinity to be specified as follows below to prefer that pods are scheduled onto correct nodes when deploying in High Availability(HA) mode.
 
 ```yaml
 # Source: nginx/templates/deployment.yaml
@@ -154,7 +159,7 @@ spec:
 
 ### Tolerations
 
-Tolerations must be set in a charts deployment(s). These values do not need changed or altered.
+Tolerations must be set in a charts deployment(s). These values do not need changed or altered. We require the  tolerations be set to ensure pods are deployed properly onto infrastructure nodes.
 
 ```yaml
 # Source: nginx/templates/deployment.yaml
@@ -169,7 +174,7 @@ tolerations:
 
 ### Node Selector
 
-In the values.yaml file of a chart, there must be a `hubconfig.nodeSelector` key. This should be given a value of `null` to start. Overrides to nodeSelector are applied from the MCH CR and are passed down to each chart through this key.
+In the values.yaml file of a chart, there must be a `hubconfig.nodeSelector` key. This should be given a value of `null` to start. Overrides to nodeSelector are applied from the MCH CR and are passed down to each chart through this key, allowing a user to select which nodes the pods will be deployed upon.
 
 ```yaml
 # Source: nginx/values.yaml
@@ -201,7 +206,7 @@ spec:
 
 ### Naming ClusterRoles and ClusterRoleBindings
 
-Clusterroles and clusterrolebindings installed as part of open-cluster-management require a prefix specifying their hierarchy/ownership. This should be formatted  in a way that is `<org-name>:<release-name>:<clusterrole/clusterrolebinding-name>`. A full clusterrole name should resemble the following - `open-cluster-management:nginx-chart-72fa7:clusterrole`.
+Clusterroles and clusterrolebindings installed as part of open-cluster-management require a prefix specifying their hierarchy/ownership to avoid conflicts and standardize. This should be formatted  in a way that is `<org-name>:<release-name>:<clusterrole/clusterrolebinding-name>`. A full clusterrole name should resemble the following - `open-cluster-management:nginx-chart-72fa7:clusterrole`.
 
 ```yaml
 # Source: nginx/values.yaml
@@ -212,7 +217,7 @@ See [clusterrole.yaml](nginx/templates/clusterrole.yaml) and [clusterrolebinding
 
 ### Security Policies
 
-The following security policies must be specified in the deployments, unless an exemption is approved.
+The following security policies must be specified in the deployments, unless an exemption is approved. This is done to minimize security risks and attack vectors.
 
 ```yaml
 # Source: nginx/templates/deployment.yaml
