@@ -2,41 +2,90 @@
 # Copyright (c) 2020 Red Hat, Inc.
 # Copyright Contributors to the Open Cluster Management project
 
+CHARTS_PATH="multiclusterhub/charts"
+CHART_VERSION="$(cat CHART_VERSION)"
+FORMAT=sha
+echo "---Setting chart version as ${CHART_VERSION}---"
 
-if ! command -v helm &> /dev/null
-then
-    echo "helm could not be found"
-    curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-    chmod 700 get_helm.sh
-    ./get_helm.sh
-    rm get_helm.sh
-fi
+# temp-charts will hold the charts until it is ready to replace the current charts dir
+mkdir temp-charts
 
-cd $(dirname $0)
-CHARTS_PATH="../../../../../multiclusterhub/charts"
-CICD_FOLDER="../../../../"
-CHART_VERSION="$(cat ../CHART_VERSION)"
-echo "Fetching charts from csv"
-rm ../multiclusterhub/charts/* #rm all charts first, in case chart versions are changed
-while IFS=, read -r f1 f2
+while IFS=, read -r url chartpath shaorbranch
 do
+
+  # Determine whether we are pulling a branch or a specific sha
+  if [[ $shaorbranch == main ]] || [[ $shaorbranch == master ]] || [[ $shaorbranch == release* ]];then
+    # This is a branch
+    printf "Github URL: $url\tPath to chart: $chartpath\tDesired branch: $shaorbranch\n"
+    FORMAT=branch
+  else
+    # Must be a sha
+    printf "Github URL: $url\tPath to chart: $chartpath\tDesired sha: $shaorbranch\n"
+    FORMAT=sha
+  fi
+
+  # currentsha is the sha of the chart currently bundled in the charts dir
+  currentsha=$(grep --max-count=1 "$url" currentSHAs.csv | cut -d ',' -f3)
+  # filename is the desired chart package name
+  filename="${chartpath##*/}-${CHART_VERSION}.tgz"
+
+  if [ $FORMAT == sha ]; then
+    # Check if chart is using correct sha and chart version
+    if [ "$currentsha" == "$shaorbranch" ] && [ -f "${CHARTS_PATH}/${filename}" ]; then
+      echo $"Current sha matches desired sha and chart file exists. Copying chart over."
+      cp "${CHARTS_PATH}/${filename}" "temp-charts/${filename}"
+      
+      # Add to new CSV of our current shas
+      echo -en "$url,$chartpath,$shaorbranch\n" >> temp-currentSHAs.csv
+      continue
+    fi
+  fi
+
+  if [ $FORMAT == branch ]; then
+    ## Find the most recent sha in the repository branch
+
+    # Get the repo name without the leading 'https://github.com/'
+    httpsTrimmedURL=${url#*//}
+    githubTrimmedURL=${httpsTrimmedURL#*/}
+    lastsha=$(curl -s -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/${githubTrimmedURL}/git/refs/heads/${shaorbranch} | jq -r '.object.sha')
+    echo "Last sha in the ${shaorbranch} branch of ${githubTrimmedURL} is ${lastsha}"
+    
+    # Check if chart is using the latest sha and correct chart version
+    if [ "$currentsha" == "$lastsha" ] && [ -f "${CHARTS_PATH}/${filename}" ]; then
+      echo "Latest SHA matches SHA in branch ${shaorbranch} and file chart version exists. Copying chart over."
+      cp "${CHARTS_PATH}/${filename}" "temp-charts/${filename}"
+      
+      # Add to new CSV of our current shas
+      echo -en "$url,$chartpath,$lastsha\n" >> temp-currentSHAs.csv
+      continue
+    fi
+  fi
+
+  echo "$url either does not have desired sha, doesn't have latest sha, or isn't set to the current chart version. It will need to be repackaged."
+
+  # Work in temporary directory
   mkdir -p tmp
   cd tmp
-  #if this is being run by chart travis, use that token in travis job to clone
-  if [ -z "${TRAVIS_BUILD_DIR}" ] || [[ "$(echo $TRAVIS_BUILD_DIR | cut -f8 -d/)" == "multicloudhub-repo" ]]; then 
-    git clone $f1
-  else 
-    git clone "https://${MCH_REPO_BOT_TOKEN}@github.com/open-cluster-management/$(echo $f1 | cut -f2 -d/)"
-  fi
-  var1=$(echo "$(ls)" | cut -f5 -d/)  #get the repo name
-  cd */ 
-  git checkout $f2
-  var2=$(echo $var1 | cut -f1 -d-) #get the first word (ie kui in kui-web-terminal)
-  var3=$(find . -type d -name "$var2*") #look for folder in repo that starts with ^ rather than stable/*/
-  cd $var3
-  PACKAGE="$(helm package ./ --version $CHART_VERSION)"
-  find . -type f -name "*tgz" | xargs -I '{}' mv '{}' $CHARTS_PATH
-  cd $CICD_FOLDER
+  # Clone repo
+  git clone $url
+  # Enter repo directory
+  cd */
+
+  # Checkout branch or commit sha from origin
+  git checkout $shaorbranch
+  lastsha=$(git rev-parse HEAD)
+  echo "Packaging at sha ${lastsha}"
+
+  helm package $chartpath --version="${CHART_VERSION}" --destination="../../temp-charts"
+
+  cd ../..
   rm -rf tmp
-done < chartSHA.csv
-helm repo index --url http://multiclusterhub-repo:3000/charts ../multiclusterhub/charts
+
+  # Add to new CSV of our current shas
+  echo -en "$url,$chartpath,$lastsha\n" >> temp-currentSHAs.csv
+done < desiredSHAs.csv
+
+rm -rf ${CHARTS_PATH}
+mv temp-charts ${CHARTS_PATH}
+mv temp-currentSHAs.csv currentSHAs.csv
+git status --porcelain
