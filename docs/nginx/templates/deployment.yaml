@@ -92,8 +92,16 @@ spec:
           image: {{ .Values.global.imageOverrides.nginx }}
           imagePullPolicy: {{ .Values.global.pullPolicy }}
           env:
-            - name: BITNAMI_DEBUG
-              value: "false"
+            - name: DEBUG_LEVEL
+              value: "info"
+            {{- if .Values.hubconfig.proxyConfigs }}
+            - name: HTTP_PROXY
+              value: {{ .Values.hubconfig.proxyConfigs.HTTP_PROXY }}
+            - name: HTTPS_PROXY
+              value: {{ .Values.hubconfig.proxyConfigs.HTTPS_PROXY }}
+            - name: NO_PROXY
+              value: {{ .Values.hubconfig.proxyConfigs.NO_PROXY }}
+            {{- end }}
           ports:
             - name: http
               containerPort: 8080
