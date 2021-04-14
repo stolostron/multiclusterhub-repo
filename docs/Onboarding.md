@@ -20,6 +20,7 @@ This document is intended to be a guide to enable developers who would like to a
   - [Node Selector](#node-selector)
   - [Naming ClusterRoles and ClusterRoleBindings](#naming-clusterroles-and-clusterrolebindings)
   - [Security Policies](#security-policies)
+  - [Global HTTP Proxy Configurations](#global-http-proxy-configurations)
   - [Other](#other)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -246,6 +247,43 @@ spec:
             privileged: false
             readOnlyRootFilesystem: true
           ...
+```
+
+### Global HTTP Proxy Configurations
+
+Global HTTP proxy configurations must be read into each component if they are passed down from the hub. This is done to ensure that proxy support is respected if it is [configured](https://docs.openshift.com/container-platform/4.6/operators/admin/olm-configuring-proxy-support.html). If the proxyConfigs map is empty, no enviornment variables will be passed down to the deployments. When a proxy is configured, the hub deployment passes down the 3 preconfigured proxy environment variables (HTTP_PROXY, HTTPS_PROXY, NO_PROXY) to the appsub, so they can be utilized. Adding this is the first step in ensuring proxy configuration is supported. Components are expected to do their due diligence to ensure their components function properly with the global configuration if they utilize a proxy.
+
+```yaml
+hubconfig:
+  proxyConfigs: {}
+```
+
+In each deployment, the following HTTP Proxy environment variables can be read in as shown below.
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  ...
+spec:
+  ...
+  template:
+    ...
+    spec:
+      containers:
+        - name: nginx
+          env:
+            - name: DEBUG_LEVEL
+              value: "info"
+            {{- if .Values.hubconfig.proxyConfigs }}
+            - name: HTTP_PROXY
+              value: {{ .Values.hubconfig.proxyConfigs.HTTP_PROXY }}
+            - name: HTTPS_PROXY
+              value: {{ .Values.hubconfig.proxyConfigs.HTTPS_PROXY }}
+            - name: NO_PROXY
+              value: {{ .Values.hubconfig.proxyConfigs.NO_PROXY }}
+            {{- end }}
+            ...
 ```
 
 ### Other
