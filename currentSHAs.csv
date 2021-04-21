@@ -1,11 +1,11 @@
-https://github.com/open-cluster-management/application-chart,stable/application-chart,3e8c6c142e5623bd415dafc4e662a14b8b535c4b
+https://github.com/open-cluster-management/application-chart,stable/application-chart,60cd60c6def3242b2f486dca5d79d2034cf674d1
 https://github.com/open-cluster-management/cert-manager-chart,stable/cert-manager,093145039f5d4de468c5411ef79115858864f795
 https://github.com/open-cluster-management/cert-manager-webhook-chart,stable/cert-manager-webhook,728808145eb980d3f73ff4077a3f9e01c97316dd
-https://github.com/open-cluster-management/cluster-lifecycle-chart,stable/cluster-lifecycle,bd565414ad82575e56e3ad37ee9c4e3c38f0edde
+https://github.com/open-cluster-management/cluster-lifecycle-chart,stable/cluster-lifecycle,0aad59d92fa9ed2d94c28e0bc1af85ba4c49b05d
 https://github.com/open-cluster-management/configmap-watcher-chart,stable/configmap-watcher,51d89c8e6f8f49d3c2a0accff605137b2cee6743
-https://github.com/open-cluster-management/console-chart,stable/console-chart,25ff745da2d84b3f0897e26a58e2d1ebface6a90
+https://github.com/open-cluster-management/console-chart,stable/console-chart,a942ecd562cb43f6b6cfe8516727da11d60ca425
 https://github.com/open-cluster-management/grc-chart,stable/grc,7cc0844b9276966af31a599ca03bcd8580d54b33
 https://github.com/open-cluster-management/insights-chart,stable/insights-chart,75be75c7c1c50b2b4760a66ec0ada9034f6839cd
-https://github.com/open-cluster-management/kui-web-terminal-chart,stable/kui-web-terminal,5fca34391ba7682ac260699422c36ec8d0dd3888
+https://github.com/open-cluster-management/kui-web-terminal-chart,stable/kui-web-terminal,989b20ff009c789dd944b5cba478f211edab09a4
 https://github.com/open-cluster-management/management-ingress-chart,stable/management-ingress,03a087a54b7184e828d04b7c2f971c70a19f38e6
-https://github.com/open-cluster-management/search-chart,stable/search-prod,04d00e01e10e000ba11323e19df72cf25a17ec60
+https://github.com/open-cluster-management/search-chart,stable/search-prod,76192b57c66a36f27ffd1ef0d675f6b87bf3ceea
