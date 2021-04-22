@@ -1,4 +1,4 @@
-module github.com/open-cluster-management/multicloudhub-repo
+module github.com/open-cluster-management/multiclusterhub-repo
 
 go 1.16
 
