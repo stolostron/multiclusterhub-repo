@@ -53,7 +53,7 @@ A charts GitHub repository must be enabled with fast forwarding to release branc
 
 ### Contributing a Chart
 
-Before beginning to onboard your chart, please see our [contributing.md](https://github.com/open-cluster-management/multicloudhub-repo/blob/main/CONTRIBUTING.md). Follow the steps here for to ensure that the repo owners are aware of the desired change and can handle the desired change in a standard fashion. An issue must be created to ensure this can be tracked, as changes are also required in the MultiClusterHub Operator, to create an Application Subscription when installing the MCH.
+Before beginning to onboard your chart, please see our [contributing.md](https://github.com/open-cluster-management/multiclusterhub-repo/blob/main/CONTRIBUTING.md). Follow the steps here for to ensure that the repo owners are aware of the desired change and can handle the desired change in a standard fashion. An issue must be created to ensure this can be tracked, as changes are also required in the MultiClusterHub Operator, to create an Application Subscription when installing the MCH.
 
 ### Service Account
 

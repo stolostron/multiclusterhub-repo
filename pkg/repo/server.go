@@ -1,7 +1,6 @@
 // Copyright (c) 2020 Red Hat, Inc.
 // Copyright Contributors to the Open Cluster Management project
 
-
 package repo
 
 import (
@@ -9,7 +8,7 @@ import (
 	"sync"
 
 	"github.com/fsnotify/fsnotify"
-	"github.com/open-cluster-management/multicloudhub-repo/pkg/config"
+	"github.com/open-cluster-management/multiclusterhub-repo/pkg/config"
 )
 
 // Server holds an index.yaml

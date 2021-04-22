@@ -1,7 +1,6 @@
 // Copyright (c) 2020 Red Hat, Inc.
 // Copyright Contributors to the Open Cluster Management project
 
-
 package repo
 
 import (
@@ -16,7 +15,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/open-cluster-management/multicloudhub-repo/pkg/config"
+	"github.com/open-cluster-management/multiclusterhub-repo/pkg/config"
 	"helm.sh/helm/v3/pkg/repo"
 	"sigs.k8s.io/yaml"
 )
@@ -113,9 +112,9 @@ func Test_indexURL(t *testing.T) {
 				c: &config.Config{
 					Namespace: "test",
 					Port:      "8000",
-					Service:   "multicloudhub-repo",
+					Service:   "multiclusterhub-repo",
 				}},
-			want: "http://multicloudhub-repo.test.svc.cluster.local:8000/charts",
+			want: "http://multiclusterhub-repo.test.svc.cluster.local:8000/charts",
 		},
 	}
 	for _, tt := range tests {
