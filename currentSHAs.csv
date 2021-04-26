@@ -5,7 +5,7 @@ https://github.com/open-cluster-management/cluster-lifecycle-chart,stable/cluste
 https://github.com/open-cluster-management/configmap-watcher-chart,stable/configmap-watcher,b3d8902e903307ac6fd9f608c4619ef387f58a5d
 https://github.com/open-cluster-management/console-chart,stable/console-chart,bd4ca70086602cf7532db3221c749854e8655572
 https://github.com/open-cluster-management/grc-chart,stable/grc,72b7dd3e8c6604716ff5d96fedab7d1d42553036
-https://github.com/open-cluster-management/insights-chart,stable/insights-chart,5c4113529f8e5bdbaf36a10b326eda0f5ae16575
+https://github.com/open-cluster-management/insights-chart,stable/insights-chart,df578b54d4036a276ca0ee1c3a1b5ace78d8bb89
 https://github.com/open-cluster-management/kui-web-terminal-chart,stable/kui-web-terminal,9e8caa2f84b36c39e01c366e57c6bd7edddbf231
 https://github.com/open-cluster-management/management-ingress-chart,stable/management-ingress,692828f533806bfd4e5e74ae6b9771679f718889
 https://github.com/open-cluster-management/search-chart,stable/search-prod,58c7fe63c29ffbe94e7fa75c8fe5bd20d0b3ad3a
