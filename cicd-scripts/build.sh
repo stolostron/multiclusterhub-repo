@@ -7,8 +7,8 @@ cd $(dirname $0)
 
 #if on PR not master or release, update PR with latest charts.Otherwise just build image
 if [ "${TRAVIS_BRANCH}" != "master" ] && [[ "${TRAVIS_BRANCH}" != "release-"* ]] && [[ "${TRAVIS_BRANCH}" != "dev-"* ]]; then
-    git clone https://${GITHUB_USER}:${GITHUB_TOKEN}@github.com/open-cluster-management/multicloudhub-repo.git
-    cd multicloudhub-repo
+    git clone https://${GITHUB_USER}:${GITHUB_TOKEN}@github.com/open-cluster-management/multiclusterhub-repo.git
+    cd multiclusterhub-repo
     git checkout "${TRAVIS_BRANCH}"
     git pull origin "${TRAVIS_BRANCH}"
     lastCommitMsg=$(git log -1 --pretty=%B)
