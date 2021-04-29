@@ -1,7 +1,7 @@
 https://github.com/open-cluster-management/application-chart,stable/application-chart,60cd60c6def3242b2f486dca5d79d2034cf674d1
 https://github.com/open-cluster-management/cert-manager-chart,stable/cert-manager,96aa70b36bd1dbe7e072abae489113c59223d88c
 https://github.com/open-cluster-management/cert-manager-webhook-chart,stable/cert-manager-webhook,4dc2d8d87ec1633f65aba8cfb8508b38b1f3ebfa
-https://github.com/open-cluster-management/cluster-lifecycle-chart,stable/cluster-lifecycle,706fe7e24f3a7ed4f3502d1d04cb88e8df0d144b
+https://github.com/open-cluster-management/cluster-lifecycle-chart,stable/cluster-lifecycle,79d5cbe559a50903dfcf9ac41c9bd34379ac0495
 https://github.com/open-cluster-management/configmap-watcher-chart,stable/configmap-watcher,b3d8902e903307ac6fd9f608c4619ef387f58a5d
 https://github.com/open-cluster-management/console-chart,stable/console-chart,368b14c92b9fd6d6c2d09ee274e0b27e800d8f85
 https://github.com/open-cluster-management/grc-chart,stable/grc,72b7dd3e8c6604716ff5d96fedab7d1d42553036
