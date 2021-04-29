@@ -1,5 +1,5 @@
 # Ignore binary
-multicloudhub-repo
+multiclusterhub-repo
 .DS_Store
 
 build-harness
