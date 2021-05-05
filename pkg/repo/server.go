@@ -7,7 +7,7 @@ import (
 	"sync"
 
 	"github.com/fsnotify/fsnotify"
-	"github.com/open-cluster-management/multicloudhub-repo/pkg/config"
+	"github.com/open-cluster-management/multiclusterhub-repo/pkg/config"
 )
 
 // Server holds an index.yaml
