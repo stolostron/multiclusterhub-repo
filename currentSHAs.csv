@@ -1,7 +1,7 @@
 https://github.com/open-cluster-management/application-chart,stable/application-chart,60cd60c6def3242b2f486dca5d79d2034cf674d1
 https://github.com/open-cluster-management/cluster-lifecycle-chart,stable/cluster-lifecycle,91cdbaa1a8d6c9989b53cfd1f6a418bd72e0d1b0
 https://github.com/open-cluster-management/console-chart,stable/console-chart,f1dc540df74d9cda3873a627121644615febf2c1
-https://github.com/open-cluster-management/discovery-chart,stable/discovery-chart,7ceb0d69ad8435030fed589926949204d0f7cb5a
+https://github.com/open-cluster-management/discovery-chart,stable/discovery-chart,e715056ee9816cc8c3ddbba60bb773ff1661b144
 https://github.com/open-cluster-management/grc-chart,stable/grc,72b7dd3e8c6604716ff5d96fedab7d1d42553036
 https://github.com/open-cluster-management/insights-chart,stable/insights-chart,ffa8ad49c02da96b13f594a192f439dfbb1c3449
 https://github.com/open-cluster-management/kui-web-terminal-chart,stable/kui-web-terminal,9e8caa2f84b36c39e01c366e57c6bd7edddbf231
