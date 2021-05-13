@@ -1,0 +1,8 @@
+- repo_name: "community-operators"
+  github_ref: "https://github.com/operator-framework/community-operators.git"
+  operators:
+    - name: "assisted-service"
+      channel: "ocm-2.3"
+      package-yml: "community-operators/assisted-service-operator/assisted-service.package.yaml"
+      imageMappings:
+        assisted-service: assisted_service
