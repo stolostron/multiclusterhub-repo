@@ -56,22 +56,22 @@ def parse_image_ref(image_ref):
 
    return parsed_ref
 
-def templateHelmChart(helmChart):
+def templateHelmChart(outputDir, helmChart):
     logging.info("Copying templates into new '%s' chart directory ...", helmChart)
     # Create main folder
-    if os.path.exists(os.path.join("stable", helmChart)):
+    if os.path.exists(os.path.join(outputDir, "stable", helmChart)):
         logging.critical("Chart already exists with name '%s'", helmChart)
         exit(1)
 
     # Create Chart.yaml, values.yaml, and templates dir
-    os.makedirs(os.path.join("stable", helmChart, "templates"))
-    shutil.copyfile("chart-templates/Chart.yaml", os.path.join("stable", helmChart, "Chart.yaml"))
-    shutil.copyfile("chart-templates/values.yaml", os.path.join("stable", helmChart, "values.yaml"))
+    os.makedirs(os.path.join(outputDir, "stable", helmChart, "templates"))
+    shutil.copyfile(os.path.join(os.path.dirname(os.path.realpath(__file__)), "chart-templates", "Chart.yaml"), os.path.join(outputDir, "stable", helmChart, "Chart.yaml"))
+    shutil.copyfile(os.path.join(os.path.dirname(os.path.realpath(__file__)), "chart-templates", "values.yaml"), os.path.join(outputDir, "stable", helmChart, "values.yaml"))
     logging.info("Templates copied.\n")
 
-def fillChartYaml(helmChart, csvPath):
+def fillChartYaml(helmChart, name, csvPath):
     logging.info("Updating '%s' Chart.yaml file ...", helmChart)
-    chartYml = os.path.join("stable", helmChart, "Chart.yaml")
+    chartYml = os.path.join(helmChart, "Chart.yaml")
 
     # Read Chart.yaml
     with open(chartYml, 'r') as f:
@@ -85,9 +85,9 @@ def fillChartYaml(helmChart, csvPath):
     logging.info("Description: %s", csv["metadata"]["annotations"]["description"])
 
     # Write to Chart.yaml
-    chart['name'] = helmChart
+    chart['name'] = name
     chart['description'] = csv["metadata"]["annotations"]["description"]
-    chart['version'] = csv['metadata']['name'].split(".", 1)[1][1:]
+    # chart['version'] = csv['metadata']['name'].split(".", 1)[1][1:]
     with open(chartYml, 'w') as f:
         yaml.dump(chart, f)
     logging.info("'%s' Chart.yaml updated successfully.\n", helmChart)
@@ -96,8 +96,8 @@ def addDeployment(helmChart, deployment):
     name = deployment["name"]
     logging.info("Templating deployment '%s.yaml' ...", name)
 
-    deployYaml = os.path.join("stable", helmChart, "templates",  name + ".yaml")
-    shutil.copyfile("chart-templates/templates/deployment.yaml", deployYaml)
+    deployYaml = os.path.join(helmChart, "templates",  name + ".yaml")
+    shutil.copyfile(os.path.join(os.path.dirname(os.path.realpath(__file__)), "chart-templates/templates/deployment.yaml"), deployYaml)
 
     with open(deployYaml, 'r') as f:
         deploy = yaml.safe_load(f)
@@ -116,8 +116,8 @@ def addClusterScopedRBAC(helmChart, rbacMap):
     logging.info("Templating clusterrole '%s-clusterrole.yaml' ...", name)
     
     # Create Clusterrole
-    clusterroleYaml = os.path.join("stable", helmChart, "templates",  name + "-clusterrole.yaml")
-    shutil.copyfile("chart-templates/templates/clusterrole.yaml", clusterroleYaml)
+    clusterroleYaml = os.path.join(helmChart, "templates",  name + "-clusterrole.yaml")
+    shutil.copyfile(os.path.join(os.path.dirname(os.path.realpath(__file__)), "chart-templates/templates/clusterrole.yaml"), clusterroleYaml)
     with open(clusterroleYaml, 'r') as f:
         clusterrole = yaml.safe_load(f)
     # Edit Clusterrole
@@ -130,8 +130,8 @@ def addClusterScopedRBAC(helmChart, rbacMap):
     
     logging.info("Templating serviceaccount '%s-serviceaccount.yaml' ...", name)
     # Create Serviceaccount
-    serviceAccountYaml = os.path.join("stable", helmChart, "templates",  name + "-serviceaccount.yaml")
-    shutil.copyfile("chart-templates/templates/serviceaccount.yaml", serviceAccountYaml)
+    serviceAccountYaml = os.path.join(helmChart, "templates",  name + "-serviceaccount.yaml")
+    shutil.copyfile(os.path.join(os.path.dirname(os.path.realpath(__file__)), "chart-templates/templates/serviceaccount.yaml"), serviceAccountYaml)
     with open(serviceAccountYaml, 'r') as f:
         serviceAccount = yaml.safe_load(f)
     # Edit Serviceaccount
@@ -143,8 +143,8 @@ def addClusterScopedRBAC(helmChart, rbacMap):
 
     logging.info("Templating clusterrolebinding '%s-clusterrolebinding.yaml' ...", name)
     # Create Clusterrolebinding
-    clusterrolebindingYaml = os.path.join("stable", helmChart, "templates",  name + "-clusterrolebinding.yaml")
-    shutil.copyfile("chart-templates/templates/clusterrolebinding.yaml", clusterrolebindingYaml)
+    clusterrolebindingYaml = os.path.join(helmChart, "templates",  name + "-clusterrolebinding.yaml")
+    shutil.copyfile(os.path.join(os.path.dirname(os.path.realpath(__file__)), "chart-templates/templates/clusterrolebinding.yaml"), clusterrolebindingYaml)
     with open(clusterrolebindingYaml, 'r') as f:
         clusterrolebinding = yaml.safe_load(f)
     clusterrolebinding['metadata']['name'] = name
@@ -161,8 +161,8 @@ def addNamespaceScopedRBAC(helmChart, rbacMap):
     logging.info("Setting namespaced scoped RBAC ...")
     logging.info("Templating role '%s-role.yaml' ...", name)
     # Create role
-    roleYaml = os.path.join("stable", helmChart, "templates",  name + "-role.yaml")
-    shutil.copyfile("chart-templates/templates/role.yaml", roleYaml)
+    roleYaml = os.path.join(helmChart, "templates",  name + "-role.yaml")
+    shutil.copyfile(os.path.join(os.path.dirname(os.path.realpath(__file__)), "chart-templates/templates/role.yaml"), roleYaml)
     with open(roleYaml, 'r') as f:
         role = yaml.safe_load(f)
     # Edit role
@@ -174,10 +174,10 @@ def addNamespaceScopedRBAC(helmChart, rbacMap):
     logging.info("Role '%s-role.yaml' updated successfully.", name)
     
     # Create Serviceaccount
-    serviceAccountYaml = os.path.join("stable", helmChart, "templates",  name + "-serviceaccount.yaml")
+    serviceAccountYaml = os.path.join(helmChart, "templates",  name + "-serviceaccount.yaml")
     if not os.path.isfile(serviceAccountYaml):
         logging.info("Serviceaccount doesnt exist. Templating '%s-serviceaccount.yaml' ...", name)
-        shutil.copyfile("chart-templates/templates/serviceaccount.yaml", serviceAccountYaml)
+        shutil.copyfile(os.path.join(os.path.dirname(os.path.realpath(__file__)), "chart-templates/templates/serviceaccount.yaml"), serviceAccountYaml)
         with open(serviceAccountYaml, 'r') as f:
             serviceAccount = yaml.safe_load(f)
         # Edit Serviceaccount
@@ -189,8 +189,8 @@ def addNamespaceScopedRBAC(helmChart, rbacMap):
 
     logging.info("Templating rolebinding '%s-rolebinding.yaml' ...", name)
     # Create rolebinding
-    rolebindingYaml = os.path.join("stable", helmChart, "templates",  name + "-rolebinding.yaml")
-    shutil.copyfile("chart-templates/templates/rolebinding.yaml", rolebindingYaml)
+    rolebindingYaml = os.path.join(helmChart, "templates",  name + "-rolebinding.yaml")
+    shutil.copyfile(os.path.join(os.path.dirname(os.path.realpath(__file__)), "chart-templates/templates/rolebinding.yaml"), rolebindingYaml)
     with open(rolebindingYaml, 'r') as f:
         rolebinding = yaml.safe_load(f)
     rolebinding['metadata']['name'] = name
@@ -229,9 +229,9 @@ def addResources(helmChart, csvPath):
 
 def findTemplatesOfType(helmChart, kind):
     resources = []
-    for filename in os.listdir(os.path.join("stable", helmChart, "templates")):
+    for filename in os.listdir(os.path.join(helmChart, "templates")):
         if filename.endswith(".yaml") or filename.endswith(".yml"):
-            filePath = os.path.join("stable", helmChart, "templates", filename)
+            filePath = os.path.join(helmChart, "templates", filename)
             with open(filePath, 'r') as f:
                 fileYml = yaml.safe_load(f)
             if fileYml['kind'] == kind:
@@ -243,7 +243,7 @@ def findTemplatesOfType(helmChart, kind):
 
 def fixImageReferences(helmChart, imageKeyMapping):
     logging.info("Fixing image and pull policy references in deployments and values.yaml ...")
-    valuesYaml = os.path.join("stable", helmChart, "values.yaml")
+    valuesYaml = os.path.join(helmChart, "values.yaml")
     with open(valuesYaml, 'r') as f:
         values = yaml.safe_load(f)
     
@@ -306,7 +306,7 @@ def injectHelmFlowControl(deployment):
 
 def updateDeployments(helmChart):
     logging.info("Updating deployments with antiaffinity, security policies, and tolerations ...")
-    deploySpecYaml = "chart-templates/templates/deploymentspec.yaml"
+    deploySpecYaml = os.path.join(os.path.dirname(os.path.realpath(__file__)), "chart-templates/templates/deploymentspec.yaml")
     with open(deploySpecYaml, 'r') as f:
         deploySpec = yaml.safe_load(f)
     
@@ -389,7 +389,7 @@ def split_at(the_str, the_delim, favor_right=True):
    return (left_part, right_part)
 
 def getCSVPath(repo, operator):
-    packageYmlPath = os.path.join("tmp", repo, operator["package-yml"])
+    packageYmlPath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "tmp", repo, operator["package-yml"])
     if not os.path.exists(packageYmlPath):
         logging.critical("Could not find package.yaml at given path:", operator["package-yml"])
         exit(1)
@@ -401,7 +401,7 @@ def getCSVPath(repo, operator):
     for channel in packageYml["channels"]:
         if channel["name"] == operator["channel"]:
             version = channel["currentCSV"].split(".", 1)[1][1:]
-            bundlePath = os.path.join("tmp", repo, os.path.dirname(operator["package-yml"]), version)
+            bundlePath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "tmp", repo, os.path.dirname(operator["package-yml"]), version)
             break
 
     if bundlePath == "":
@@ -420,24 +420,28 @@ def getCSVPath(repo, operator):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--skipOverrides", dest="skipOverrides", type=bool)
+    parser.add_argument("--destination", dest="destination", type=str, required=True, help="Destination directory of the created helm chart")
+    parser.add_argument("--skipOverrides", dest="skipOverrides", type=bool, help="If true, overrides such as helm flow control will not be applied")
     parser.set_defaults(skipOverrides=False)
 
     args = parser.parse_args()
     skipOverrides = args.skipOverrides
+    destination = args.destination
 
     logging.basicConfig(level=logging.DEBUG)
 
-    configYaml = "config.yaml"
+
+    configYaml = os.path.join(os.path.dirname(os.path.realpath(__file__)),"config.yaml")
     with open(configYaml, 'r') as f:
         config = yaml.safe_load(f)
 
     for repo in config:
         csvPath = ""
         logging.info("Cloning: %s", repo["repo_name"])
-        repo_path = os.path.join(os.getcwd(), "tmp/" + repo["repo_name"])
-        if not os.path.exists(repo_path):
-            Repo.clone_from(repo["github_ref"], repo_path)
+        repo_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "tmp/" + repo["repo_name"])
+        if os.path.exists(repo_path):
+            shutil.rmtree(repo_path)
+        Repo.clone_from(repo["github_ref"], repo_path)
 
         for operator in repo["operators"]:
             logging.info("Helm Chartifying -  %s!\n", operator["name"])
@@ -458,15 +462,16 @@ def main():
             with open(csvPath, 'r') as f:
                 csv = yaml.safe_load(f)
             
-            helmChart = csv['metadata']['name'].split(".")[0]
-            logging.info("Creating helm chart: '%s' ...", helmChart)
+            helmChart = operator["name"]
+            logging.info("Creating helm chart: '%s' ...", operator["name"])
 
             # Prepares Helm Chart Directory
-            logging.info("Templating helm chart '%s' ...", helmChart)
-            templateHelmChart(helmChart)
-
+            logging.info("Templating helm chart '%s' ...", operator["name"])
+            templateHelmChart(destination, operator["name"])
+            
+            helmChart = os.path.join(destination, "stable", operator["name"])
             logging.info("Filling Chart.yaml ...")
-            fillChartYaml(helmChart, csvPath)
+            fillChartYaml(helmChart, operator["name"],csvPath)
 
             logging.info("Adding Resources from CSV...")
             addResources(helmChart, csvPath)

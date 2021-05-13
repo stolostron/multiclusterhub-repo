@@ -23,6 +23,14 @@ After the `config.yaml` file has been correctly configured, the script can be ra
 
 ## Flags
 
+### Destination
+
+By adding the `destination` flag, the helm chart will be created at the specified directory. 
+
+```bash
+$ ./csv-to-helm-chart.py --destination .
+```
+
 ### Skip Overrides
 
 By adding the `skipOverrides` flag, overrides will not be applied, and instead will need to be applied manually. 
