@@ -2,7 +2,7 @@ github.com/open-cluster-management/application-chart.git,application-chart,1c336
 github.com/open-cluster-management/cert-manager-chart.git,cert-manager,8ae9844c7d552d2f1a623c2c12cfc17c0f945fb2
 github.com/open-cluster-management/cert-manager-webhook-chart.git,cert-manager-webhook,dec5af470f54a2c6d7ab8e9296338866d73d1b41
 github.com/open-cluster-management/configmap-watcher-chart.git,configmap-watcher,b35ba6e23ca7c7c49337b2df3552d3e560b727e2
-github.com/open-cluster-management/console-chart.git,console-chart,83ccab68fc0685e415424512c9868a7dc71858bb
+github.com/open-cluster-management/console-chart.git,console-chart,5e11e5bbaaf378fbdeee980c09921491508d4b8f
 github.com/open-cluster-management/grc-chart.git,grc,e758d802a0817993fb9e1cfc6d62425931f0f6b9
 github.com/open-cluster-management/kui-web-terminal-chart.git,kui-web-terminal,0f8a6707815f3f7745f73dc66d90e94a2892b927
 github.com/open-cluster-management/management-ingress-chart.git,management-ingress,b08e3c633c254027bc847c15ddb7e6d591f891a5
