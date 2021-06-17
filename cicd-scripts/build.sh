@@ -23,7 +23,7 @@ if [ "${TRAVIS_BRANCH}" != "master" ] && [[ "${TRAVIS_BRANCH}" != "release-"* ]]
     docker build -t $1 .
     git add .
     git commit -s -m "[skip-chart-sync] add charts"
-    git merge origin/release-2.2 -s -m "[skip-chart-sync] resolve conflicts" -s recursive -X ours
+    git merge origin/release-2.2 -m "[skip-chart-sync] resolve conflicts" -s recursive -X ours
     git push origin "HEAD:${TRAVIS_BRANCH}"
 else 
     cd ..
