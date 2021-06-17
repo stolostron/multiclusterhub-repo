@@ -3,21 +3,21 @@ entries:
   application-chart:
   - apiVersion: v1
     appVersion: 2.1.0
-    created: "2021-05-05T13:28:50.689376991Z"
+    created: "2021-06-17T13:52:51.757929648Z"
     description: Helm chart for Open Cluster Management application UI
-    digest: 36b58ec757a51daee6b208fb71cc5dd0efe26bd81640eb6e5203e0c1f9c4c8cc
+    digest: 97b38670f2841dc74a77627879eee8e4a38a00266a7f8da22bb5d3e32c0f684c
     keywords:
     - ui
     name: application-chart
     urls:
-    - http://multiclusterhub-repo:3000/charts/application-chart-2.2.4.tgz
-    version: 2.2.4
+    - http://multiclusterhub-repo:3000/charts/application-chart-2.2.5.tgz
+    version: 2.2.5
   cert-manager:
   - apiVersion: v1
     appVersion: 0.10.3
-    created: "2021-05-05T13:28:50.690465639Z"
+    created: "2021-06-17T13:52:51.758970764Z"
     description: Service for issuing and managing certificates.
-    digest: 66600d2921d7ca923c903da9d8b4c8542e4a201a7baeaeecf5aa05d5ee8c5675
+    digest: 7316bb6c58afbb0b6c61ad73eef2be9265d5e735c71ded0353352355ca143f44
     keywords:
     - amd64
     - ppc64le
@@ -33,14 +33,14 @@ entries:
     - ROKS
     name: cert-manager
     urls:
-    - http://multiclusterhub-repo:3000/charts/cert-manager-2.2.4.tgz
-    version: 2.2.4
+    - http://multiclusterhub-repo:3000/charts/cert-manager-2.2.5.tgz
+    version: 2.2.5
   cert-manager-webhook:
   - apiVersion: v1
     appVersion: 0.10.3
-    created: "2021-05-05T13:28:50.693891085Z"
+    created: "2021-06-17T13:52:51.760682407Z"
     description: A Helm chart for deploying the cert-manager webhook component
-    digest: 99c3e67c4eb3034a5c9195ed3a83041dbdd5e097493bdc1388cea91e41d9f90f
+    digest: fe13bc8045da910dff8c48450673bd3c2a07e4064b636ce8667c9982ea74bc24
     home: https://github.com/jetstack/cert-manager
     keywords:
     - cert-manager
@@ -57,14 +57,14 @@ entries:
     sources:
     - https://github.com/jetstack/cert-manager
     urls:
-    - http://multiclusterhub-repo:3000/charts/cert-manager-webhook-2.2.4.tgz
-    version: 2.2.4
+    - http://multiclusterhub-repo:3000/charts/cert-manager-webhook-2.2.5.tgz
+    version: 2.2.5
   configmap-watcher:
   - apiVersion: v1
     appVersion: 3.7.0
-    created: "2021-05-05T13:28:50.695492742Z"
+    created: "2021-06-17T13:52:51.762136615Z"
     description: A helm chart for deploying the config map watcher component.
-    digest: 7c35e15bdd5aff750fc46b654bcb4f2a316ad114427e90fcd108acfccd0b007b
+    digest: 9835f6c5432e331c64c86c4d0bde90ccd727d12fb47c797d16836e403b4bf1e5
     keywords:
     - configmap
     - watcher
@@ -78,40 +78,40 @@ entries:
     - Tech
     name: configmap-watcher
     urls:
-    - http://multiclusterhub-repo:3000/charts/configmap-watcher-2.2.4.tgz
-    version: 2.2.4
+    - http://multiclusterhub-repo:3000/charts/configmap-watcher-2.2.5.tgz
+    version: 2.2.5
   console-chart:
   - apiVersion: v1
     appVersion: 2.0.0
-    created: "2021-05-05T13:28:50.696212666Z"
+    created: "2021-06-17T13:52:51.763597002Z"
     description: Helm chart for Open Cluster Management Console
-    digest: d6cbbdf1fb4169f4065c028f5067c088c7d8064b3492ba67d3705e6bd16a68b0
+    digest: f39437d185500685234d4e9d41f8c2a36454a0037ecacd40cbcf5f8064ba3c97
     keywords:
     - ui
     kubeVersion: '>=1.10.0-0'
     name: console-chart
     urls:
-    - http://multiclusterhub-repo:3000/charts/console-chart-2.2.4.tgz
-    version: 2.2.4
+    - http://multiclusterhub-repo:3000/charts/console-chart-2.2.5.tgz
+    version: 2.2.5
   grc:
   - apiVersion: v1
     appVersion: 1.0.0
-    created: "2021-05-05T13:28:50.696666889Z"
+    created: "2021-06-17T13:52:51.764420184Z"
     description: helm chart for multicloud grc
-    digest: 00e71c05e7c39da27c0193dac6930f7e060dabf32c4389d64dff4edf541b456f
+    digest: b09edcc665c110e6721924a54a2bc27d92fa3f8861ae2f0273a69726d8037560
     keywords:
     - acm
     - grc
     name: grc
     urls:
-    - http://multiclusterhub-repo:3000/charts/grc-2.2.4.tgz
-    version: 2.2.4
+    - http://multiclusterhub-repo:3000/charts/grc-2.2.5.tgz
+    version: 2.2.5
   kui-web-terminal:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2021-05-05T13:28:50.697476219Z"
+    created: "2021-06-17T13:52:51.765557886Z"
     description: A helm chart for deploying the Red Hat Visual Web Terminal
-    digest: f711cce9ba899913fb5e9cd34cb301f4792973c0ea26085869cfe109055e396d
+    digest: 2aafb9331ec481f3a59c15063a33c8b4d43e752957c7ac0d54b3ef6c84001e4b
     keywords:
     - IcpClusterResource
     - Commercial
@@ -125,14 +125,14 @@ entries:
     kubeVersion: '>=1.11.0-0'
     name: kui-web-terminal
     urls:
-    - http://multiclusterhub-repo:3000/charts/kui-web-terminal-2.2.4.tgz
-    version: 2.2.4
+    - http://multiclusterhub-repo:3000/charts/kui-web-terminal-2.2.5.tgz
+    version: 2.2.5
   management-ingress:
   - apiVersion: v1
     appVersion: 3.4.0
-    created: "2021-05-05T13:28:50.69847463Z"
+    created: "2021-06-17T13:52:51.76691765Z"
     description: Multi Cloud control plane ingress controller
-    digest: 0765857c7e160e53f98a21fc586a493cc97dd20f6d6247e3a4f1d452a1d42e67
+    digest: 4fd3203a0df1ae4fc352a850b784c4867276ea1f8ca986f9fa9a600bba8d38de
     keywords:
     - ingress
     - nginx
@@ -145,14 +145,14 @@ entries:
     kubeVersion: '>=1.11.0-0'
     name: management-ingress
     urls:
-    - http://multiclusterhub-repo:3000/charts/management-ingress-2.2.4.tgz
-    version: 2.2.4
+    - http://multiclusterhub-repo:3000/charts/management-ingress-2.2.5.tgz
+    version: 2.2.5
   rcm:
   - apiVersion: v1
     appVersion: "2.2"
-    created: "2021-05-05T13:28:50.699419937Z"
+    created: "2021-06-17T13:52:51.768073455Z"
     description: A helm chart for deploying the cluster lifecycle
-    digest: add7e98093ee52c63154248c77378c766af89f65bf5092c20c435ecd7bb96b49
+    digest: 216b9083ea174a2fd9dec5a820bf816e5f8bb131c3ad59bbe9fd9bcf1c93dbca
     keywords:
     - IcpClusterResource
     - Commercial
@@ -166,14 +166,14 @@ entries:
     kubeVersion: '>=1.11.0-0'
     name: rcm
     urls:
-    - http://multiclusterhub-repo:3000/charts/rcm-2.2.4.tgz
-    version: 2.2.4
+    - http://multiclusterhub-repo:3000/charts/rcm-2.2.5.tgz
+    version: 2.2.5
   search-prod:
   - apiVersion: v1
     appVersion: 2.2.0
-    created: "2021-05-05T13:28:50.70088178Z"
+    created: "2021-06-17T13:52:51.769428631Z"
     description: Helm chart to install the Open Cluster Management Search service
-    digest: 95748949a1455c91277460091483fd404983fb7c08793634f7cd8ed2d7c81dc8
+    digest: cb8c86753a35521cce86247dd5e38265d8265340ca5e97af176724f3aae40067
     icon: https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.png
     keywords:
     - RHACM
@@ -186,19 +186,19 @@ entries:
     - runtime
     name: search-prod
     urls:
-    - http://multiclusterhub-repo:3000/charts/search-prod-2.2.4.tgz
-    version: 2.2.4
+    - http://multiclusterhub-repo:3000/charts/search-prod-2.2.5.tgz
+    version: 2.2.5
   topology:
   - apiVersion: v1
     appVersion: 1.0.0
-    created: "2021-05-05T13:28:50.701309361Z"
+    created: "2021-06-17T13:52:51.7698704Z"
     description: helm chart for multicloud topology
-    digest: 963f2f4be446d6e072a6b80568ddfe760a23012a66bd2587b00954d572056a0f
+    digest: 98bf78527b817d7d8c6c2c7cd76f86513ef498143f321acef1cceb51002be4ce
     keywords:
     - acm
     - topology
     name: topology
     urls:
-    - http://multiclusterhub-repo:3000/charts/topology-2.2.4.tgz
-    version: 2.2.4
-generated: "2021-05-05T13:28:50.688694555Z"
+    - http://multiclusterhub-repo:3000/charts/topology-2.2.5.tgz
+    version: 2.2.5
+generated: "2021-06-17T13:52:51.75726868Z"
