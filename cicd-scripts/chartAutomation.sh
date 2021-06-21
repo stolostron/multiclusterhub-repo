@@ -6,4 +6,4 @@ cicd-scripts/install-dependencies.sh
 cicd-scripts/chart-sync.sh
 git add .
 git commit -s -m "Update from $1"
-git push https://${MCH_REPO_BOT_TOKEN}@github.com/open-cluster-management/multiclusterhub-repo.git "main"
+git push https://${MCH_REPO_BOT_TOKEN}@github.com/open-cluster-management/multiclusterhub-repo.git "release-2.2"
