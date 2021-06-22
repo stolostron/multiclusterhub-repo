@@ -4,7 +4,7 @@ https://github.com/open-cluster-management/cluster-lifecycle-chart,stable/cluste
 https://github.com/open-cluster-management/console-chart,stable/console-chart,release-2.3
 https://github.com/open-cluster-management/discovery-chart,stable/discovery-chart,release-2.3
 https://github.com/open-cluster-management/grc-chart,stable/grc,release-2.3
-https://github.com/open-cluster-management/insights-chart,stable/insights-chart,release-2.3
+https://github.com/open-cluster-management/insights-chart,stable/policyreport,release-2.3
 https://github.com/open-cluster-management/kui-web-terminal-chart,stable/kui-web-terminal,release-2.3
 https://github.com/open-cluster-management/management-ingress-chart,stable/management-ingress,release-2.3
 https://github.com/open-cluster-management/search-chart,stable/search-prod,release-2.3
