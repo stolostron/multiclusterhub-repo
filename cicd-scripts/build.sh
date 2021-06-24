@@ -22,7 +22,7 @@ if [ "${TRAVIS_BRANCH}" != "master" ] && [[ "${TRAVIS_BRANCH}" != "release-"* ]]
     cicd-scripts/chart-sync.sh
     docker build -t $1 .
     git add .
-    git commit -m "[skip-chart-sync] add charts"
+    git commit -s -m "[skip-chart-sync] add charts"
     git merge origin/release-2.1 -m "[skip-chart-sync] resolve conflicts" -s recursive -X ours
     git push origin "HEAD:${TRAVIS_BRANCH}"
 else 
