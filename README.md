@@ -8,7 +8,7 @@ This repo is intended to serve charts for the [multiclusterhub-operator installe
 
 ## Onboarding a Component
 
-For help onboarding your component, see the following [doc](docs/Onboarding.md). This guide will help ensure that your chart, images, CRDs, and GitHub repository fit our required specifications.
+For help onboarding your component, see the following [doc](docs/Onboarding.md). This guide will help ensure that your chart, images, CRDs, and GitHub repository fit our required specifications. 
 
 ## Updating Charts
 
