@@ -3,8 +3,8 @@ https://github.com/open-cluster-management/assisted-service-chart,stable/assiste
 https://github.com/open-cluster-management/cluster-lifecycle-chart,stable/cluster-lifecycle,6df5e0ea1a45457bd493f5e7620b6a7fdb3f5eb6
 https://github.com/open-cluster-management/console-chart,stable/console-chart,bf9d3fbfe875091e2c444eb9a9f99643bc21b8d5
 https://github.com/open-cluster-management/discovery-chart,stable/discovery-chart,59b33cf9bf91271d18aabb602b7193157a8101e8
-https://github.com/open-cluster-management/grc-chart,stable/grc,c30042dbba5ad1665fd9045105f0d818df2107ae
+https://github.com/open-cluster-management/grc-chart,stable/grc,380f2e907b585717094d19869f6425967576e30a
 https://github.com/open-cluster-management/insights-chart,stable/insights-chart,8406eb1a342037529336b54c7063ced93d6d90c9
-https://github.com/open-cluster-management/kui-web-terminal-chart,stable/kui-web-terminal,9e8caa2f84b36c39e01c366e57c6bd7edddbf231
+https://github.com/open-cluster-management/kui-web-terminal-chart,stable/kui-web-terminal,ccc59150fe07f1772421fcd137b42ddbb0b8dcbf
 https://github.com/open-cluster-management/management-ingress-chart,stable/management-ingress,f89efc6af52919e352b62c34cc7c9c336e6c7049
 https://github.com/open-cluster-management/search-chart,stable/search-prod,aad4d1d27ba0fb03c64c915921256571f11ab84d
