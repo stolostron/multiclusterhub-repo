@@ -4,7 +4,8 @@ go 1.16
 
 require (
 	github.com/fsnotify/fsnotify v1.4.9
-	helm.sh/helm/v3 v3.2.1
+	helm.sh/helm/v3 v3.6.1
+	rsc.io/letsencrypt v0.0.3 // indirect
 	sigs.k8s.io/yaml v1.2.0
 )
 
