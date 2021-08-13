@@ -5,5 +5,5 @@ https://github.com/open-cluster-management/console-chart,stable/console-chart,co
 https://github.com/open-cluster-management/discovery-chart,stable/discovery-chart,discovery-operator,eaf7952c12d00a3bf5fb779bf4739a9aa2de6048
 https://github.com/open-cluster-management/grc-chart,stable/grc,grc,ac8b36732d04d9181aebbcf874a98ca94db90fd3
 https://github.com/open-cluster-management/insights-chart,stable/insights-chart,policyreport,bd7f59211819f7f03b9125ac6780fe1cb54b10d8
-https://github.com/open-cluster-management/management-ingress-chart,stable/management-ingress,management-ingress,6be01f18b41c201e5422a7c0694c8765deeab2f5
+https://github.com/open-cluster-management/management-ingress-chart,stable/management-ingress,management-ingress,1405e85b3d92c4f22d7ecfdb017cb2566e2c67d1
 https://github.com/open-cluster-management/search-chart,stable/search-prod,search-prod,a112a3b6281006318331320a65b0d325413558cf
