@@ -10,7 +10,7 @@ echo "---Setting chart version as ${CHART_VERSION}---"
 # temp-charts will hold the charts until it is ready to replace the current charts dir
 mkdir temp-charts
 
-while IFS=, read -r url chartpath shaorbranch
+while IFS=, read -r url chartpath chartname shaorbranch
 do
 
   # Determine whether we are pulling a branch or a specific sha
@@ -25,9 +25,9 @@ do
   fi
 
   # currentsha is the sha of the chart currently bundled in the charts dir
-  currentsha=$(grep --max-count=1 "$url" currentSHAs.csv | cut -d ',' -f3)
+  currentsha=$(grep --max-count=1 "$url" currentSHAs.csv | cut -d ',' -f4)
   # filename is the desired chart package name
-  filename="${chartpath##*/}-${CHART_VERSION}.tgz"
+  filename="${chartname}-${CHART_VERSION}.tgz"
 
   if [ $FORMAT == sha ]; then
     # Check if chart is using correct sha and chart version
@@ -36,7 +36,7 @@ do
       cp "${CHARTS_PATH}/${filename}" "temp-charts/${filename}"
       
       # Add to new CSV of our current shas
-      echo -en "$url,$chartpath,$shaorbranch\n" >> temp-currentSHAs.csv
+      echo -en "$url,$chartpath,$chartname,$shaorbranch\n" >> temp-currentSHAs.csv
       continue
     fi
   fi
@@ -56,7 +56,7 @@ do
       cp "${CHARTS_PATH}/${filename}" "temp-charts/${filename}"
       
       # Add to new CSV of our current shas
-      echo -en "$url,$chartpath,$lastsha\n" >> temp-currentSHAs.csv
+      echo -en "$url,$chartpath,$chartname,$lastsha\n" >> temp-currentSHAs.csv
       continue
     fi
   fi
@@ -82,7 +82,7 @@ do
   rm -rf tmp
 
   # Add to new CSV of our current shas
-  echo -en "$url,$chartpath,$lastsha\n" >> temp-currentSHAs.csv
+  echo -en "$url,$chartpath,$chartname,$lastsha\n" >> temp-currentSHAs.csv
 done < desiredSHAs.csv
 
 rm -rf ${CHARTS_PATH}
