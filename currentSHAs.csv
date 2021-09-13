@@ -8,3 +8,4 @@ https://github.com/open-cluster-management/grc-chart,stable/grc,grc,65e3b24a6582
 https://github.com/open-cluster-management/insights-chart,stable/insights-chart,policyreport,f4ecbf418be587686f3d061feba9e0219e861b08
 https://github.com/open-cluster-management/management-ingress-chart,stable/management-ingress,management-ingress,3fa6976112b821c99aabce7dfff0c6c550f39e15
 https://github.com/open-cluster-management/search-chart,stable/search-prod,search-prod,38cd46c99def9b72b9f4937c40dde2813f5d171d
+https://github.com/open-cluster-management/cluster-backup-chart,stable/cluster-backup-chart,cluster-backup-chart,1cb1bf4bfbddc78d94086ffdef1ce3bbadca1065
