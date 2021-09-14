@@ -1,12 +1,10 @@
 // Copyright (c) 2020 Red Hat, Inc.
 // Copyright Contributors to the Open Cluster Management project
 
-
 // Package license scans the repo for missing license or copyright headers
 package licensetest
 
 import (
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -44,7 +42,7 @@ func TestLicense(t *testing.T) {
 			return nil
 		}
 
-		src, err := ioutil.ReadFile(path)
+		src, err := os.ReadFile(path)
 		if err != nil {
 			return nil
 		}
