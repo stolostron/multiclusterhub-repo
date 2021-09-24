@@ -1,4 +1,4 @@
-This repo is intended to serve charts for the [multiclusterhub-operator installer](https://github.com/open-cluster-management/multiclusterhub-operator)
+This repo is intended to serve charts for the [multiclusterhub-operator installer](https://github.com/open-cluster-management/multiclusterhub-operator).
 
 ## Updating Charts
 
