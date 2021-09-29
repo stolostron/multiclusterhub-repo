@@ -1,6 +1,6 @@
 https://github.com/open-cluster-management/application-chart,stable/application-chart,application-chart,a26d7a61adc21275f7569aa549c5215869797349
 https://github.com/open-cluster-management/assisted-service-chart,stable/assisted-service,assisted-service,74d2e244125ed2c75465bec4a04eb56a36993517
-https://github.com/open-cluster-management/cluster-lifecycle-chart,stable/cluster-lifecycle,cluster-lifecycle,d8e4cf02c54a312c7ac17aa6fc94e5cda9868265
+https://github.com/open-cluster-management/cluster-lifecycle-chart,stable/cluster-lifecycle,cluster-lifecycle,e458485853ee06f3a23657ee0bcd7815ba098a7f
 https://github.com/open-cluster-management/cluster-proxy-addon-chart,stable/cluster-proxy-addon,cluster-proxy-addon,679069776547d2afc71f00523068e1931d62a53e
 https://github.com/open-cluster-management/console-chart,stable/console-chart,console-chart,9ef7b2e96a30b14fc0e949f23193bbeec07cd44a
 https://github.com/open-cluster-management/discovery-chart,stable/discovery-chart,discovery-operator,e31f3f2b7c609e690805a86921758fcb0c9a433b
