@@ -18,4 +18,4 @@ To manually update charts in this repo:
 3. Open a PR and ask the Installer Squad for review (via the `forum-acm-hub-installer` Slack channel)
 
 ## Updating chart in a Kubernetes cluster
-Running `make patch-charts-in-cluster` will update the charts in the `multiclusterhub-repo` pod with charts in the local `multiclusterhub/charts` folder
+Running `make patch-charts-in-cluster` will update the charts in the `multiclusterhub-repo` pod with charts in the local `multiclusterhub/charts` folder.
