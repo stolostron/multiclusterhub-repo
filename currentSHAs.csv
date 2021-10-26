@@ -6,5 +6,5 @@ https://github.com/open-cluster-management/discovery-chart,stable/discovery-char
 https://github.com/open-cluster-management/grc-chart,stable/grc,grc,e7fab0b87e2e56398c2693bbfe7d33745c8ea2cc
 https://github.com/open-cluster-management/insights-chart,stable/insights-chart,policyreport,ba4817dccf9b8ede9ac75aec3137c2a17be196d6
 https://github.com/open-cluster-management/kui-web-terminal-chart,stable/kui-web-terminal,kui-web-terminal,ccc59150fe07f1772421fcd137b42ddbb0b8dcbf
-https://github.com/open-cluster-management/management-ingress-chart,stable/management-ingress,management-ingress,08b545855d1ea14b3b2d25d4a26557ac7eaf383d
+https://github.com/open-cluster-management/management-ingress-chart,stable/management-ingress,management-ingress,29444b8dd1e64cbbc8dfb212f28d20c8fbc94ca3
 https://github.com/open-cluster-management/search-chart,stable/search-prod,search-prod,aad4d1d27ba0fb03c64c915921256571f11ab84d
