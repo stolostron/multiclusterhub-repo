@@ -1,6 +1,6 @@
 https://github.com/open-cluster-management/application-chart,stable/application-chart,application-chart,release-2.5
 https://github.com/open-cluster-management/assisted-service-chart,stable/assisted-service,assisted-service,release-2.5
-https://github.com/open-cluster-management/cluster-lifecycle-chart,stable/cluster-lifecycle,cluster-lifecycle,release-2.5
+https://github.com/open-cluster-management/cluster-lifecycle-chart,stable/cluster-lifecycle,cluster-lifecycle,release-9.9
 https://github.com/open-cluster-management/cluster-proxy-addon-chart,stable/cluster-proxy-addon,cluster-proxy-addon,release-2.5
 https://github.com/open-cluster-management/console-chart,stable/console-chart,console-chart,release-2.5
 https://github.com/open-cluster-management/discovery-chart,stable/discovery-chart,discovery-operator,release-2.5
