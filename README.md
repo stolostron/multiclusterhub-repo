@@ -13,7 +13,7 @@ For help onboarding your component, see the following [doc](docs/Onboarding.md).
 ## Updating Charts
 
 To manually update charts in this repo:
-1. Update `desiredSHAs.csv` with the desired SHA or branch you wish to pull from.
+1. Update `desiredSHAs.csv` with the desired SHA or branch you wish to pull from
 2. Run `make update-charts`
 3. Open a PR and ask the Installer Squad for review (via the `forum-acm-hub-installer` Slack channel)
 
