@@ -29,7 +29,7 @@ This document is intended to be a guide to enable developers who would like to a
 
 ### Onboarding Images
 
-For help onboarding images into the pipeline, please see the following [https://github.com/stolostron/cicd-docs/blob/main/prow/onboarding.md]().
+For help onboarding images into the pipeline, please see the following [doc](https://github.com/stolostron/cicd-docs/blob/main/prow/onboarding.md).
 
 ### Onboarding CRDs
 
