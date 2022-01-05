@@ -12,8 +12,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/open-cluster-management/multiclusterhub-repo/pkg/config"
-	"github.com/open-cluster-management/multiclusterhub-repo/pkg/repo"
+	"github.com/stolostron/multiclusterhub-repo/pkg/config"
+	"github.com/stolostron/multiclusterhub-repo/pkg/repo"
 )
 
 func main() {
