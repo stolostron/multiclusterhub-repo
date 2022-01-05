@@ -8,7 +8,7 @@ import (
 	"sync"
 
 	"github.com/fsnotify/fsnotify"
-	"github.com/open-cluster-management/multiclusterhub-repo/pkg/config"
+	"github.com/stolostron/multiclusterhub-repo/pkg/config"
 )
 
 // Server holds an index.yaml

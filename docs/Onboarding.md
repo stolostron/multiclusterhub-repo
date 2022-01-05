@@ -29,31 +29,31 @@ This document is intended to be a guide to enable developers who would like to a
 
 ### Onboarding Images
 
-For help onboarding images into the pipeline, please see the following [doc](https://github.com/open-cluster-management/cicd-docs/blob/main/prow/Onboarding.md).
+For help onboarding images into the pipeline, please see the following [doc](https://github.com/stolostron/cicd-docs/blob/main/prow/onboarding.md).
 
 ### Onboarding CRDs
 
 We do not allow for CRDs to be installed or managed via helm. All CRDs must be removed from the charts before onboarding.
 
-To enable CRDs to be installed, upgraded, and uninstalled properly, ensure your CRD(s) are added to the [hub-crds](https://github.com/open-cluster-management/hub-crds) repository. 
+To enable CRDs to be installed, upgraded, and uninstalled properly, ensure your CRD(s) are added to the [hub-crds](https://github.com/stolostron/hub-crds) repository. 
 
-See [Contributing.md](https://github.com/open-cluster-management/hub-crds/blob/main/CONTRIBUTING.md) for help contributing to this repository.
+See [Contributing.md](https://github.com/stolostron/multiclusterhub-repo/blob/main/CONTRIBUTING.md) for help contributing to this repository.
 
 ## Onboarding a Chart
 
 In order for a chart to be onboarded properly, ensure your chart meets the specifications below. 
 
-The chart repository must be public and must be inside the github.com/open-cluster-management organization. If creating a new repo from scratch, this repository must be approved by the organization.
+The chart repository must be public and must be inside the github.com/stolostron organization. If creating a new repo from scratch, this repository must be approved by the organization.
 
 The chart must be valid and helm linted.
 
 ### Fast Forwarding and Release branches
 
-A charts GitHub repository must be enabled with fast forwarding to release branches to ensure that our automation is able to pick up new updates to the chart across multiple versioned branches. See the following [doc](https://github.com/open-cluster-management/cicd-docs/blob/main/prow/Onboarding.md#onboarding-a-repo-to-openshift-ci) to ensure your charts GitHub repository is onboarded properly.
+A charts GitHub repository must be enabled with fast forwarding to release branches to ensure that our automation is able to pick up new updates to the chart across multiple versioned branches. See the following [doc](https://github.com/stolostron/cicd-docs/blob/main/prow/onboarding.md#onboarding-a-repo-to-openshift-ci) to ensure your charts GitHub repository is onboarded properly.
 
 ### Contributing a Chart
 
-Before beginning to onboard your chart, please see our [contributing.md](https://github.com/open-cluster-management/multiclusterhub-repo/blob/main/CONTRIBUTING.md). Follow the steps here for to ensure that the repo owners are aware of the desired change and can handle the desired change in a standard fashion. An issue must be created to ensure this can be tracked, as changes are also required in the MultiClusterHub Operator, to create an Application Subscription when installing the MCH.
+Before beginning to onboard your chart, please see our [contributing.md](https://github.com/stolostron/multiclusterhub-repo/blob/main/CONTRIBUTING.md). Follow the steps here for to ensure that the repo owners are aware of the desired change and can handle the desired change in a standard fashion. An issue must be created to ensure this can be tracked, as changes are also required in the MultiClusterHub Operator, to create an Application Subscription when installing the MCH.
 
 ### Service Account
 
