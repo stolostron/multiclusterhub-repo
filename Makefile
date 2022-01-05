@@ -19,15 +19,9 @@ ifndef GITHUB_TOKEN
 	exit -1
 endif
 
-USE_VENDORIZED_BUILD_HARNESS ?=
+-include $(shell [ -f ".build-harness-bootstrap" ] || curl -sL -o .build-harness-bootstrap -H "Authorization: token $(GITHUB_TOKEN)" -H "Accept: application/vnd.github.v3.raw" "https://raw.github.com/stolostron/build-harness-extensions/main/templates/Makefile.build-harness-bootstrap"; echo .build-harness-bootstrap)
 
-ifndef USE_VENDORIZED_BUILD_HARNESS
--include $(shell curl -s -H 'Authorization: token ${GITHUB_TOKEN}' -H 'Accept: application/vnd.github.v4.raw' -L https://api.github.com/repos/open-cluster-management/build-harness-extensions/contents/templates/Makefile.build-harness-bootstrap -o .build-harness-bootstrap; echo .build-harness-bootstrap)
-else
--include vbh/.build-harness-vendorized
-endif
-
-REGISTRY ?= quay.io/rhibmcollab
+REGISTRY ?= quay.io/stolostron
 IMG ?= multiclusterhub-repo
 VERSION ?= latest
 

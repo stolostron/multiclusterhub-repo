@@ -26,7 +26,7 @@ while IFS=, read -r f1 f2
 do
   mkdir -p $TMP_PATH
   cd $TMP_PATH
-  git clone "https://${GITHUB_TOKEN}@github.com/open-cluster-management/$(echo $f1 | cut -f2 -d/)"
+  git clone "https://${GITHUB_TOKEN}@github.com/stolostron/$(echo $f1 | cut -f2 -d/)"
   REPO_NAME=$(echo "$(ls)" | cut -f5 -d/)  #get the repo name
   cd $REPO_NAME
   git checkout $f2
