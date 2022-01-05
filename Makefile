@@ -1,6 +1,6 @@
 # Copyright Contributors to the Open Cluster Management project
 
-REGISTRY ?= quay.io/open-cluster-management
+REGISTRY ?= quay.io/stolostron
 IMG ?= multiclusterhub-repo
 VERSION ?= latest
 
