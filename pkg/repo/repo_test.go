@@ -15,7 +15,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/open-cluster-management/multiclusterhub-repo/pkg/config"
+	"github.com/stolostron/multiclusterhub-repo/pkg/config"
 	"helm.sh/helm/v3/pkg/repo"
 	"sigs.k8s.io/yaml"
 )

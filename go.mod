@@ -1,4 +1,4 @@
-module github.com/open-cluster-management/multiclusterhub-repo
+module github.com/stolostron/multiclusterhub-repo
 
 go 1.17
 
