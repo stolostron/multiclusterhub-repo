@@ -2,10 +2,10 @@ github.com/stolostron/application-chart.git,application-chart,d353e89466673b0948
 github.com/stolostron/cert-manager-chart.git,cert-manager,2ad47a1775d984ae33f2b702ea9bc0b2223a4dab
 github.com/stolostron/cert-manager-webhook-chart.git,cert-manager-webhook,9a49d09f63c1f43099960982f715e3bd51f385b7
 github.com/stolostron/configmap-watcher-chart.git,configmap-watcher,e41a8ab1aa1ae7abe48d0b039d07378548660436
-github.com/stolostron/console-chart.git,console-chart,60c041e5a5e22b78a99d99278509c0dea789051e
+github.com/stolostron/console-chart.git,console-chart,99be3d7bbc6ba2518709d09112a316d6c1664e59
 github.com/stolostron/grc-chart.git,grc,a51d476c7073d252fa3c6278b3085252ae64c5ba
-github.com/stolostron/kui-web-terminal-chart.git,kui-web-terminal,aa98074b36c8e3a5b2352366e3dec66d667c8c9d
-github.com/stolostron/management-ingress-chart.git,management-ingress,a4b8d42632ab31d9341f8ccccfd530ec3fb13608
+github.com/stolostron/kui-web-terminal-chart.git,kui-web-terminal,96e08273cb48da3dedf365b450b1124576a4bb93
+github.com/stolostron/management-ingress-chart.git,management-ingress,6a86c29fe72fcf1410a5f6e70db3d740a6f3db36
 github.com/stolostron/rcm-chart.git,rcm,916855e491dfbeeaadaea974d8c74e23403856c2
 github.com/stolostron/search-chart.git,search-prod,f76c936e435cf3299046a7cc37521752f0097946
 github.com/stolostron/topology-chart.git,topology,44674df448feeab339b2ad5de1e05a6c7343bf05
