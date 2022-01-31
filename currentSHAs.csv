@@ -4,7 +4,7 @@ https://github.com/stolostron/cluster-lifecycle-chart,stable/cluster-lifecycle,c
 https://github.com/stolostron/console-chart,stable/console-chart,console-chart,19e1e4d10af01eaceab359d264dda53911fbeddd
 https://github.com/stolostron/discovery-chart,stable/discovery-chart,discovery-operator,0398dd76851b65ba972d9ebcdfa1410f05658f41
 https://github.com/stolostron/grc-chart,stable/grc,grc,1e368b6a6c43be2ca6f55c66163273111251c718
-https://github.com/stolostron/insights-chart,stable/insights-chart,policyreport,ba4817dccf9b8ede9ac75aec3137c2a17be196d6
+https://github.com/stolostron/insights-chart,stable/insights-chart,policyreport,7fedbaa5e3c5dc32841eae6dd5e4a4b388c51a9b
 https://github.com/stolostron/kui-web-terminal-chart,stable/kui-web-terminal,kui-web-terminal,efb785cda07e10e513cbc867dc0d4eb907e1fbdc
 https://github.com/stolostron/management-ingress-chart,stable/management-ingress,management-ingress,21dee0c7a39c2385377ea233730fec64e5f55d53
-https://github.com/stolostron/search-chart,stable/search-prod,search-prod,aad4d1d27ba0fb03c64c915921256571f11ab84d
+https://github.com/stolostron/search-chart,stable/search-prod,search-prod,89dfcbe937dfacb91b3f45c722df9b553f15c497
