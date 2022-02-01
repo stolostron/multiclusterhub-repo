@@ -8,4 +8,4 @@ https://github.com/stolostron/grc-chart,stable/grc,grc,6c08e6d74be51fe7ee621f5ff
 https://github.com/stolostron/insights-chart,stable/insights-chart,policyreport,5df205c5fc73c8f581c3dff7479abf18c097fb69
 https://github.com/stolostron/management-ingress-chart,stable/management-ingress,management-ingress,e1f623c65b9c842767b97354faa8ebe0d03b7aa8
 https://github.com/stolostron/search-chart,stable/search-prod,search-prod,b71fc4b0c27f4e25934ad07418bcca6d2364a774
-https://github.com/stolostron/cluster-backup-chart,stable/cluster-backup-chart,cluster-backup-chart,ca43bb90f2c6617fa435f686fcbca10ffe7a7f90
+https://github.com/stolostron/cluster-backup-chart,stable/cluster-backup-chart,cluster-backup-chart,605e20079e59ede516dd35019b941381e5a18aa1
