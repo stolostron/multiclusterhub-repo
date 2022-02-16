@@ -1,5 +1,4 @@
 https://github.com/stolostron/application-chart,stable/application-chart,application-chart,release-2.5
-https://github.com/stolostron/assisted-service-chart,stable/assisted-service,assisted-service,release-2.5
 https://github.com/stolostron/cluster-lifecycle-chart,stable/cluster-lifecycle,cluster-lifecycle,release-2.5
 https://github.com/stolostron/cluster-proxy-addon-chart,stable/cluster-proxy-addon,cluster-proxy-addon,release-2.5
 https://github.com/stolostron/console-chart,stable/console-chart,console-chart,release-2.5
