@@ -33,3 +33,6 @@ COPY --from=builder /workspace/start-repo .
 COPY multiclusterhub/charts/ multiclusterhub/charts/
 EXPOSE 3000
 ENTRYPOINT /app/start-repo
+
+RUN chgrp -R 0 /app && \
+    chmod -R g=u /app
