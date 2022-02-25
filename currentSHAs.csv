@@ -2,7 +2,7 @@ https://github.com/stolostron/application-chart,stable/application-chart,applica
 https://github.com/stolostron/cluster-lifecycle-chart,stable/cluster-lifecycle,cluster-lifecycle,ce7866c6e32522ab05f5885743e16f80650aaa4c
 https://github.com/stolostron/cluster-proxy-addon-chart,stable/cluster-proxy-addon,cluster-proxy-addon,2754a22bbbb4bb0fc9b8db11f8b60ec0e94de73e
 https://github.com/stolostron/console-chart,stable/console-chart,console-chart,f4dfcd4d56f9b52b8aaaf35052ed8870ef408a51
-https://github.com/stolostron/grc-chart,stable/grc,grc,645012a96230bb372a44b94e6080a23994ba3a3e
+https://github.com/stolostron/grc-chart,stable/grc,grc,35d3a92417c988e0a7a2966cd1129f3b6af858cf
 https://github.com/stolostron/insights-chart,stable/insights-chart,policyreport,f7f7ecddf5bdaa0fff432dc608c8dc4b93fdfcde
 https://github.com/stolostron/management-ingress-chart,stable/management-ingress,management-ingress,3e5555372dc05b3690c931de13c36597beeb83be
 https://github.com/stolostron/search-chart,stable/search-prod,search-prod,f1efb673de0e9a38d0d505bef399279a7d1f29c3
