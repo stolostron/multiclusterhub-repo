@@ -7,3 +7,4 @@ https://github.com/stolostron/insights-chart,stable/insights-chart,policyreport,
 https://github.com/stolostron/management-ingress-chart,stable/management-ingress,management-ingress,release-2.5
 https://github.com/stolostron/search-chart,stable/search-prod,search-prod,release-2.5
 https://github.com/stolostron/cluster-backup-chart,stable/cluster-backup-chart,cluster-backup-chart,release-2.5
+https://github.com/stolostron/volsync-addon-controller-chart,stable/volsync-addon-controller,volsync-addon-controller,release-2.5
