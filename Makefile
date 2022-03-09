@@ -4,14 +4,17 @@ REGISTRY ?= quay.io/stolostron
 IMG ?= multiclusterhub-repo
 VERSION ?= latest
 
+build:
+	go build -o start-repo ./cmd/repo
+
+unit-test:
+	go test -v ./...
+
 image:
 	docker build -t "$(REGISTRY)/$(IMG):$(VERSION)" .
 
 push:
 	docker push "$(REGISTRY)/$(IMG):$(VERSION)"
-
-unit-test:
-	go test -v ./...
 
 # local builds a docker image and runs it locally
 local:
