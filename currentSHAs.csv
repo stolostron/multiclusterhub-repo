@@ -7,4 +7,4 @@ https://github.com/stolostron/insights-chart,stable/insights-chart,policyreport,
 https://github.com/stolostron/management-ingress-chart,stable/management-ingress,management-ingress,3e5555372dc05b3690c931de13c36597beeb83be
 https://github.com/stolostron/search-chart,stable/search-prod,search-prod,d43c30a92cf5c824e6abfc7a5a99f56dac812e9b
 https://github.com/stolostron/cluster-backup-chart,stable/cluster-backup-chart,cluster-backup-chart,b79f5ddbdbc74a62183d74d95cd2454bb1fd8c2a
-https://github.com/stolostron/volsync-addon-controller-chart,stable/volsync-addon-controller,volsync-addon-controller,52b3fc3352217f344e70fc476b5fbe754917c75d
+https://github.com/stolostron/volsync-addon-controller-chart,stable/volsync-addon-controller,volsync-addon-controller,c6a38044f3501eb15f3ae83e7ec0fefa24b08bb1
