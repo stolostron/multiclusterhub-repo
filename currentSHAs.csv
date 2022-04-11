@@ -1,5 +1,5 @@
 https://github.com/stolostron/application-chart,stable/application-chart,application-chart,72ab1d0bc97cc607b6e226d2fb856f7321cf9ff4
-https://github.com/stolostron/cluster-lifecycle-chart,stable/cluster-lifecycle,cluster-lifecycle,d7702e6bb019152e117306659d5598798a3ff6ba
+https://github.com/stolostron/cluster-lifecycle-chart,stable/cluster-lifecycle,cluster-lifecycle,c6e830b20533fea07a5ac5505f86ed154fbfc378
 https://github.com/stolostron/cluster-proxy-addon-chart,stable/cluster-proxy-addon,cluster-proxy-addon,f6d525b1563d6a2f66b3092ff13e8c73188ea1bd
 https://github.com/stolostron/console-chart,stable/console-chart,console-chart,596992197343ea2f949c75557604f2daa9d2d314
 https://github.com/stolostron/grc-chart,stable/grc,grc,08ade93ee45d4cc44565f7a2e9e014b1bd87609b
