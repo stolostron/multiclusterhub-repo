@@ -1,0 +1,15 @@
+# Copyright Contributors to the Open Cluster Management project
+name: management-ingress
+description: Multi Cloud control plane ingress controller
+keywords:
+- ingress
+- nginx
+- network
+- amd64
+- ppc64le
+- s390x
+apiVersion: v1
+version: 3.4.0
+tillerVersion: ">=2.12.3"
+kubeVersion: ">=1.11.0-0"
+appVersion: "3.4.0"

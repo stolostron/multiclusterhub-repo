@@ -1,7 +1,6 @@
 // Copyright (c) 2020 Red Hat, Inc.
 // Copyright Contributors to the Open Cluster Management project
 
-
 package config
 
 import (
@@ -16,7 +15,7 @@ var (
 )
 
 type Config struct {
-	// Directory to serve files from
+	// Directory to read files from
 	ChartDir string
 	// Namespace charts are served from
 	Namespace string
@@ -24,6 +23,8 @@ type Config struct {
 	Port string
 	// Kubernetes service exposing app
 	Service string
+	// Version of charts
+	Version string
 }
 
 // New returns a new Config struct
@@ -33,6 +34,7 @@ func New() *Config {
 		Namespace: getEnv("POD_NAMESPACE", ""),
 		Port:      getEnv("MCH_REPO_PORT", defaultPort),
 		Service:   getEnv("MCH_REPO_SERVICE", defaultServiceName),
+		Version:   getEnv("CHART_VERSION", ""),
 	}
 }
 

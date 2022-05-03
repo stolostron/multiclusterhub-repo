@@ -12,3 +12,6 @@ build-harness-extensions
 !vbh/.build-harness-vendorized
 !vbh/build-harness
 !vbh/build-harness-extensions 
+
+# ignore packaged versions of charts
+multiclusterhub/charts/*.tgz

@@ -1,0 +1,229 @@
+# Licensed Materials - Property of IBM
+# 5737-E67
+# @ Copyright IBM Corporation 2016, 2020 All Rights Reserved
+# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# Copyright Contributors to the Open Cluster Management project
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Release.Name }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    component: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/name: {{ .Release.Name }}
+    helm.sh/chart: {{ .Chart.Name }}
+spec:
+  replicas: {{ .Values.hubconfig.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+      chart: {{ .Chart.Name }}
+      heritage: {{ .Release.Service }}
+      k8s-app: {{ .Release.Name }}
+      component: {{ .Release.Name }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      annotations:
+        productID: "{{ .Chart.Name }}_{{ .Chart.Version }}_00000"
+        productName: "{{ .Chart.Name }}"
+        productVersion: "{{ .Chart.Version }}"
+      labels:
+        app: {{ .Release.Name }}
+        ocm-antiaffinity-selector: "managementingress"
+        chart: {{ .Chart.Name }}
+        heritage: {{ .Release.Service }}
+        k8s-app: {{ .Release.Name }}
+        component: {{ .Release.Name }}
+        release: {{ .Release.Name }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/managed-by: {{ .Release.Service }}
+        app.kubernetes.io/name: {{ .Release.Name }}
+        helm.sh/chart: {{ .Chart.Name }}
+    spec:
+      serviceAccountName: {{ .Release.Name }}-sa
+      hostNetwork: {{ .Values.hostNetwork }}
+      {{- if .Values.hostNetwork }}
+      dnsPolicy: ClusterFirstWithHostNet
+      {{- end }}
+      {{- if .Values.pullSecret }}
+      imagePullSecrets:
+        - name: {{ .Values.pullSecret }}
+      {{- end }}
+      containers:
+        - args:
+          - --provider=openshift
+          - --upstream=https://{{ .Values.service_name }}.{{ .Release.Namespace }}.svc:{{ .Values.httpsPort }}
+          - --upstream-ca=/etc/tls/ca/service-ca.crt
+          - --https-address=:{{ .Values.oauth_proxy.httpsPort }}
+          - --client-id={{ .Values.oauth_client.id }}
+          - --client-secret={{ .Values.oauth_client.secret }}
+          - --pass-user-bearer-token=true
+          - --pass-access-token=true
+          - --scope=user:full
+          - '-openshift-delegate-urls={"/": {"resource": "projects", "verb": "list"}}'
+          - --cookie-secure=true
+          - --cookie-expire=12h0m0s
+          - --cookie-refresh=8h0m0s
+          - --tls-cert=/etc/tls/private/tls.crt
+          - --tls-key=/etc/tls/private/tls.key
+          - --cookie-secret=NGRlV1B4NnFFS25VTkhxSg==
+          - --openshift-ca=/etc/pki/tls/cert.pem
+          - --openshift-ca=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+          {{- if .Values.hubconfig.customCAConfigmap }}
+          - --openshift-ca=/etc/tls/ocp/tls.crt
+          {{- end }}
+          image: "{{ .Values.global.imageOverrides.oauth_proxy }}"
+          imagePullPolicy: {{ .Values.global.pullPolicy }}
+          name: oauth-proxy
+          ports:
+          - containerPort: {{ .Values.oauth_proxy.httpsPort }}
+            name: public
+            protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /oauth/healthz
+              port: {{ .Values.oauth_proxy.httpsPort }}
+              scheme: HTTPS
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /etc/tls/private
+            name: tls-secret
+          - mountPath: /etc/tls/ca
+            name: ca-tls
+          {{- if .Values.hubconfig.customCAConfigmap }}
+          - mountPath: /etc/tls/ocp
+            name: ocp-custom-ca
+          {{- end }}
+        - env:
+            - name: ENABLE_IMPERSONATION
+              value: "{{ .Values.enable_impersonation }}"
+            - name: APISERVER_SECURE_PORT
+              value: "{{ .Values.apiserver_secure_port }}"
+            - name: CLUSTER_DOMAIN
+              value: "{{ .Values.cluster_basedomain }}"
+            - name: HOST_HEADERS_CHECK_ENABLED
+              value: "{{ .Values.host_headers_check_enabled }}"
+            - name: ALLOWED_HOST_HEADERS
+              value: "{{ .Values.allowed_host_headers }} {{ .Release.Name }} {{ .Values.service_name }} {{ .Values.service_name }}.{{ .Release.Namespace }}.svc {{ template "management-ingress.consoleRouteHost" . }}"
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.name
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+            - name: FIPS_ENABLED
+          {{- if .Values.fips_enabled }}
+              value: "true"
+          {{- else }}
+              value: "false"
+          {{- end }}
+          image: "{{ .Values.global.imageOverrides.management_ingress }}"
+          securityContext:
+            allowPrivilegeEscalation: true
+            runAsNonRoot: true
+          ports:
+            {{- if .Values.enable_impersonation }}
+            - containerPort: {{ .Values.apiserver_secure_port }}
+              hostPort: {{ .Values.apiserver_secure_port }}
+            {{- end }}
+            - containerPort:  {{ .Values.httpPort }}
+          {{- if .Values.hostPort }}
+              hostPort: {{ .Values.httpPort }}
+          {{- end }}
+            - containerPort: {{ .Values.httpsPort }}
+          {{- if .Values.hostPort }}
+              hostPort: {{ .Values.httpsPort }}
+          {{- end }}
+          livenessProbe:
+            initialDelaySeconds: 10
+            httpGet:
+              path: "/healthz"
+              scheme: HTTP
+              port: {{ .Values.httpPort }}
+            timeoutSeconds: 1
+          readinessProbe:
+            initialDelaySeconds: 10
+            httpGet:
+              path: "/healthz"
+              scheme: HTTP
+              port: {{ .Values.httpPort }}
+          command:
+            {{- if .Values.enable_impersonation }}
+            - /run.sh
+            {{- end }}
+            - /management-ingress
+            - --default-ssl-certificate=$(POD_NAMESPACE)/{{ .Release.Name }}-tls-secret
+            - --configmap=$(POD_NAMESPACE)/{{ .Release.Name }}
+            - --http-port={{ .Values.httpPort }}
+            - --https-port={{ .Values.httpsPort }}
+          imagePullPolicy: {{ .Values.global.pullPolicy }}
+          name: {{ .Release.Name }}
+          resources:
+          {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+          {{- if .Values.enable_impersonation }}
+          - mountPath: /var/run/secrets/platform-auth
+            name: platform-auth-secret
+          {{- end }}
+          - mountPath: /var/run/secrets/tls
+            name: tls-secret
+      volumes:
+        {{- if .Values.enable_impersonation }}
+        - name: platform-auth-secret
+          secret:
+            defaultMode: 420
+            secretName: platform-auth-secret
+        {{- end }}
+        - name: tls-secret
+          secret:
+            defaultMode: 420
+            secretName: {{ .Release.Name }}-tls-secret
+        - name: ca-tls
+          configMap:
+            defaultMode: 420
+            name: {{ .Release.Name }}-ca
+        {{- if .Values.hubconfig.customCAConfigmap }}
+        - name: ocp-custom-ca
+          configMap:
+            name: {{ .Values.hubconfig.customCAConfigmap }}
+            items:
+              - key: ca-bundle.crt
+                path: tls.crt
+        {{- end }}
+      {{- with .Values.hubconfig.nodeSelector }}
+      nodeSelector:
+      {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+      {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.hubconfig.tolerations }}
+      tolerations:
+      {{- toYaml . | nindent 8 }}
+      {{- end }}
