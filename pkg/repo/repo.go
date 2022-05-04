@@ -4,6 +4,7 @@
 package repo
 
 import (
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -15,7 +16,6 @@ import (
 	"time"
 
 	"github.com/Masterminds/semver/v3"
-	"github.com/pkg/errors"
 	"github.com/stolostron/multiclusterhub-repo/pkg/config"
 	"helm.sh/helm/v3/pkg/chart/loader"
 	"helm.sh/helm/v3/pkg/chartutil"
@@ -96,7 +96,7 @@ func packageCharts(c *config.Config) ([]string, error) {
 		if f.IsDir() {
 			pkgName, err := packageChart(path.Join(c.ChartDir, f.Name()), c.ChartDir, c.Version)
 			if err != nil {
-				return charts, errors.Wrap(err, fmt.Sprintf("failed to package directory %s", f.Name()))
+				return charts, fmt.Errorf("failed to package directory %s: %w", f.Name(), err)
 			}
 			charts = append(charts, pkgName)
 		}
@@ -109,7 +109,7 @@ func packageChart(src string, dst string, chartVersion string) (string, error) {
 	ch.Metadata.Version = chartVersion
 	name, err := chartutil.Save(ch, dst)
 	if err != nil {
-		return "", errors.Wrap(err, "failed to save")
+		return "", fmt.Errorf("failed to save: %w", err)
 	}
 	log.Printf("Packaged chart as %s", name)
 	return name, nil
