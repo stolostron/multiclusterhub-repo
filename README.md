@@ -15,3 +15,4 @@ NOTE:
 Running `make update-charts` will update the charts in the `multiclusterhub-repo` pod with charts in the local `multiclusterhub/charts` folder
 
 Last updated manually: Oct 18, 2021
+
