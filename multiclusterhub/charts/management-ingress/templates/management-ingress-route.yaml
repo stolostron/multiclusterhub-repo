@@ -1,0 +1,60 @@
+# Licensed Materials - Property of IBM
+# 5737-E67
+# @ Copyright IBM Corporation 2016, 2020 All Rights Reserved
+# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+# Copyright Contributors to the Open Cluster Management project
+---
+
+{{- $caSecret := (lookup "v1" "Secret" .Release.Namespace "byo-ca-cert" ) }}
+{{- $certSecret := (lookup "v1" "Secret" .Release.Namespace "byo-ingress-tls-secret" ) }}
+
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: {{ .Values.console_route.name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Release.Name }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    component: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/name: {{ .Release.Name }}
+    helm.sh/chart: {{ .Chart.Name }}
+spec:
+  host: {{ template "management-ingress.consoleRouteHost" . }}
+  subdomain: {{ .Values.console_route.subdomain }}
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: reencrypt
+{{- if $caSecret }}
+{{- $caCert := (b64dec (get $caSecret.data "tls.crt")) -}}
+{{- if $caCert }}
+    caCertificate: |-
+      {{- $caCert | nindent 6 -}}
+{{- end }}
+{{- end }}
+{{- if $certSecret }}
+{{- $certCert := (b64dec (get $certSecret.data "tls.crt")) -}}
+{{- if $certCert }}
+    certificate: |-
+      {{- $certCert | nindent 6 -}}
+{{- end }}
+{{- $certKey := (b64dec (get $certSecret.data "tls.key")) -}}
+{{- if $certKey }}
+    key: |-
+      {{- $certKey | nindent 6 -}}
+{{- end }}
+{{- end }}
+  to:
+    kind: Service
+    name: {{ .Values.service_name }}
+    weight: 100
+  port:
+    targetPort: https
+  wildcardPolicy: None
+status:
+  ingress: []

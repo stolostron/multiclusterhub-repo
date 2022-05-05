@@ -1,0 +1,97 @@
+# Copyright Contributors to the Open Cluster Management project
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+org: open-cluster-management
+
+pullSecret: null
+
+global:
+  pullPolicy: IfNotPresent
+  imageOverrides:
+    management_ingress: ""
+    oauth_proxy: ""
+
+resources:
+  requests:
+    cpu: 200m
+    memory: 256Mi
+
+config:
+  disable-access-log: 'true'
+  ssl-ciphers: 'ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256'
+
+## Use BYO cert
+# tls_secret: management-ingress-tls-secret
+
+## Whether to enable host header check
+host_headers_check_enabled: false
+allowed_host_headers: "127.0.0.1 localhost"
+
+## Listening port of nginx backend
+httpPort: 8080
+httpsPort: 8443
+
+## Use host port
+hostPort: false
+
+## Use host network
+hostNetwork: false
+
+## Whether to enable fips cipher suites
+fips_enabled: false
+
+## Whether to do impersonation
+enable_impersonation: false
+
+## Kubernetes port
+apiserver_secure_port: 8001
+
+service_name: "management-ingress"
+
+oauth_proxy:
+  httpsPort: 9443
+
+oauth_client:
+  id: multicloudingress
+  secret: multicloudingresssecret
+  callback_url: "/oauth/callback"
+
+cluster_basedomain: ""
+
+console_route:
+  name: multicloud-console
+  subdomain: ""
+
+hubconfig:
+  nodeSelector: null
+  replicaCount: 1
+  tolerations:
+  - key: "dedicated"
+    operator: "Exists"
+    effect: "NoSchedule"
+  - effect: NoSchedule 
+    key: node-role.kubernetes.io/infra 
+    operator: Exists
+
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 70
+      podAffinityTerm:
+        topologyKey: topology.kubernetes.io/zone
+        labelSelector:
+          matchExpressions:
+          - key: ocm-antiaffinity-selector
+            operator: In
+            values:
+            - managementingress
+    - weight: 35
+      podAffinityTerm:
+        topologyKey: kubernetes.io/hostname
+        labelSelector:
+          matchExpressions:
+          - key: ocm-antiaffinity-selector
+            operator: In
+            values:
+            - managementingress

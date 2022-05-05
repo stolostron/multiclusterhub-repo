@@ -58,6 +58,7 @@ func TestFileServer(t *testing.T) {
 		Namespace: "test",
 		Port:      "8000",
 		Service:   "test-service",
+		Version:   "9.9.9",
 	}
 	s, _ := New(c)
 	ts := httptest.NewServer(s.Router)
@@ -70,6 +71,7 @@ func TestFileServer(t *testing.T) {
 	}{
 		{"Get index", "index.yaml", http.StatusOK},
 		{"Get nginx chart", "nginx-5.6.0.tgz", http.StatusOK},
+		{"Get hello-world chart", "hello-world-9.9.9.tgz", http.StatusOK},
 		{"Get non-existant chart", "not-found.tgz", http.StatusNotFound},
 	}
 
@@ -84,6 +86,10 @@ func TestFileServer(t *testing.T) {
 					status, tt.want)
 			}
 		})
+	}
+	err := os.Remove("testdata/charts/hello-world-9.9.9.tgz")
+	if err != nil {
+		t.Errorf("error cleaning up chart package: %s", err.Error())
 	}
 }
 
@@ -167,9 +173,13 @@ func TestReindex(t *testing.T) {
 		Namespace: "test",
 		Port:      "8000",
 		Service:   "test-service",
+		Version:   "9.9.9",
 	}
 
-	s, _ := New(c)
+	s, err := New(c)
+	if err != nil {
+		t.Error(err)
+	}
 	s.Start()
 	defer s.Stop()
 

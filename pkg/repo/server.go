@@ -24,6 +24,12 @@ type Server struct {
 func New(c *config.Config) (*Server, error) {
 	var err error
 
+	// Generate packages from charts
+	_, err = packageCharts(c)
+	if err != nil {
+		return nil, err
+	}
+
 	// Hold index file in memory
 	index, err := createIndex(c)
 	if err != nil {
@@ -35,7 +41,10 @@ func New(c *config.Config) (*Server, error) {
 		Config: c,
 	}
 
-	s.SetupRouter()
+	err = s.SetupRouter()
+	if err != nil {
+		return nil, err
+	}
 
 	s.watcher, err = fsnotify.NewWatcher()
 	if err != nil {

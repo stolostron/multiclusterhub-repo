@@ -4,19 +4,27 @@
 package repo
 
 import (
+	"errors"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
+	"path"
 	"path/filepath"
+	"strings"
 	"time"
 
+	"github.com/Masterminds/semver/v3"
 	"github.com/stolostron/multiclusterhub-repo/pkg/config"
+	"helm.sh/helm/v3/pkg/chart/loader"
+	"helm.sh/helm/v3/pkg/chartutil"
 	"helm.sh/helm/v3/pkg/repo"
 	"sigs.k8s.io/yaml"
 )
 
 // Create request router with modified index
-func (s *Server) SetupRouter() {
+func (s *Server) SetupRouter() error {
 	mux := http.NewServeMux()
 
 	// Add route handlers
@@ -27,6 +35,7 @@ func (s *Server) SetupRouter() {
 	mux.Handle("/charts/", loggingMiddleware(http.StripPrefix("/charts/", fileServer)))
 
 	s.Router = mux
+	return nil
 }
 
 // StatusWriter adds a field an http.ResponseWriter to track status
@@ -69,6 +78,56 @@ func createIndex(c *config.Config) ([]byte, error) {
 	}
 
 	return b, nil
+}
+
+// packageCharts
+func packageCharts(c *config.Config) ([]string, error) {
+	if _, err := semver.NewVersion(c.Version); err != nil {
+		return nil, err
+	}
+
+	files, err := ioutil.ReadDir(c.ChartDir)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	charts := []string{}
+	for _, f := range files {
+		if f.IsDir() {
+			pkgName, err := packageChart(path.Join(c.ChartDir, f.Name()), c.ChartDir, c.Version)
+			if err != nil {
+				return charts, fmt.Errorf("failed to package directory %s: %w", f.Name(), err)
+			}
+			charts = append(charts, pkgName)
+		}
+	}
+	return charts, nil
+}
+
+func packageChart(src string, dst string, chartVersion string) (string, error) {
+	ch, err := loader.LoadDir(src)
+	ch.Metadata.Version = chartVersion
+	name, err := chartutil.Save(ch, dst)
+	if err != nil {
+		return "", fmt.Errorf("failed to save: %w", err)
+	}
+	log.Printf("Packaged chart as %s", name)
+	return name, nil
+}
+
+func cleanupCharts(c *config.Config, charts []string) error {
+	errorMessages := []string{}
+	for _, file := range charts {
+		err := os.Remove(file)
+		if err != nil {
+			errorMessages = append(errorMessages, err.Error())
+		}
+	}
+	if len(errorMessages) > 0 {
+		log.Println(errors.New(fmt.Sprintf(": %s", strings.Join(errorMessages, "; "))))
+		return errors.New(fmt.Sprintf(": %s", strings.Join(errorMessages, "; ")))
+	}
+	return nil
 }
 
 // readIndex builds an index from a flat directory

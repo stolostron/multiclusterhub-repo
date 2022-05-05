@@ -1,0 +1,23 @@
+# Copyright (c) 2021 Red Hat, Inc.
+# Copyright Contributors to the Open Cluster Management project
+apiVersion: search.open-cluster-management.io/v1alpha1
+kind: SearchOperator
+metadata:
+  name: searchoperator
+spec:
+  pullpolicy: {{ .Values.global.pullPolicy }}
+  searchimageoverrides:
+    redisgraph_tls: {{ .Values.global.imageOverrides.redisgraph_tls }}
+  {{- if .Values.global.pullSecret }}
+  pullsecret: {{ .Values.global.pullSecret }}
+  {{- end }}
+  {{- with .Values.hubconfig.nodeSelector }}
+  nodeSelector:
+  {{ toYaml . | indent 2 }}
+  {{- end }}
+  redisgraph_resource:
+    limit_memory: {{ toYaml .Values.search.redisgraph.resources.limits.memory }}
+    request_cpu: {{ toYaml .Values.search.redisgraph.resources.requests.cpu }}
+    request_memory: {{ toYaml .Values.search.redisgraph.resources.requests.memory }}
+    
+  
