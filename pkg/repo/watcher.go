@@ -1,7 +1,6 @@
 // Copyright (c) 2020 Red Hat, Inc.
 // Copyright Contributors to the Open Cluster Management project
 
-
 package repo
 
 import (
@@ -11,7 +10,7 @@ import (
 
 // Start starts the watch on the chart directory files.
 func (s *Server) Start() error {
-	if err := s.watcher.Add(s.Config.ChartDir); err != nil {
+	if err := s.watcher.Add(s.Config.RepoDir); err != nil {
 		return err
 	}
 

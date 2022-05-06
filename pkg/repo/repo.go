@@ -4,15 +4,12 @@
 package repo
 
 import (
-	"errors"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
-	"os"
 	"path"
 	"path/filepath"
-	"strings"
 	"time"
 
 	"github.com/Masterminds/semver/v3"
@@ -28,7 +25,7 @@ func (s *Server) SetupRouter() error {
 	mux := http.NewServeMux()
 
 	// Add route handlers
-	fileServer := http.FileServer(http.Dir(s.Config.ChartDir))
+	fileServer := http.FileServer(http.Dir(s.Config.RepoDir))
 	mux.Handle("/liveness", http.HandlerFunc(livenessHandler))
 	mux.Handle("/readiness", http.HandlerFunc(readinessHandler))
 	mux.Handle("/charts/index.yaml", loggingMiddleware(http.HandlerFunc(s.indexHandler)))
@@ -67,7 +64,7 @@ func loggingMiddleware(next http.Handler) http.Handler {
 // readIndex builds an index from a flat directory
 func createIndex(c *config.Config) ([]byte, error) {
 	url := indexURL(c)
-	index, err := repo.IndexDirectory(filepath.Clean(c.ChartDir), url)
+	index, err := repo.IndexDirectory(filepath.Clean(c.RepoDir), url)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +91,7 @@ func packageCharts(c *config.Config) ([]string, error) {
 	charts := []string{}
 	for _, f := range files {
 		if f.IsDir() {
-			pkgName, err := packageChart(path.Join(c.ChartDir, f.Name()), c.ChartDir, c.Version)
+			pkgName, err := packageChart(path.Join(c.ChartDir, f.Name()), c.RepoDir, c.Version)
 			if err != nil {
 				return charts, fmt.Errorf("failed to package directory %s: %w", f.Name(), err)
 			}
@@ -113,21 +110,6 @@ func packageChart(src string, dst string, chartVersion string) (string, error) {
 	}
 	log.Printf("Packaged chart as %s", name)
 	return name, nil
-}
-
-func cleanupCharts(c *config.Config, charts []string) error {
-	errorMessages := []string{}
-	for _, file := range charts {
-		err := os.Remove(file)
-		if err != nil {
-			errorMessages = append(errorMessages, err.Error())
-		}
-	}
-	if len(errorMessages) > 0 {
-		log.Println(errors.New(fmt.Sprintf(": %s", strings.Join(errorMessages, "; "))))
-		return errors.New(fmt.Sprintf(": %s", strings.Join(errorMessages, "; ")))
-	}
-	return nil
 }
 
 // readIndex builds an index from a flat directory
