@@ -55,6 +55,7 @@ func TestReadiness(t *testing.T) {
 func TestFileServer(t *testing.T) {
 	c := &config.Config{
 		ChartDir:  "testdata/charts/",
+		RepoDir:   "testdata/charts/",
 		Namespace: "test",
 		Port:      "8000",
 		Service:   "test-service",
@@ -134,6 +135,7 @@ func Test_indexURL(t *testing.T) {
 func Test_createIndex(t *testing.T) {
 	c := &config.Config{
 		ChartDir:  "testdata/charts/",
+		RepoDir:   "testdata/charts/",
 		Namespace: "test",
 		Port:      "3000",
 		Service:   "multiclusterhub-repo",
@@ -170,6 +172,7 @@ func TestReindex(t *testing.T) {
 	c := &config.Config{
 		// ChartDir:  "testdata/" + tmpDir + "/",
 		ChartDir:  path.Join(tmpDir),
+		RepoDir:   path.Join(tmpDir),
 		Namespace: "test",
 		Port:      "8000",
 		Service:   "test-service",

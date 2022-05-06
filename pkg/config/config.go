@@ -17,6 +17,8 @@ var (
 type Config struct {
 	// Directory to read files from
 	ChartDir string
+	// Directory to write packaged charts
+	RepoDir string
 	// Namespace charts are served from
 	Namespace string
 	// Port to serve on
@@ -30,7 +32,8 @@ type Config struct {
 // New returns a new Config struct
 func New() *Config {
 	return &Config{
-		ChartDir:  defaultChartDir,
+		ChartDir:  getEnv("CHART_DIR", defaultChartDir),
+		RepoDir:   getEnv("REPO_DIR", defaultChartDir),
 		Namespace: getEnv("POD_NAMESPACE", ""),
 		Port:      getEnv("MCH_REPO_PORT", defaultPort),
 		Service:   getEnv("MCH_REPO_SERVICE", defaultServiceName),
