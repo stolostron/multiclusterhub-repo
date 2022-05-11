@@ -75,8 +75,8 @@ spec:
         - key: dedicated
           operator: Exists
           effect: NoSchedule
-        - effect: NoSchedule
-          key: node-role.kubernetes.io/infra
+        - effect: NoSchedule 
+          key: node-role.kubernetes.io/infra 
           operator: Exists
       containers:
         - name: manager
@@ -88,7 +88,6 @@ spec:
             - --leader-elect=true
             - --signer-secret-namespace={{ .Release.Namespace }}
             - --agent-image-name={{ .Values.global.imageOverrides.cluster_proxy }}
-            - --agent-install-namespace={{ .Values.global.spokeAddonNamespace }}
         {{- if .Values.pullSecret }}
       imagePullSecrets:
       - name: {{ .Values.pullSecret }}
