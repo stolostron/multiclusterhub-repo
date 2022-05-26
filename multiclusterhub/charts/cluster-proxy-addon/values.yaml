@@ -3,7 +3,7 @@ imagePullPolicy: Always
 # Number of replicas
 replicas: 1
 
-spokeAddonNamespace: "open-cluster-management-cluster-proxy"
+spokeAddonNamespace: "open-cluster-management-agent-addon"
 
 proxyServer:
   entrypointLoadBalancer: false
