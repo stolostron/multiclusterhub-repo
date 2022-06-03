@@ -1,4 +1,4 @@
-name: Update 2.3 Charts
+name: Update 2.5 Charts
 
 on: 
   # Run every weekday at 7am
@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           token: ${{ secrets.HUB_REPO_TOKEN }}
-          ref: release-2.3
+          ref: release-2.5
 
       - name: Trigger info
         run: |
@@ -37,10 +37,10 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           signoff: true
-          branch: "update-charts-2.3"
+          branch: "update-charts-2.5"
           delete-branch: true
-          title: "Auto-Update Charts [2.3]"
+          title: "Auto-Update Charts [2.5]"
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           labels: do-not-merge/hold
-          assignees: cameronmwall,JakobGray,eemurphy,ray-harris         
+          assignees: cameronmwall,JakobGray,eemurphy,ray-harris          
