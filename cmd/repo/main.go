@@ -34,10 +34,11 @@ func main() {
 	srv := &http.Server{
 		Addr: ":" + c.Port,
 		// Good practice to set timeouts to avoid Slowloris attacks.
-		WriteTimeout: time.Second * 30,
-		ReadTimeout:  time.Second * 30,
-		IdleTimeout:  time.Second * 30,
-		Handler:      server.Router,
+		WriteTimeout:      time.Second * 30,
+		ReadTimeout:       time.Second * 30,
+		ReadHeaderTimeout: time.Second * 30,
+		IdleTimeout:       time.Second * 30,
+		Handler:           server.Router,
 	}
 
 	// Run our server in a goroutine so that it doesn't block.

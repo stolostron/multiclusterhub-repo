@@ -15,3 +15,6 @@ build-harness-extensions
 
 # ignore packaged versions of charts
 multiclusterhub/charts/*.tgz
+
+# ignore vscode
+.vscode
