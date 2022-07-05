@@ -212,3 +212,11 @@ rules:
   verbs:
   - list
   - watch
+
+- verbs:
+  - list
+  - watch
+  apiGroups:
+  - console.open-cluster-management.io
+  resources:
+  - userpreferences
