@@ -1,8 +1,9 @@
 https://github.com/stolostron/cluster-lifecycle-chart,stable/cluster-lifecycle,cluster-lifecycle,be16569cd59c081b6306665123237b3d04afde1f
-https://github.com/stolostron/console-chart,stable/console-chart,console-chart,4bf1022e17a723d65a4c61f8fa33692f5330a5d4
+https://github.com/stolostron/cluster-proxy-addon-chart,stable/cluster-proxy-addon,cluster-proxy-addon,dfe85c4de5f9b0d8adb48c7592497542f57a29ee
+https://github.com/stolostron/console-chart,stable/console-chart,console-chart,476fca3886599e47c22138168aea9e4ffc62a39d
 https://github.com/stolostron/grc-chart,stable/grc,grc,7da90cf67c2ba50129b244be576f9fd1bc9ae6a4
 https://github.com/stolostron/insights-chart,stable/insights-chart,policyreport,c11839d0b259e16c6783d01017f0d5b84f69d1d7
 https://github.com/stolostron/management-ingress-chart,stable/management-ingress,management-ingress,09efaff27b9862ef49786016ccd8c2834e312692
 https://github.com/stolostron/search-chart,stable/search-prod,search-prod,4e25e09109881d0fc39fd53d51f942b34dfc024d
 https://github.com/stolostron/cluster-backup-chart,stable/cluster-backup-chart,cluster-backup-chart,722efc07ad2db1519c3a5cfedbb4a78a0fc43d1b
-https://github.com/stolostron/volsync-addon-controller-chart,stable/volsync-addon-controller,volsync-addon-controller,16e3dc201cf46a2e1cce9d9a4f66f2e27377c15a
+https://github.com/stolostron/volsync-addon-controller-chart,stable/volsync-addon-controller,volsync-addon-controller,29dda84f92ba70c1ced45e3a82c58b8a41df5f58
