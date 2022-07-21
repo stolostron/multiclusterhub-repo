@@ -4,6 +4,8 @@ apiVersion: console.openshift.io/v1alpha1
 kind: ConsolePlugin
 metadata:
   name: acm
+  annotations:
+    console.openshift.io/use-i18n: "true"
 spec:
   displayName: Red Hat Advanced Cluster Management
   proxy:
