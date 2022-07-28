@@ -122,11 +122,22 @@ rules:
   resourceNames:
   - cert-policy-controller
   - config-policy-controller
-  - iam-policy-controller
   - governance-policy-framework
+  - iam-policy-controller
   resources:
   - leases
   verbs:
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - events
+  verbs:
+  - create
   - get
   - list
   - patch
@@ -214,19 +225,9 @@ rules:
   - manifestworks
   verbs:
   - create
+  - delete
   - get
   - list
-  - watch
-- apiGroups:
-  - work.open-cluster-management.io
-  resourceNames:
-  - addon-cert-policy-controller-deploy
-  - addon-config-policy-controller-deploy
-  - addon-governance-policy-framework-deploy
-  - addon-iam-policy-controller-deploy
-  resources:
-  - manifestworks
-  verbs:
-  - delete
   - patch
   - update
+  - watch
