@@ -19,4 +19,3 @@ To manually update charts in this repo:
 
 ## Updating chart in a Kubernetes cluster
 Running `make patch-charts-in-cluster` will update the charts in the `multiclusterhub-repo` pod with charts in the local `multiclusterhub/charts` folder.
-
