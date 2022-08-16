@@ -1,0 +1,46 @@
+name: Update 2.6 Charts
+
+on: 
+  # Run every weekday at 7am
+  schedule:
+    - cron: "0 12 * * 1-5"
+  
+  # manual trigger
+  workflow_dispatch:
+
+jobs:
+  chart-update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.HUB_REPO_TOKEN }}
+          ref: release-2.6
+
+      - name: Trigger info
+        run: |
+          echo 'commit_message<<EOF' >> $GITHUB_ENV
+          echo "Chart update run via $GITHUB_EVENT_NAME" >> $GITHUB_ENV
+          echo "Initiated by - $GITHUB_ACTOR" >> $GITHUB_ENV
+          echo "Workflow URL - $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
+
+      - name: Install Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: v3.4.0
+
+      - name: Update charts
+        run: bash cicd-scripts/chart-sync.sh
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          signoff: true
+          branch: "update-charts-2.6"
+          delete-branch: true
+          title: "Auto-Update Charts [2.6]"
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          labels: do-not-merge/hold
+          assignees: cameronmwall,JakobGray,eemurphy,ray-harris          
