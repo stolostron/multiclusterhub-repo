@@ -188,6 +188,7 @@ rules:
   - metal3.io
   resources:
   - baremetalhosts
+  - provisionings
 
 - apiGroups:
   - policy.open-cluster-management.io
@@ -245,3 +246,11 @@ rules:
   - apiextensions.k8s.io
   resources:
   - customresourcedefinitions
+  
+- apiGroups:
+  - multicluster.openshift.io
+  verbs:
+  - list
+  - watch
+  resources:
+  - multiclusterengines
