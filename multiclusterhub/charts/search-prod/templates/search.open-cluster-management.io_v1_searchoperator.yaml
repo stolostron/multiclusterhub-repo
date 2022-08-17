@@ -15,6 +15,10 @@ spec:
   nodeSelector:
   {{ toYaml . | indent 2 }}
   {{- end }}
+  {{- with .Values.hubconfig.tolerations }}
+  tolerations:
+  {{- toYaml . | nindent 2 }}
+  {{- end }}
   redisgraph_resource:
     limit_memory: {{ toYaml .Values.search.redisgraph.resources.limits.memory }}
     request_cpu: {{ toYaml .Values.search.redisgraph.resources.requests.cpu }}
