@@ -1,5 +1,4 @@
 https://github.com/stolostron/console-chart,stable/console-chart,console-chart,d53c11e54a9a761cfdc8e02381ef39ef92675caa
-https://github.com/stolostron/grc-chart,stable/grc,grc,51f196820fe96804783a10be062de12f2d43cb70
 https://github.com/stolostron/management-ingress-chart,stable/management-ingress,management-ingress,b34e9785b7d661600c93f9c0c7d8cbfefa70120d
 https://github.com/stolostron/cluster-backup-chart,stable/cluster-backup-chart,cluster-backup-chart,57d8d530b8b1551b9c29111f72fb93895079750d
 https://github.com/stolostron/volsync-addon-controller-chart,stable/volsync-addon-controller,volsync-addon-controller,a649280640a55df8e82468aa4e7c7bd89d482e76
