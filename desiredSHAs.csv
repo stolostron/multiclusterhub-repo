@@ -1,4 +1,3 @@
-https://github.com/stolostron/console-chart,stable/console-chart,console-chart,release-2.7
 https://github.com/stolostron/management-ingress-chart,stable/management-ingress,management-ingress,release-2.7
 https://github.com/stolostron/cluster-backup-chart,stable/cluster-backup-chart,cluster-backup-chart,release-2.7
 https://github.com/stolostron/volsync-addon-controller-chart,stable/volsync-addon-controller,volsync-addon-controller,release-2.7
