@@ -19,6 +19,7 @@ metadata:
     app.kubernetes.io/name: {{ template "console.name" . }}
     helm.sh/chart: {{ template "console.chart" . }}
 spec:
+  ingressClassName: ingress-open-cluster-management
   rules:
   - http:
       paths:
