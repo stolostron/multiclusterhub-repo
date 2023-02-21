@@ -7,7 +7,6 @@ metadata:
   annotations:
     ingress.open-cluster-management.io/auth-type: access-token
     ingress.open-cluster-management.io/secure-backends: "true"
-    kubernetes.io/ingress.class: ingress-open-cluster-management
   name: {{ template "console.fullname" . }}-console-v2
   labels:
     app: {{ template "console.name" . }}-v2
